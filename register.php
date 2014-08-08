@@ -1,3 +1,62 @@
+<?php
+	ini_set('display_errors','On');
+	ini_set('display_errors', true);
+	ini_set('html_errors', false);
+	error_reporting(E_ALL);
+
+	$a=array(1,2,array('a','b','c'));
+	var_dump($a);
+	echo('</br>');
+	$ar=array(
+		"a"=>1,
+		"b"=>2
+	);
+	var_dump($ar);
+	echo('</br>');
+	echo($ar["b"]);
+	unset($ar["a"]);
+	echo('</br>');
+	var_dump($ar);
+	echo('</br>');
+	print_r($a);	
+	echo('</br></hr>');
+	foreach($ar as $i => $value){
+		echo($i.'=>'.$value);	
+		echo('</br>');
+	}
+	class A{
+		private $a;
+		public $b;
+	}
+
+	$pa= new A();
+	echo('</br>');
+	var_dump(array_diff(array(1,2,3,array(1)),array(2,3,4,array(1))));
+	echo('</br>');
+	$colors=array('red','green','blue','yellow');
+	foreach($colors as $color){
+		echo "Do yo like $color?\n";
+	}
+	echo('</br>');
+
+	class profiler{
+		function profiler(){
+			$this->starttime=microtime();
+		}
+		static function p(){
+			echo '</br>abc';
+		}
+	}
+
+	$pro = new profiler();
+	echo $pro->starttime;
+	call_user_func(array('profiler','p'));
+	echo '</br>';
+	$tpss = function($n){
+		return	$n*$n*$n; 
+	};
+	print_r(array_map($tpss,range(1,5)));
+?>
 <head>
 <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -64,7 +123,13 @@
     </table></td>
   </tr>
 </table>
+<?php for($i=0;$i<5;$i++): ?>
+	<p>hello,hear!<?php echo $i ?></p>
+<?php endfor; ?>
 <!--p>&nbsp;</p>
 <div id="url"></div-->
 </body>
 </html>
+<script>
+	var arr=<?php echo json_encode(array(1,2,3,4,5)); ?>;
+</script>
