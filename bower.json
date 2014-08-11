@@ -1,0 +1,21 @@
+{
+	"name":"BusFree",
+	"version":"1.0.0",
+	"appPath":"app",
+	"authors": [
+		"zjliu <liuzhijunsw@126.com>"
+	],
+	"moduleType": [
+		"node"
+	  ],
+	"dependencies": {
+		"seajs":"*"	
+	},
+	"ignore": [
+		"**/.*",
+		"node_modules",
+		"bower_components",
+		"test",
+		"tests"
+	]
+}
