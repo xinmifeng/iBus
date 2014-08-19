@@ -1,0 +1,308 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<title>BusFree</title>
+<link href="css/bootstrap.css" rel="stylesheet">
+<script src="js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/jtzi.css"/>
+<script src="js/jquery.min.js"></script>
+<link  href="css/public.css" rel="stylesheet" />
+<script src="js/zepto.js"></script>
+
+</head>
+
+<body style="background:url(images/index_bg.jpg) repeat-x;">
+<!--标题-->
+<div class="container-fluid">
+   <div class="row text-center logo">
+        <div class="row col-xs-2"><img src="images/logo.png" width="109" height="31" /></div>
+        <div class="row col-xs-4"></div>
+        <div class="row col-xs-4"></div>
+   </div>
+</div>
+
+
+<!--导航条-->
+<!--<div class="container-fluid">
+     <div class="row nav">
+        <div class="col-xs-2 text-center" style="padding:0"><a href="#">热门</a></div>
+        <div class="col-xs-3 text-center" style="padding:0"><a href="#">咨询</a></div>
+        <div class="col-xs-2 text-center" style="padding:0"><a href="#">搞笑</a></div>
+        <div class="col-xs-3 text-center" style="padding:0"><a href="#">微电影</a></div>
+        <div class="col-xs-2 text-center" style="padding:0"><a href="#">动漫</a></div>
+  </div>
+</div>-->
+
+
+<!--轮播大图 开始-->
+<div class="w-header">
+ <a href="#" class="" id="loginuserapp" style="display: ;">
+    <!--<img src="" id="headImg" style="display:;" />-->
+    <!--<i style="display:;" id="messageCount"></i>-->
+  </a>
+  <a href="#" class="w-header-login" id="loginuser" style="display: none;"></a>
+</div>
+    
+     
+
+<div class="focusimg01">
+        <div class="focusimg01-img"><ul id="picContainer"><li><a href="http://m.autohome.com.cn/advice/201408/832714.html#pvareaid=101315"><h3>时尚动感是亮点 福特蒙迪欧车主访谈</h3><img src="http://www0.m.autoimg.cn/newspic/2014/8/18/640x320_0_q30_2014081807173395511.jpg" /><i class="icon-load"></i></a></li><li><a href="http://v.m.autohome.com.cn/v_8_28757.html#pvareaid=101316"><h3>焕然一新 原创试驾东风标致新一代408</h3><img src="http://www0.m.autoimg.cn/newspic/2014/8/17/640x320_0_q30_2014081717001597064.jpg" /><i class="icon-load"></i></a></li><li><a href="http://m.autohome.com.cn/culture/201408/829745.html#pvareaid=101317"><h3>清晨闲游牛津小镇 英国五日游记(上)</h3><img src="http://www0.m.autoimg.cn/newspic/2014/8/17/640x320_0_q30_2014081710231355880.jpg" /><i class="icon-load"></i></a></li><li id="ad_datu_cs"></li></ul></div>
+        <div class="page-prevnext">
+            <a class="btn btn-page prev" id="prevpic"><i class="icon-arrow arrow-left"></i></a>
+            <a class="btn btn-page next" id="nexpic"><i class="icon-arrow arrow-right"></i></a>
+            <span id="dotpic" class="dot"><i class="current"></i><i></i><i></i><i></i></span>
+        </div>
+    </div> 
+
+    
+
+
+    
+
+
+   
+
+
+<script type="text/javascript">
+    
+   
+
+    var Auto= Auto || {};
+    
+
+    // 模板{}替换方法
+    Auto["ReplaceTemplate"] = function (D, T) { function f(d, t) { var sb = t, b = null; for (var o in d) { b = "" + d[o]; d[o] = b.replace(/"/gi, "&quot"); b = new RegExp("{" + o + "}", "gi"); sb = sb.replace(b, d[o]) } return sb } var SB = ""; if (Object.prototype.toString.call(D) == '[object Array]') { for (var i = 0; i < D.length; i++) { SB += arguments.callee(D[i], T) } } else { SB = f(D, T) } return SB };
+    // 扩展Function，增加bind方法
+    Function.prototype.bind2 = function (bindObj, args) { var _self = this; return function () { return _self.apply(bindObj, [].concat(args)) } };
+    // 轮播控件 【略微修改，使用zepto animate实现，CSS3动画】
+    function ipadscrollable(a){var c,d,b=this.extend(this.extend({},this.getConfig),a||{});return this.c=b,c=this,this.obj=c.$(b.id),this.num=0,this.index=1,this.L=0,d=[],null==this.obj?null:(this.movingElement=!1,this.ItemWidth=0,c.extend(c,{addItem:function(){var a=c.clone(d[0]),b=c.clone(d[d.length-1]);c.obj.appendChild(a),c.obj.insertBefore(b,d[0])},moveEnd:function(){},getChildNodes:function(a){var c,b=[];for(c=0;c<a.childNodes.length;c++)3!=a.childNodes[c].nodeType&&b.push(a.childNodes[c]);return b},clone:function(a){return a.cloneNode(!0)},getLeft:function(a){return a.offsetLeft},getWidth:function(){return(document.documentElement.clientWidth||document.body.clientWidth||window.screen.clientWidth)-b.subWidth},touchStart:function(a){a=a?a:event,b.isEnd&&(b.isBegin=!0,a.targetTouches?(b.isTouch=!0,b.startX=a.targetTouches[0].clientX,b.startY=a.targetTouches[0].clientY):(b.startX=a.clientX,b.startY=a.clientY),$(c.obj).css({"-webkit-transition":"0",transition:"0"}))},touchEnd:function(a){return a=a?a:event,b.isBegin&&b.isMove?(b.isEnd=!0,b.isBegin=!1,b.isMove=!1,delete b.horizontal,b.dx<0?(newCarLoad.load("next"),c.index++):(newCarLoad.load("prev"),c.index--),$(c.obj).css({"-webkit-transition":"0.4s",transition:"0.4s"}),c.moveTo(c.index),void 0):(b.isBegin=!1,b.isMove=!1,b.isEnd=!0,delete b.horizontal,void 0)},touchMove:function(a){var d,e,f;return a=a?a:event,d={x:0},b.isBegin?(b.isMove=!0,b.isTouch?(e=a.targetTouches[0].clientX,f=a.targetTouches[0].clientY):(e=a.clientX,f=a.clientY),b.dx=e-b.startX,b.dy=f-b.startY,b.startX=e,b.startY=f,b.x+=b.dx,b.y+=b.dy,void 0===b.horizontal&&(b.horizontal=Math.abs(b.dx)>Math.abs(b.dy)?!0:!1),b.horizontal?(a.preventDefault(),d.x=b.x,c.moveCSS3(c.obj,d,0),void 0):(b.isBegin=!1,b.isMove=!1,b.isEnd=!0,delete b.horizontal,void 0)):void 0},moveNext:function(){c.moveTo(c.index+1)},movePrev:function(){c.moveTo(c.index-1)},moveTo:function(a){var f,d={x:0},e=!1;1==b.Carousel?(d.x=-1*c.ItemWidth*a,c.L<a&&(c.index=1,c.moveCSS3(c.obj,d,b.time,function(){d.x=-1*c.ItemWidth,b.x=d.x,c.moveCSS3(c.obj,d,0)}),e=!0),0==a&&(c.index=c.L,c.moveCSS3(c.obj,d,b.time,function(){d.x=-1*c.ItemWidth*c.L,c.c.x=d.x,c.moveCSS3(c.obj,d,0)}),e=!0)):(a>c.L&&(c.index=c.L,d.x=-1*c.ItemWidth*(c.L-1),b.x=d.x,c.moveCSS3(c.obj,d,b.time),e=!0),0==a&&(c.index=1,d.x=0,b.x=d.x,c.moveCSS3(c.obj,d,b.time),e=!0)),0==e&&(f=1==b.Carousel?a:a-1,d.x=-1*c.ItemWidth*f,b.x=d.x,c.index=a,c.moveCSS3(c.obj,d,b.time,b.moveEnd.bind2(c,[]))),c.changeNav()},changeNav:function(){var a,d;if(null!=b.navId&&b.navId.length>0)for(a=c.$(b.navId).getElementsByTagName(b.navTag),d=0;d<a.length;d++)a[d].className=d==c.index-1?b.navSelectClass:b.navClass},moveCSS3:function(a,b,c,d){$.os.ios?$(a).animate({left:b.x+"px"},c,"linear"):$(a).css({"-webkit-transform":"translate3d("+b.x+"px,0,0)",transform:"translate3d("+b.x+"px,0,0)"}),d&&setTimeout(d,300)},ReFlash:function(){setTimeout(function(){c.ItemWidth=c.getWidth(d[0]);var e=(window.orientation,c.obj.getElementsByTagName(b.elemTag));$(c.obj).find(b.elemTag).css({width:c.ItemWidth+"px"}),$.os.ios?c.obj.style.left="-"+(c.index-1)*c.ItemWidth+"px":$(c.obj).css({width:e.length*c.ItemWidth+"px","-webkit-transition":"0.4s",transition:"0.4s","-webkit-transform":"translateX(-"+(c.index-1)*c.ItemWidth+"px)"})},250)},init:function(){c.ReFlash(),d=c.getChildNodes(c.obj),c.ItemWidth=c.getWidth(d[0]),c.obj.addEventListener("touchmove",c.touchMove.bind2(c,[]),!1),c.obj.addEventListener("touchend",c.touchEnd.bind2(c,[]),!1),c.obj.addEventListener("touchstart",c.touchStart.bind2(c,[]),!1),window.addEventListener("onorientationchange"in window?"orientationchange":"resize",c.ReFlash.bind2(c,[]),!1),b.Carousel&&c.addItem();var a=1==b.Carousel?c.index:c.index-1;c.obj.style.left=-1*c.ItemWidth*a+"px",b.x=-1*c.ItemWidth*a}}),c.init(),this.L=d.length,void 0)}ipadscrollable.prototype={extend:function(a,b){for(var c in b)a[c]=b[c];return a},$:function(a){return"string"==typeof a?document.getElementById(a):a},getConfig:{id:null,obj:null,startX:0,startY:0,isBegin:!1,isTouch:!1,isMove:!1,isEnd:!0,x:0,y:0,dx:0,dy:0,cssMoveS:0,cssMoveStart:0,time:300,offset:0,Carousel:!1,navId:"",navClass:"",navSelectClass:"",elemTag:"",navTag:"",moveEnd:function(){},subWidth:0}};
+    // 重新封装的lazyload function by caichao
+    Auto.lazyload=function(e){this.BodyIds=null,this.Images=[],this.src2="src2",this.IPad=!1,this.offset=0,this.IsLoading=!1,this.loadImgCount=0,this.isLoading=!1,this.onloadImg=function(){},this.initialize(e)},Auto.lazyload.prototype={initialize:function(e){this.extend(this,e),this.getImg();if(this.Images.length<1)return;var t=navigator.userAgent.toLowerCase();if(t.indexOf("ipad")>-1||t.indexOf("ipod")>-1||t.indexOf("Android")>-1||t.indexOf("Iphone")>-1)this.IPad=!0;window.attachEvent?window.attachEvent("onscroll",this.Load.bind2(this)):(window.addEventListener("scroll",this.Load.bind2(this),!1),window.addEventListener("touchmove",this.Load.bind2(this),!1),window.addEventListener("touchend",this.Load.bind2(this),!1)),this.Load()},getOffset:function(e){var t=0,n=0,r=typeof e=="string"?document.getElementById(e):e;while(r.offsetParent)t+=r.offsetLeft,n+=r.offsetTop,r=r.offsetParent;return{left:t,top:n}},getWindow:function(){return{width:document.documentElement.clientWidth||document.body.clientWidth,height:document.documentElement.clientHeight||document.body.clientHeight}},extend:function(e,t){for(var n in t)e[n]=t[n];return e},getImg:function(){if(this.BodyIds==null)return;var e=this.BodyIds.split(",");for(var t=0;t<e.length;t++){if(e[t]==""||document.getElementById(e[t])==null)continue;var n=document.getElementById(e[t]).getElementsByTagName("img");for(var r=0;r<n.length;r++)n[r].getAttribute(this.src2)!=null&&this.Images.push(n[r])}return this.Images},Load:function(){this.loadImgCount++;if(this.isLoading==1||this.Images.length==0)return;this.isLoading=!0;var e=this.getWindow();e.height=e.height+Math.max(document.documentElement.scrollTop,document.body.scrollTop),this.IPad&&(e.height=window.screen.height+window.scrollY);for(var t=0;t<this.Images.length;t++){var n=this.getOffset(this.Images[t]);n.top-this.offset<=e.height&&(this.onloadImg(this.Images[t]),this.Images[t].setAttribute("src",this.Images[t].getAttribute(this.src2)),this.Images[t].removeAttribute(this.src2),this.Images.splice(t,1),--t)}this.isLoadEnd(),this.isLoading=!1},isLoadEnd:function(){this.Images.length==0&&(window.attachEvent?window.detachEvent("onscroll",this.Load):(window.removeEventListener("scroll",this.Load,!1),window.removeEventListener("touchmove",this.Load,!1),window.removeEventListener("touchend",this.Load,!1)))}}
+
+    //行情 by caichao 获取cityId的逻辑重写，清晰 【改动较大】
+    function getCityId(){var CityId=$.getCookie("cookieCityId","0"),unExpInfoArr={"1102":"1101","1202":"1201","3102":"3101","5002":"5001"};if(CityId=="0"){var area=$.getCookie("area","0");if(area!=="0"){var code=(Math.floor(parseInt(area)/100)*100).toString(),Privice=code.substr(0,2),city_id_f=code.substr(2,2),zone_id_f=code.substr(4,2);if(Privice==="99"||city_id_f==="99"||zone_id_f==="99"){CityId="110100"}else{var _tmpId=area.substr(0,4);if(unExpInfoArr[_tmpId]){CityId=unExpInfoArr[_tmpId]+"00"}else{CityId=_tmpId+"00"}}}else{CityId="110100"}}return CityId}
+
+    // 全局变量，当前城市ID，供其他功能调用
+    CityId = getCityId();
+
+    // 降价部分，需要读取window.CityId变量
+    var promotion=function(){var _promotion={},pid='';var $pt=$("#divPromotionTip"),$hssn=$("#divHSSpecNull"),$hp=$("#ulHotPromotion"),$hsp=$("#ulHSPromotion");if(CityId!=0){pid=CityId.toString().substr(0,2)+"0000";}_promotion.cityCallBack=function(city){if(city!==null||city!==undefined){$("#areaPromotion").html(city.name+'<i class="icon-arrow arrow-right"></i>');$("#h3PromotionInfo").html(city.name+'降价信息');}};_promotion.hotCallback=function(data){if(data==null||data.list==null){return;}var html="";for(var val in data.list){var priceInfo="";if(data.list[val].PriceOffType=="1"||data.list[val].PriceOffType=="3"){priceInfo='<i class="icon icon-lower"></i>'+data.list[val].PriceOffTitle;}else{priceInfo=data.list[val].PriceOffTitle;}html+='<li><a href="http://buy.'+$.getDomain("m")+'/'+data.list[val].BrandId+'/'+data.list[val].SeriesID+'/'+0+'/'+pid+'/'+CityId+'/0-1-1-1.html#pvareaid=102469"><span class="caption">'+data.list[val].SeriesName+'</span><span class="pricelower">'+priceInfo+'</span><i class="icon-arrow arrow-right"></i></a></li>';}$hp.html(html);};_promotion.hsCallback=function(data){if(data==null||data.list==null){$hssn.show();$pt.hide();return;}$hssn.hide();$pt.show();var html="";for(var val in data.list){var priceInfo="";if(data.list[val].MinPrice!="0"){priceInfo='<i class="icon icon-lower"></i>'+((data.list[val].OriginalPrice-data.list[val].MinPrice)/10000)+"万";}else{priceInfo="暂无降价";}html+='<li><a href="http://buy.'+$.getDomain("m")+'/'+data.list[val].BrandId+'/'+data.list[val].SeriesId+'/'+data.list[val].SpecId+'/'+pid+'/'+CityId+'/0-1-1-1.html#pvareaid=102469"><span class="caption">'+data.list[val].SeriesName+" "+data.list[val].SpecName+'</span><span class="pricelower">'+priceInfo+'</span><i class="icon-arrow arrow-right"></i></a></li>';}$hsp.attr("isload","1");$hsp.html(html);};_promotion.init=function(){$.LoadJs({"url":"/Ashx/Promotion/LoadAutoMarket.ashx?CityId="+CityId+"&pageSize=7&hotCallback=promotion.hotCallback&cityCallBack=promotion.cityCallBack","type":"async"},function(){});$("#aPromotionLink").attr("href",'http://buy.'+$.getDomain("m")+'/0/0/0/'+pid+'/'+CityId+'/0-1-1-1.html#pvareaid=103203');$("#aHSSpecPromotion").on("click",function(){$("#aHotPromotion").removeClass("btn-selected");$(this).addClass("btn-selected");$hsp.show();$hp.hide();if($hsp.attr("isnull")=="1"){$hssn.show();}else{$hssn.hide();}if($hsp.attr("isload")=="0"){var hs=$.getCookie("hsViewPromotionSpec","");if(hs!=""){$.LoadJs({"url":"/Ashx/Promotion/LoadSpecPromotion.ashx?cityId="+CityId+"&specIds="+hs+"&callback=promotion.hsCallback","type":"async"},function(){});}else{$hsp.attr("isnull",1);$hssn.show();$pt.hide();}}return false; });$("#aHotPromotion").on("click",function(){$("#aHSSpecPromotion").removeClass("btn-selected");$(this).addClass("btn-selected");$pt.show();$hp.show();$hssn.hide();$hsp.hide();return false;});};return _promotion;}();
+
+    // 行情数据处理回到ipadscrollable
+    function showHangqing(obj){if(obj!=null){$("#area").html(obj.cityname+'<i class="icon-arrow arrow-right"></i>');$("#morehangqing").attr("href","/marketarea/"+CityId+"/?pvareaid=103205").html('进入'+obj.cityname+'行情<i class="icon-arrow arrow-right"></i>');var hqListT='<li><a href="{url}"><span class="caption">{title}</span><span class="comment"><i class="icon icon-comment"></i>{replycount}</span></a></li>';var html=Auto.ReplaceTemplate(obj.articlelist,hqListT);$("#listhq").append(html);}}
+    
+    /* ########################### 基础函数集 ########################### END */
+
+    new Auto.lazyload({BodyIds: "divClubJX,divnewcar", src2: "src2", offset: 100 });
+    
+    $(document).ready(function(){
+       
+        
+
+       
+        //焦点图【轮播】
+        var picLz = new ipadscrollable({ id: "picContainer", Carousel: false, navId: "dotpic", navSelectClass: "current", elemTag: "li", navTag: "i",moveEnd:function(){_gaq.push(['_trackEvent', 'M首页焦点图滑动点击', '滑动', '滑动次数',1,true]);}});
+
+        $('#prevpic').click(function(){
+            _gaq.push(['_trackEvent', 'M首页焦点图上下页点击按钮', '点击', '点击次数',1,true]);
+            picLz.movePrev();
+            return false;
+        });
+        $('#nexpic').click(function(){
+            _gaq.push(['_trackEvent', 'M首页焦点图上下页点击按钮', '点击', '点击次数',1,true]);
+            picLz.moveNext();
+            return false;
+        });
+        
+        
+        
+    });
+    
+    
+    
+</script>
+
+    <script type="text/javascript">
+        var pvTrack = function () { };
+        pvTrack.site = 1211001;
+        pvTrack.category = 40;
+        pvTrack.subcategory = 1347;
+        pvTrack.object = 0;
+        var url_stats = "http://stats.autohome.com.cn/pv_count.php?SiteId=";
+        (function () {
+            if (typeof (pvTrack) !== "undefined") {
+                setTimeout("func_stats()", 3000);
+                var doc = document, t = pvTrack;
+                var pv_site, pv_category, pv_subcategory, pv_object, pv_series, pv_type, pv_typeid, pv_spec, pv_level, pv_dealer, pv_ref, pv_cur;
+                pv_ref = escape(doc.referrer); pv_cur = escape(doc.URL);
+                pv_site = t.site; pv_category = t.category; pv_subcategory = t.subcategory; pv_object = t.object; pv_series = t.series; pv_type = t.type; pv_typeid = t.typeid; pv_spec = t.spec; pv_level = t.level; pv_dealer = t.dealer;
+                url_stats += pv_site + (pv_category != null ? "&CategoryId=" + pv_category : "") + (pv_subcategory != null ? "&SubCategoryId=" + pv_subcategory : "") + (pv_object != null ? "&objectid=" + pv_object : "") + (pv_series != null ? "&seriesid=" + pv_series : "") + (pv_type != null ? "&type=" + pv_type : "") + (pv_typeid != null ? "&typeid=" + pv_typeid : "") + (pv_spec != null ? "&specid=" + pv_spec : "") + (pv_level != null ? "&jbid=" + pv_level : "") + (pv_dealer != null ? "&dealerid=" + pv_dealer : "") + "&ref=" + pv_ref + "&cur=" + pv_cur + "&rnd=" + Math.random();
+                var len_url_stats = url_stats.length;
+            }
+        })();
+        function func_stats() { var d = new Image(1, 1); d.src = url_stats; d.onload = function () { }; d.onerror = function () { }; }
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-30787185-1']);
+        _gaq.push(['_addOrganic', 'm.baidu.com', 'word']);
+        _gaq.push(['_setDomainName', '.autohome.com.cn']);
+        _gaq.push(['_setAllowHash', false]);
+        _gaq.push(['_setSampleRate', '10']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+       
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement('script'); hm.type = 'text/javascript'; hm.async = true;
+            hm.src = '//hm.baidu.com/h.js?c3d5d12c0100a78dd49ba1357b115ad7';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(hm, s);
+        })();
+
+    </script>
+    
+      
+    
+    <script type="text/javascript">
+        (function(){
+            var  FocusDefaultDateJson ={url:"http://m.autohome.com.cn/culture/201408/831108.html#pvareaid=101124",img:"http://www0.m.autoimg.cn/newspic/2014/8/12/640x320_0_q30_2014081215414225159.jpg",title:"最后的四缸FR保时捷 实拍92年保时捷968"},ad_datu_cs = document.getElementById('ad_datu_cs');
+            if(ad_datu_cs.innerHTML== ""  && FocusDefaultDateJson!=null)
+            {
+                ad_datu_cs.innerHTML ='<a href="'+ FocusDefaultDateJson.url +'"><h3>'+ FocusDefaultDateJson.title +'</h3><img src="'+  FocusDefaultDateJson.img +'"><i class="icon-load"></i></a>';
+            }
+        })();
+        // 返回顶部优化 by caichao
+        function getClassName(){
+            window.className = "publicGUID" in window?window["publicGUID"]:"downpa";
+            if("publicGUID" in window){
+                $.LoadJs({ url: "http://x.autoimg.cn/m/js/moveTop.js", type: "async" },function(){
+                    // 如果有APP推广条，返回顶部按钮上移                
+                    if ($('.'+className).length>0) $('.topback-layer').css('padding-bottom','60px');
+                });
+            }else{
+                setTimeout(getClassName,50);
+            }
+        }
+        setTimeout(getClassName,50);
+    </script>
+
+
+
+<!--<div class="slide_container" style="padding:0;">
+   <ul class="rslides" id="slider">
+      <li><img src="images/2.jpg" alt=""></li>
+      <li><img src="images/1.jpg" alt=""></li>
+      <li><img src="images/3.jpg" alt=""></li>
+    </ul>
+</div>
+
+<script src="js/responsiveslides.min.js"></script>
+<script src="js/slide.js"></script>
+<div class="clear"></div>-->
+<!--轮播大图 结束-->
+
+
+<!--内容列表-->
+<div class="container-fluid">
+      <div class="row">
+          <div class="col-xs-12">
+            <img src="images/hetu1.png" border="0" usemap="#Map"  class="img-responsive"/>
+          <div class="col-xs-12"> 
+            <map name="Map" id="Map">
+              <area shape="rect" coords="3,2,397,191" href="http://www.baidu.com"/>
+              <area shape="rect" coords="416,3,604,192" href="http://www.sina.com.cn"/>
+            </map>
+          </div>
+          </div>
+          
+          <!--<div class="col-xs-4 nine">
+          <div class="thumbnail">
+             <a href="#" style="background:#c00;"><img src="images/shangwang.jpg" data-src="holder.js/100%x195" class="img-responsive"/></a> 
+          </div>
+          </div>-->
+
+      </div>
+
+
+
+
+
+
+
+</div>
+<!--<div class="container-fluid pd30" style="margin-bottom:60px">
+     <div class="row">
+         <div class="row col-xs-8 eight" ><a href="#" style="background:#f00;">234</a></div>
+         <div class="row col-xs-4 eight" ><a href="#" style="background:#ccc;>2345</a></div>
+     </div>
+
+
+     <div class="row" style="margin-top:8px;">
+         <div class="text-center col-xs-6 eight"><a href="#" ><img src="images/shipin.jpg"  class="img-responsive"/></a></div>
+       <div class="text-center col-xs-6 eight"><a href="#" ><img src="images/shipin2.jpg" class="img-responsive"/></a></div>
+     </div>
+     
+     
+     <div class="row" style="margin-top:8px;">
+         <div class="text-center col-xs-8" style="padding:0;"><a href="#"><img src="images/beauty.jpg"  class="sec_line img-responsive"/></a></div>
+       <div class="text-center col-xs-4" style="padding:0;"><a href="#"><img src="images/tree.jpg"  class="sec_line img-responsive"/></a></div>
+     </div>
+
+
+    <div class="row" style="margin-top:8px;">
+         <div class="text-center col-xs-4" style="padding:0;"><a href="#"><img src="images/married.jpg"  class="fir_line img-responsive"/></a></div>
+         <div class="text-center col-xs-8" style="padding:0;"><a href="#"><img src="images/qixi.jpg"  class="fir_line img-responsive"/></a></div>
+    </div>
+    
+    
+    <div class="row" style="margin-top:8px;">
+         <div class="text-center col-xs-8" style="padding:0;"><a href="#"><img src="images/xiecheng.jpg"  class="fir_line img-responsive"/></a></div>
+         <div class="text-center col-xs-4" style="padding:0;"><a href="#"><img src="images/hospital.jpg"  class="fir_line img-responsive"/></a></div>
+    </div>
+    
+    
+    <div class="row" style="margin-top:8px;">
+         <div class="text-center col-xs-4" style="padding:0;"><a href="#"><img src="images/movie.jpg"  class="fir_line img-responsive"/></a></div>
+         <div class="text-center col-xs-8" style="padding:0;"><a href="#"><img src="images/qianwei.jpg"  class="fir_line img-responsive"/></a></div>
+    </div>
+</div>-->
+
+
+<!--底部-->
+<!--底部-->
+<div class="navbar navbar-fixed-bottom beau_col" role="navigation" style="padding:0px;">
+   <div class="container-fluid" style="margin-top:0px;">
+      <div class="row" >
+      <div class="text-center col-xs-1"></div>
+         <div class="text-center col-xs-2 menu"> 
+            <a href="index.html"><span class="home" style="margin-bottom:-12px;"></span>主页</a>
+         </div>
+         <div class="text-center col-xs-2 menu">
+            <a href="fenlei.html"><span class="see_shi" style="margin-bottom:-12px;"></span>视频</a>
+         </div>
+         <div class="text-center col-xs-2 menu">
+            <a href="money_list.html" ><span class="dazhe" style="margin-bottom:-12px;"></span>优惠</a>
+         </div>
+         <div class="text-center col-xs-2 menu">
+            <a href="yingyong.html" ><span class="yong" style="margin-bottom:-12px;"></span>应用</a>
+         </div>
+         <div class="text-center col-xs-2 menu">
+            <a href="active_hot.html" ><span class="mine" style="margin-bottom:-12px;"></span>我的</a>
+         </div>
+         <div class="text-center col-xs-1"></div>
+      </div>
+   </div>
+</div>
+
+
+
+
+</body>
+</html>

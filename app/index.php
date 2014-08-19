@@ -6,10 +6,10 @@
 <meta name="format-detection" content="telephone=no" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <title>BusFree</title>
-<script src="js/jquery.min.js"></script>
 <link href="css/bootstrap.css" rel="stylesheet">
 <script src="js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/jtzi.css"/>
+<script src="js/jquery.min.js"></script>
 
 
 
