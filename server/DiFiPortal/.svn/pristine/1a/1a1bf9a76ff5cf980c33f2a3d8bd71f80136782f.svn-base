@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <system.webServer>
+        <handlers>
+            <add name="php-5.4.12" path="*.php" verb="*" modules="FastCgiModule" scriptProcessor="D:\php-5.4.12\php-cgi.exe" resourceType="Unspecified" />
+        </handlers>
+    </system.webServer>
+</configuration>

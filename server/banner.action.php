@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once('common.class.php');
 if(isset($_GET["type"])){
 	require_once("sqlDb.php");
 	/*
@@ -11,8 +12,12 @@ if(isset($_GET["type"])){
 	$type = $_GET["type"];
 	$DB->where("type",$type);
 	$DB->orderBy("order_id","desc");
-	$banners = $DB->get("banner");
-    header("Content-type: application/json");
-	echo json_encode($banners);
+	$banners=$DB->get("banner");
+	echo json_encode(Common::getResult(1,"ok",$banners));
+	exit(0);
+}
+else{
+	echo json_encode(Common::getResult(0,"缺少type参数!"));
+	exit(0);
 }
 ?>
