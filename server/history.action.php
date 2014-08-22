@@ -8,16 +8,15 @@ if(!isset($_GET["type"])){
 	exit(0);
 }
 require_once("sqlDb.php");
+$id=$_SESSION["user"]["id"];
 $type=$_GET["type"];
-$ids = $DB->subQuery();
-$ids->where('src_type',$type);
-if($type===1){
-	$ids->get("activity",null,"id");
+
+$params=array($id,$type);
+$sql="select v.v_id id,v.pic_url picture,v.title title,h.create_date from bee_video v,bee_user_history h where h.src_id=v.v_id and h.user_id=? and h.src_type=?";
+if($type==="1"){
+$sql="select a.id,a.picture_url picture,a.title title,h.create_date from bee_activity a,bee_user_history h where a.id=h.src_id and user_id=? and h.src_type=?";
 }
-else if($type===2){
-	$ids->get("video",null,"v_id");
-}
-$DB->where("src_id",$ids,"in");
-$historys=$DB->get("user_history");
-echo json_encode($historys);
+$historys=$DB->rawQuery($sql,$params);
+echo json_encode(Common::getResult(1,"success!",$historys));
+exit(0);
 ?>

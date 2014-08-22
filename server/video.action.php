@@ -20,6 +20,10 @@ $start=$_GET["start"];
 $count=$_GET["count"];
 $params = array($type,$start,$count);
 $videos=$DB->rawQuery("select * from bee_video where type_id = ? order by order_id desc limit ?,?",$params);
-header("Content-type: application/json");
-echo json_encode($videos);
+
+$DB->orderBy("order_id");
+$types=$DB->get("video_type");
+$reData=Common::getResult(1,"ok",$videos);
+$reData["types"]=$types;
+echo json_encode($reData);
 ?>

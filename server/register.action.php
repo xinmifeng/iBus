@@ -96,6 +96,11 @@ else if($action==="codeRegist"){
 			);
 			$id=$DB->insert("user",$user);
 			if($id){
+				$_SESSION["user"]=array(
+					"id"=>$id,
+					"user_name"=>$tel,
+					"status"=>1
+				);
 				echo json_encode(Common::getResult(1,"ok"));
 				exit(0);
 			}

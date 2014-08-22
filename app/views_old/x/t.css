@@ -1,0 +1,7 @@
+.main-promo { width: 100%; }
+.main-promo .content { width: 320px; margin: 0 auto; overflow: hidden; position: relative; }
+.main-promo ul {  position: absolute; left: 0; top: 0; padding: 0px; margin: 0px; }
+.main-promo ul li.zjroll_li {  overflow: hidden; float: left; padding: 0px; margin: 0px; }
+.main-promo .slider-status { width: 100%; height: 10px; position: absolute; bottom: 10px; left: 0; text-align: center; }
+.main-promo .slider-status span { display: inline-block; width: 6px; height: 6px; background-color: #fff; border-radius: 3px; line-height: 3px; cursor: pointer; margin: 0 4px 0 0; }
+.main-promo .slider-status span.sel { background-color: #98000d; }

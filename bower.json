@@ -9,7 +9,10 @@
 		"node"
 	  ],
 	"dependencies": {
-		"seajs":"*"	
+		"angular":"*",
+		"angular-route":"*",
+		"bootstrap":"*",
+		"zeptojs":"*"
 	},
 	"ignore": [
 		"**/.*",
