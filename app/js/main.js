@@ -101,8 +101,28 @@ function videoDetailControll($scope,$http,$routeParams,$sce){
 		params:{"id":$routeParams.id}
 	}).success(function(data){
 		$scope.item=data.data;
+		$scope.item.likeClass=$scope.item.is_like?"love":"";
 		$scope.item.address=$sce.trustAsResourceUrl("."+$scope.item.address);
 	});
+	$scope.loveMovie=function(){
+		$http({
+			method:"get",
+			url:server_url+"dohistory.action.php",
+			params:{
+				"type":2,
+				"action":1,
+				"id":$routeParams.id
+			}
+		}).success(function(data){
+			if(data.status){
+				$scope.item.likeClass="love";		
+				$scope.item.total_like=parseInt($scope.item.total_like)+1;
+			}
+			else{
+				alert(data.message);
+			}
+		});
+	}
 }
 
 function activityControll($scope,$http){
@@ -173,6 +193,21 @@ function appDetailControll($scope,$http,$routeParams){
 			$scope.item=data.data;
 		}
 	});
+	$scope.download=function(){
+		function download(url,filename){
+			var lnk = document.createElement('a'), e;
+			lnk.download = filename;
+			lnk.href=url;
+			if (document.createEvent) {
+				e = document.createEvent("MouseEvents");
+				e.initMouseEvent("click", true, true, window,0, 0, 0, 0, 0, false, false, false,false, 0, null);
+				lnk.dispatchEvent(e);
+			}else if (lnk.fireEvent) {
+				lnk.fireEvent("onclick");
+			}
+		}
+		download("images/xizai_point.jpg","point.jpg");
+	}
 }
 
 function myControll($scope,$http){

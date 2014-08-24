@@ -361,7 +361,7 @@
 	color:#666;
 	}
 	
-.heart_bian a:hover span{
+.heart_bian a.love span{
 	background:url(../images/heart.png) no-repeat;
 	background-position:0px -35px;}
 	
