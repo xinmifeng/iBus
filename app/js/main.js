@@ -6,31 +6,31 @@ function appRouteConfig($routeProvider){
 	}).
 	when("/video/:id",{
 		controller:videoControll,
-		templateUrl:'views/TV_hot.html'
+		templateUrl:'views/video.html'
 	}).
 	when("/videoDetail/:id",{
 		controller:videoDetailControll,
-		templateUrl:'views/tv_time.html'
+		templateUrl:'views/videoDetail.html'
 	}).
 	when("/activity",{
 		controller:activityControll,
-		templateUrl:'views/money_list.html'
+		templateUrl:'views/activity.html'
 	}).
 	when("/apks",{
 		controller:apkControll,
-		templateUrl:'views/yingyong.html'
+		templateUrl:'views/apks.html'
 	}).
 	when("/appDetail/:id",{
 		controller:appDetailControll,
-		templateUrl:'views/download_youhui.html'
+		templateUrl:'views/appDetail.html'
 	}).
 	when("/history/:type",{
 		controller:historyControll,
-		templateUrl:'views/history_mine.html'
+		templateUrl:'views/history.html'
 	}).
 	when("/my",{
 		controller:myControll,
-		templateUrl:'views/main_mine.html'
+		templateUrl:'views/my.html'
 	}).
 	otherwise({
 		redirectTo:"/"
@@ -40,6 +40,15 @@ function appRouteConfig($routeProvider){
 appModule.config(appRouteConfig);
 
 var server_url="../server/";
+
+function swiper(){
+	var mySwiper = new Swiper('.swiper-container',{
+		  pagination: '.pagination',
+		  loop:true,
+		  grabCursor: true,
+		  paginationClickable: true
+	});
+}
 
 function indexControll($scope,$http){
 	$http({
@@ -66,9 +75,15 @@ function indexControll($scope,$http){
 		}
 		$scope.indexData=mdata;
 	});
+	$scope.swiper=function(){
+		swiper();
+	}
 }
 
 function videoControll($scope,$http,$routeParams){
+	$scope.swiper=function(){
+		swiper();
+	}
 	var type=$routeParams.id;
 	$http({
 		method:"get",
@@ -150,6 +165,9 @@ function activityControll($scope,$http){
 		}
 		$scope.indexData=mdata;
 	});
+	$scope.swiper=function(){
+		swiper();
+	}
 }
 
 function apkControll($scope,$http){
@@ -181,6 +199,9 @@ function apkControll($scope,$http){
 		}
 		$scope.groups=groups;
 	});
+	$scope.swiper=function(){
+		swiper();
+	}
 }
 
 function appDetailControll($scope,$http,$routeParams){

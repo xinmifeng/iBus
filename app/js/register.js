@@ -4,15 +4,15 @@ var registerModule = angular.module('register',["ngRoute"]);
 function appRouteConfig($routeProvider){
 	$routeProvider.when("/",{
 		controller:register_one,
-		templateUrl:'views/chuce_one.html'
+		templateUrl:'views/register_getCode.html'
 	})
 	.when("/checkCode",{
 		controller:checkCodeControll,
-		templateUrl:'views/checkCode.html'
+		templateUrl:'views/register_checkCode.html'
 	})
 	.when("/register",{
 		controller:registerControll,
-		templateUrl:'views/register.html'
+		templateUrl:'views/register_setPassword.html'
 	}).
 	otherwise({
 		redirectTo:"/"

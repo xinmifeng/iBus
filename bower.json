@@ -12,7 +12,7 @@
 		"angular":"*",
 		"angular-route":"*",
 		"bootstrap":"*",
-		"zeptojs":"*"
+		"swiper":"*"
 	},
 	"ignore": [
 		"**/.*",

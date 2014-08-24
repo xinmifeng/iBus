@@ -158,8 +158,9 @@
 	
 /*底部导航*/
 .beau_col{
-	background:#f4f3f3;
-	opacity:0.8;}
+	background:#fefef3;
+	border-top:solid 2px #dcdcdc;
+	opacity:0.95;}
 	
 .beau_col a{
 	color:#7c7c7c;
