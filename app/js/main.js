@@ -50,6 +50,10 @@ function swiper(){
 	});
 }
 
+function commonDeal(action){
+
+}
+
 function indexControll($scope,$http){
 	$http({
 		method:"get",
@@ -227,7 +231,7 @@ function appDetailControll($scope,$http,$routeParams){
 				lnk.fireEvent("onclick");
 			}
 		}
-		download("images/xizai_point.jpg","point.jpg");
+		//download("images/xizai_point.jpg","point.jpg");
 	}
 }
 

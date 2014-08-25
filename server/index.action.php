@@ -22,7 +22,7 @@ function getUrl($item){
 	$type=$item["index_type"];
 	$id=$item["details_id"];
 	if(is_null($id)){
-		return "#video";
+		return "#video/1";
 	}
 	$s="#";
 	switch($type){
