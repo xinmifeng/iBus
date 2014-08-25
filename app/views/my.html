@@ -1,0 +1,62 @@
+<!--优惠信息-->
+<div class="container-fluid">
+    <div class="row">
+		<img src="images/quan.jpg" class="img-responsive" style="margin:0 auto;"/>
+	</div>
+</div>
+
+<div class="container-fluid">
+     <div class="row">
+		<img src="images/quan_time.png" width="274" height="275" 
+		class="img-responsive" style="margin:0 auto; margin-top:-190px;"/>
+	</div>
+</div>
+
+<div class="container-fluid">
+	<div class="row">
+		<div style="margin:0 auto;margin-top:-180px;text-align:center;font-size:50px;color:#FFF;">
+		{{item.ture_days}}<span style="font-size:20px;">天<span></div>
+	 </div>
+</div>
+
+<div class="container-fluid phone_col">
+     <div class="row col-xs-13 text-center"><p>{{item.user_name}}</p></div>
+</div>
+
+<div class="container-fluid" style="margin-bottom:100px;">
+	<div class="row col-xs-13">
+       <a class="btn btn-default btn-block list_new" role="button" 
+		href="#history/1" style="border-radius:0; border-left:0; border-right:0;">
+		  <img src="images/quan_qian.png" width="40" height="32" class="img-responsive pull-left"/>
+		  <span class="pull-left marL10" style="font-weight:bold; margin-top:5px;">我的优惠劵</span>
+		  <span class="pull-right yellow"><img src="images/sanjiao_2.png" width="25" height="31" /></span>
+		  <div class="clear"></div>
+        </a>
+     </div>
+	<div class="row col-xs-13" style="margin-bottom:20px;">
+		<a class="btn btn-default btn-block list_new"  role="button" href="#history/2" style="border-radius:0; border-left:0; border-right:0; border-top:0;" >
+		  <img src="images/watch.png" width="36" height="35" class="img-responsive pull-left" style="margin-left:3px;"/> 
+		  <span class="pull-left marL10 " style="font-weight:bold; margin-top:8px; margin-left:13px;">最近观看</span>
+		  <span class="pull-right yellow"><img src="images/sanjiao_2.png" width="25" height="31" /></span>
+		  <div class="clear"></div>
+		</a>
+	</div>
+	<!--
+	<div class="row col-xs-13" style="margin-bottom:10px;">
+		<a class="btn btn-default btn-block list_new"  role="button" href="#" style="border-radius:0; border-left:0; border-right:0; border-top:0;">
+		  <img src="images/lock.png" width="30" height="42" class="img-responsive pull-left" style="margin-left:5px;"/> 
+		  <span class="pull-left marL10 " style="font-weight:bold; margin-top:15px; margin-left:17px;">修改密码</span>
+		  <span class="pull-right yellow"><img src="images/sanjiao_2.png" width="25" height="31" style="margin-top:5px;"/></span>
+		  <div class="clear"></div>
+		</a>
+	</div>
+	-->
+	<div class="row col-xs-13">
+		<a ng-click="exitLogin()" class="btn btn-default btn-block list_new"  role="button" href="javascript:void(0)" style="border-radius:0; border-left:0; border-right:0; border-top:0; padding:14px">
+		  <span class="text-center marL10 " style="font-weight:bold; margin-top:5px; color:#c25234;">退出登录</span>
+		  <span class="pull-right yellow"></span>
+		  <div class="clear"></div>
+		</a>
+	</div>
+</div>
+

@@ -1,0 +1,31 @@
+<!--导航条-->
+<div class="container-fluid">
+     <div class="row back_show">
+          <div class="row col-xs-3">
+			  <a href="javascript:history.back(0)">
+				<img src="images/back_show.jpg" width="53" height="45" />
+			  </a>
+		  </div>
+          <div class="row col-xs-4 title_down" style="text-align:center;">
+			{{item.title}}
+		  </div>
+	 </div>
+</div>
+
+
+
+<!--优惠图-->
+<div class="container-fluid" style="margin-bottom:70px;">
+    <div class="row pd40">
+		<img ng-src="{{item.download_url}}" width="320"  class="img-responsive" style="margin:0 auto;"/>
+	</div>
+    <div style="display:{{item.isCommon}}" class="row">
+		<div class="col-xs-4"></div>
+		<div class="text-center col-xs-4">
+			<a href="javascript:void(0)">
+				<img ng-click="download()" src="images/xizai_point.jpg" class="img-responsive" style="margin:10px auto;"/>
+			</a>
+		</div>
+		<div class="col-xs-4"></div>
+	</div>
+</div>

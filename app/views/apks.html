@@ -1,0 +1,41 @@
+<!--轮播大图 开始-->
+<div class="swiper-device">
+	<div class="swiper-container">
+		<div data-ng-init="swiper()" class="swiper-wrapper">
+			<!--
+			<div ng-repeat="item in data.data" class="swiper-slide">
+				<img ng-src=".{{item.picture_url}}">
+			</div>
+			-->
+			<div class="swiper-slide"><img src="images/1.jpg"></div>
+			<div class="swiper-slide"><img src="images/2.jpg"></div>
+			<div class="swiper-slide"><img src="images/3.jpg"></div>
+		</div>
+	</div>
+    <div class="pagination"></div>
+</div>
+
+<!--
+<div class="slide_container" style="padding:0;margin-bottom:0px;">
+   <ul class="rslides" id="slider">
+		<li ng-repeat="item in data.data">
+			<img ng-src=".{{item.picture_url}}" />
+		</li>
+    </ul>
+</div>
+-->
+
+<div class="clear"></div>
+<!--轮播大图 结束-->
+
+<!--内容列表-->
+<div ng-repeat="group in groups" class="container-fluid pd50" style="padding-bottom:{{group.gr}}">
+     <div class="row col-xs-13" style="margin-bottom:8px;">
+		<img ng-src="{{group.gpic}}"  class=" img-responsive" style="margin:0 auto;"/>
+	</div>
+	<div ng-repeat="item in group.data" class="row">
+		<div ng-repeat="obj in item" class="text-center col-xs-6" style="padding-left:0;margin-top:8px;">
+			<a href="#appDetail/{{obj.id}}"><img ng-src="{{obj.picture_url}}"  class=" img-responsive" style="margin:0 auto;"/></a>
+		</div>
+	</div>
+</div>
