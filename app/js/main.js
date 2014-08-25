@@ -39,6 +39,16 @@ function appRouteConfig($routeProvider){
 
 appModule.config(appRouteConfig);
 
+var BG={hasbg:false};
+function setBg($scope,hasbg){
+	BG.hasbg=hasbg?"bg":"";
+	$scope.BG=BG;
+}
+
+appModule.controller('MainControll',function ($scope){
+	setBg($scope,true);
+});
+
 var server_url="../server/";
 
 function swiper(){
@@ -51,7 +61,6 @@ function swiper(){
 }
 
 function commonDeal(action){
-
 }
 
 function indexControll($scope,$http){
@@ -82,6 +91,7 @@ function indexControll($scope,$http){
 	$scope.swiper=function(){
 		swiper();
 	}
+	setBg($scope,true);
 }
 
 function videoControll($scope,$http,$routeParams){
@@ -111,6 +121,7 @@ function videoControll($scope,$http,$routeParams){
 		}
 		$scope.types=data.types;
 	});
+	setBg($scope,true);
 }
 
 function videoDetailControll($scope,$http,$routeParams,$sce){
@@ -142,6 +153,7 @@ function videoDetailControll($scope,$http,$routeParams,$sce){
 			}
 		});
 	}
+	setBg($scope,false);
 }
 
 function activityControll($scope,$http){
@@ -172,6 +184,7 @@ function activityControll($scope,$http){
 	$scope.swiper=function(){
 		swiper();
 	}
+	setBg($scope,true);
 }
 
 function apkControll($scope,$http){
@@ -206,6 +219,7 @@ function apkControll($scope,$http){
 	$scope.swiper=function(){
 		swiper();
 	}
+	setBg($scope,true);
 }
 
 function appDetailControll($scope,$http,$routeParams){
@@ -233,6 +247,7 @@ function appDetailControll($scope,$http,$routeParams){
 		}
 		//download("images/xizai_point.jpg","point.jpg");
 	}
+	setBg($scope,false);
 }
 
 function myControll($scope,$http){
@@ -254,6 +269,7 @@ function myControll($scope,$http){
 			}
 		});
 	}
+	setBg($scope,false);
 }
 
 function historyControll($scope,$http,$routeParams){
@@ -272,4 +288,5 @@ function historyControll($scope,$http,$routeParams){
 			$scope.group=data.data;
 		}
 	});
+	setBg($scope,false);
 }

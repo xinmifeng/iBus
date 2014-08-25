@@ -29,7 +29,7 @@ if($DB->count===1){
 	<script src="bower_components/swiper/src/idangerous.swiper.js"></script>
 	<script src="js/main.js"></script>
 </head>
-<body style="background:url(images/index_bg.jpg) repeat-x;">
+<body ng-controller="MainControll" class="{{BG.hasbg}}">
 <!--标题-->
 <div class="container-fluid">
    <div class="row text-center logo">
