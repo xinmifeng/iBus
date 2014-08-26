@@ -18,5 +18,6 @@ if(!is_null($history)){
 	$is_like=$history["is_like"];
 }
 $video["is_like"]=$is_like;
+$video["address"]=$upload_dir.$video["address"];
 echo json_encode(Common::getResult(1,"ok",$video));
 ?>

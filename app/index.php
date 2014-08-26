@@ -44,19 +44,19 @@ if($DB->count===1){
 <div class="navbar navbar-fixed-bottom beau_col" role="navigation" style="padding:0px;">
    <div class="container-fluid" style="margin-top:0px;">
       <div class="row" >
-         <div class="text-center col-xs-2 menu" style="width:20%;"> 
+         <div class="text-center col-xs-2 men" style="width:20%;"> 
             <a href="#/"><span class="home" style="margin-bottom:-12px;"></span>主页</a>
          </div>
-         <div class="text-center col-xs-2 menu" style="width:20%;">
+         <div class="text-center col-xs-2 men" style="width:20%;">
             <a href="#video/<?php echo $vid;?>"><span class="see_shi" style="margin-bottom:-12px;"></span>视频</a>
          </div>
-         <div class="text-center col-xs-2 menu" style="width:20%;">
+         <div class="text-center col-xs-2 men" style="width:20%;">
             <a href="#activity" ><span class="dazhe" style="margin-bottom:-12px;"></span>优惠</a>
          </div>
-         <div class="text-center col-xs-2 menu" style="width:20%;">
-            <a href="#apks" ><span class="yong" style="margin-bottom:-12px;"></span>下载</a>
+         <div class="text-center col-xs-2 men" style="width:20%;">
+            <a href="#apks" ><span class="yong" style="margin-bottom:-12px;"></span>下载吧</a>
          </div>
-         <div class="text-center col-xs-2 menu" style="width:20%;">
+         <div class="text-center col-xs-2 men" style="width:20%;">
             <a href="#my" ><span class="mine" style="margin-bottom:-12px;"></span>我的</a>
          </div>
       </div>

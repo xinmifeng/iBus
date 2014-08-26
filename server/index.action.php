@@ -45,7 +45,7 @@ for($i=0,$len=$DB->count;$i<$len;$i++){
 	$index_type=$item["index_type"];
 	$redirect_src=getUrl($item);
 	array_push($reData,array(
-		"pic_url"=>$item["pic_url"],
+		"pic_url"=>$upload_dir.$item["pic_url"],
 		"details_id"=>$item["details_id"],
 		"position"=>$item["position"],
 		"reurl"=>$redirect_src,

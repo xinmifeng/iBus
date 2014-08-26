@@ -257,6 +257,10 @@ function myControll($scope,$http){
 	}).success(function(data){
 		if(data.status){
 			$scope.item=data.data;
+			var tel=$scope.item.user_name;
+			if(tel && tel.length===11){
+				$scope.item.user_name=tel.replace(/(\d{3})(\d{4})(\d{4})/g,"$1****$3");
+			}
 		}
 	});
 	$scope.exitLogin=function(){

@@ -8,7 +8,9 @@ global $difi_pssword;
 */
 global $sms_id;
 global $sms_key;
-
+global $upload_dir;
+//global $upload_image_dir;
+//global $upload_video_dir;
 /*
 define("ERROR_OK",0);
 define("INVALID_VALIDATION_CODE",-1);
@@ -27,4 +29,7 @@ $difi_server = $arr["difi_server"];
 */
 $sms_uid = $arr["sms_uid"];
 $sms_key = strtoupper(md5($arr["sms_key"]));
+$upload_dir = $arr["upload_dir"];
+//$upload_image_dir = $arr["image_upload_dir"];
+//$upload_video_dir = $arr["video_upload_dir"];
 ?>

@@ -20,7 +20,7 @@ function appRouteConfig($routeProvider){
 }
 registerModule.config(appRouteConfig);
 
-var user={isok:false};
+var user={isok:false,"lastmsg":Date.now()};
 function register_one($scope,$http){
 	$scope.user=user;
 	$scope.telChange=function(){
@@ -47,6 +47,7 @@ function register_one($scope,$http){
 				}
 			}).success(function(data){
 				if(data.status===1){
+					//$scope.showReGet=true;
 					window.location.href="#checkCode";	
 				}
 				else{
