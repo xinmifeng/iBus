@@ -19,5 +19,20 @@ if(!is_null($history)){
 }
 $video["is_like"]=$is_like;
 $video["address"]=$upload_dir.$video["address"];
-echo json_encode(Common::getResult(1,"ok",$video));
+
+//猜你喜欢
+$videoType=$video["type_id"];
+$DB->where("type_id",$videoType);
+$DB->orderBy("count","desc");
+$DB->orderBy("total_like","desc");
+$likeVideos=$DB->get("video",5,array("v_id","pic_url","count","title"));
+$reLikeVideos=array();
+for($i=0,$l=count($likeVideos);$i<$l;$i++){
+	$item=$likeVideos[$i];
+	$item["pic_url"]=$upload_dir.$item["pic_url"];
+	array_push($reLikeVideos,$item);
+}
+$data=Common::getResult(1,"ok",$video);
+$data["likeData"]=$reLikeVideos;
+echo json_encode($data);
 ?>
