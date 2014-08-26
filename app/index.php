@@ -5,7 +5,7 @@ if(!isset($_SESSION["user"])){
 	exit(0);
 }
 require_once("../server/sqlDb.php");
-$DB->orderBy("order_id","asc");
+$DB->orderBy("order_id","desc");
 $fv=$DB->getOne("video_type");
 $vid=0;
 if($DB->count===1){

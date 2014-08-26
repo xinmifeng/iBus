@@ -1,7 +1,7 @@
 <!--导航条-->
 <div class="container-fluid">
      <div class="row nav">
-        <div ng-repeat="type in types" class="col-xs-{{type.cssvalue}} text-center menu2" style="padding:0" >
+        <div ng-repeat="type in types" class="col-xs-{{type.cssvalue}} text-center menu2" style="padding:0;width:{{typeCss}}" >
 			<a href="#video/{{type.type_id}}">{{type.type_name}}</a>
 		</div>
 	 </div>

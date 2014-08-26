@@ -18,11 +18,17 @@ $widthObj=array(8,4,6,6,8,4,4,8,8,4,4,8);
 if($type==="2"){
 	$widthObj=array(8,4,4,8,8,4,4,8);
 }
-function getUrl($item){
+$DB->orderBy("order_id","desc");
+$fv=$DB->getOne("video_type");
+$vid=0;
+if($DB->count===1){
+	$vid=$fv["type_id"];	
+}
+function getUrl($item,$vid){
 	$type=$item["index_type"];
 	$id=$item["details_id"];
 	if(is_null($id)){
-		return "#video/1";
+		return "#video/".$vid;
 	}
 	$s="#";
 	switch($type){
@@ -38,12 +44,12 @@ function getUrl($item){
 	}
 	return $s;
 }
-for($i=0,$len=$DB->count;$i<$len;$i++){
+for($i=0,$len=count($indexs);$i<$len;$i++){
 	$pr=$i%2===0?"5px":"0";
 	$item=$indexs[$i];
 	$cssvalue=$widthObj[$i];
 	$index_type=$item["index_type"];
-	$redirect_src=getUrl($item);
+	$redirect_src=getUrl($item,$vid);
 	array_push($reData,array(
 		"pic_url"=>$upload_dir.$item["pic_url"],
 		"details_id"=>$item["details_id"],

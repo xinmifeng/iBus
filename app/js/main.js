@@ -120,6 +120,7 @@ function videoControll($scope,$http,$routeParams){
 			type.cssvalue=i%2===0?2:3;
 		}
 		$scope.types=data.types;
+		$scope.typeCss=(100/l)+"%";
 	});
 	setBg($scope,true);
 }
@@ -132,7 +133,7 @@ function videoDetailControll($scope,$http,$routeParams,$sce){
 	}).success(function(data){
 		$scope.item=data.data;
 		$scope.item.likeClass=$scope.item.is_like?"love":"";
-		$scope.item.address=$sce.trustAsResourceUrl("."+$scope.item.address);
+		$scope.item.address=$sce.trustAsResourceUrl($scope.item.address);
 	});
 	$scope.loveMovie=function(){
 		$http({

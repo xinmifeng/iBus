@@ -8,7 +8,7 @@ if(!isset($_GET["apptype"])){
 }
 */
 require_once("sqlDb.php");
-$DB->where("type","应用（App）");
+$DB->where("app_type",0,">");
 $DB->orderBy("app_type","asc");
 $DB->orderBy("create_date","desc");
 $activitys = $DB->get("activity");
@@ -31,7 +31,7 @@ for($i=0,$len=$DB->count;$i<$len;$i++){
 		"picture_url"=>$upload_dir.$item["picture_url"],
 		"title"=>$item["title"]
 	);
-	if($item["app_type"]==="1"){
+	if($item["app_type"]==="2"){
 		array_push($a0["data"],$obj);
 	}
 	else{

@@ -195,27 +195,27 @@ body.bg{
 	/*
 	background: url(../images/icon.png) no-repeat 6px 8px;
 	*/
-	background: url(../images/icon_home.png) no-repeat;
+	background:	url(../images/icon_home.png) no-repeat;
 	background-size:25px 25px;
 	margin:0 auto;}
 	
 .beau_col a:hover span.home{
-	background-size:20px 25px;
 	background: url(../images/icon_home_g.png) no-repeat;
+	background-size:25px 25px;
 	margin:0 auto;}
 
 .beau_col a span.see_shi{
-	background-size:25px 25px;
 	/*
 	background: url(../images/icon.png) no-repeat;
 	background-position:6px -63px;
 	*/
 	background: url(../images/icon_video.png) no-repeat;
+	background-size:25px 25px;
 	margin:0 auto;}
 
 .beau_col a:hover span.see_shi{
-	background-size:25px 25px;
 	background: url(../images/icon_video_g.png) no-repeat;
+	background-size:25px 25px;
 	margin:0 auto;}
 
 .beau_col a span.dazhe{
@@ -408,6 +408,7 @@ body.bg{
 	
 .heart_bian a{
 	color:#666;
+	text-decoration:none;
 	}
 	
 .heart_bian a.love span{
