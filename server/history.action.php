@@ -17,6 +17,12 @@ if($type==="1"){
 $sql="select a.id,a.picture_url picture,a.title title,h.create_date from bee_activity a,bee_user_history h where a.id=h.src_id and user_id=? and h.src_type=?";
 }
 $historys=$DB->rawQuery($sql,$params);
-echo json_encode(Common::getResult(1,"success!",$historys));
+$reData=array();
+for($i=0,$l=count($historys);$i<$l;$i++){
+	$hi=$historys[$i];
+	$hi["picture_url"]=$upload_dir.$hi["picture_url"];
+	array_push($reData,$hi);
+}
+echo json_encode(Common::getResult(1,"success!",$reData));
 exit(0);
 ?>
