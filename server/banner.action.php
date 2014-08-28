@@ -11,9 +11,19 @@ if(isset($_GET["type"])){
 	*/
 	$type = $_GET["type"];
 	$DB->where("type",$type);
+	if($type==="2"){
+		$subType=$_GET["sub_type"];
+		$DB->where("sub_type",$subType);
+	}
 	$DB->orderBy("order_id","desc");
 	$banners=$DB->get("banner");
-	echo json_encode(Common::getResult(1,"ok",$banners));
+	$reData=array();
+	for($i=0,$l=$DB->count;$i<$l;$i++){
+		$item=$banners[$i];
+		$item["picture_url"]=$upload_dir.$item["picture_url"];
+		array_push($reData,$item);
+	}
+	echo json_encode(Common::getResult(1,"ok",$reData));
 	exit(0);
 }
 else{

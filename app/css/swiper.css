@@ -3,11 +3,11 @@
   height: 150px;
   position: relative;
 }
-.swiper-container {
+.swiper-device .swiper-container {
   height: 150px;
   width: 100%;
 }
-.content-slide {
+.swiper-device .content-slide {
   padding: 20px;
   color: #fff;
 }
@@ -20,7 +20,7 @@
   z-index:1;
   margin:0px;
 }
-.swiper-pagination-switch {
+.swiper-device .swiper-pagination-switch {
   display: inline-block;
   width: 10px;
   height: 10px;
@@ -30,13 +30,87 @@
   margin: 0 3px;
   cursor: pointer;
 }
-.swiper-active-switch {
+.swiper-device .swiper-active-switch {
   background: #fff;
 }
-.swiper-slide{
+.swiper-device .swiper-slide{
 	width:100%;
 }
-.swiper-slide>img{
+.swiper-device .swiper-slide>img{
 	width:100%;
 	height:100%;
+}
+
+.swiper-like{
+	position: relative;
+	background-color: none;
+	margin: 0 auto;
+	min-height: 60px;
+	padding:10px 20px;
+	box-shadow: 1px 1px 5px rgba(0,0,0,0.4);
+}
+
+.swiper-like .swiper-container {
+  width:100%;
+  height: 100px;
+  color: #fff;
+  text-align: center;
+}
+.swiper-like .red-slide {
+  background: #ca4040;
+}
+.swiper-like .blue-slide {
+  background: #4390ee;
+}
+.swiper-like .orange-slide {
+  background: #ff8604;
+}
+.swiper-like .green-slide {
+  background: #49a430;
+}
+.swiper-like .pink-slide {
+  background: #973e76;
+}
+
+.swiper-like .swiper-slide img{
+	width:100%;
+}
+
+.swiper-like .swiper-slide{
+	padding:0px 2px;
+}
+
+.swiper-like .swiper-slide .title {
+  font-style: italic;
+  font-size: 42px;
+  margin-top: 80px;
+  margin-bottom: 0;
+  line-height: 45px;
+}
+.swiper-like .pagination {
+  position: absolute;
+  z-index: 20;
+  bottom: 0px;
+  width:100%;
+  text-align:center;
+  left:0px;
+  margin-bottom:-4px;
+}
+.swiper-like .swiper-pagination-switch {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 8px;
+  background: #222;
+  margin-right: 5px;
+  opacity: 0.8;
+  cursor: pointer;
+  background: #000;
+  box-shadow: 0px 1px 2px #555 inset;
+}
+.swiper-like .swiper-visible-switch {
+  background: #aaa;
+}
+.swiper-like .swiper-active-switch {
+  background: red;
 }

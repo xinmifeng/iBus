@@ -27,6 +27,7 @@ if($DB->count===1){
 	<script src="bower_components/angular/angular.min.js"></script>
 	<script src="bower_components/angular-route/angular-route.js"></script>
 	<script src="bower_components/swiper/src/idangerous.swiper.js"></script>
+	<script src="js/zepto.js"></script>
 	<script src="js/main.js"></script>
 </head>
 <body ng-controller="MainControll" class="{{BG.hasbg}}">
@@ -45,19 +46,19 @@ if($DB->count===1){
    <div class="container-fluid" style="margin-top:0px;">
       <div class="row" >
          <div class="text-center col-xs-2 men" style="width:20%;"> 
-            <a href="#/"><span class="home" style="margin-bottom:-12px;"></span>主页</a>
+            <a ng-click="setCurrent($event.target)" class="current" href="#/"><span class="home" style="margin-bottom:-12px;"></span>主页</a>
          </div>
          <div class="text-center col-xs-2 men" style="width:20%;">
-            <a href="#video/<?php echo $vid;?>"><span class="see_shi" style="margin-bottom:-12px;"></span>视频</a>
+            <a ng-click="setCurrent($event.target)"  href="#video/<?php echo $vid;?>"><span class="see_shi" style="margin-bottom:-12px;"></span>视频</a>
          </div>
          <div class="text-center col-xs-2 men" style="width:20%;">
-            <a href="#activity" ><span class="dazhe" style="margin-bottom:-12px;"></span>优惠</a>
+            <a ng-click="setCurrent($event.target)"  href="#activity" ><span class="dazhe" style="margin-bottom:-12px;"></span>优惠</a>
          </div>
          <div class="text-center col-xs-2 men" style="width:20%;">
-            <a href="#apks" ><span class="yong" style="margin-bottom:-12px;"></span>下载吧</a>
+            <a ng-click="setCurrent($event.target)"  href="#apks" ><span class="yong" style="margin-bottom:-12px;"></span>下载吧</a>
          </div>
          <div class="text-center col-xs-2 men" style="width:20%;">
-            <a href="#my" ><span class="mine" style="margin-bottom:-12px;"></span>我的</a>
+            <a ng-click="setCurrent($event.target)"  href="#my" ><span class="mine" style="margin-bottom:-12px;"></span>我的</a>
          </div>
       </div>
    </div>

@@ -1,29 +1,14 @@
 <!--轮播大图 开始-->
 <div class="swiper-device">
 	<div class="swiper-container">
-		<div data-ng-init="swiper()" class="swiper-wrapper">
-			<!--
-			<div ng-repeat="item in data.data" class="swiper-slide">
-				<img ng-src=".{{item.picture_url}}">
+		<div class="swiper-wrapper" imgCount="{{dataCount}}">
+			<div ng-repeat="item in data" class="swiper-slide">
+				<img index="{{$index}}" ng-src="{{item.picture_url}}" orientable>
 			</div>
-			-->
-			<div class="swiper-slide"><img src="images/1.jpg"></div>
-			<div class="swiper-slide"><img src="images/2.jpg"></div>
-			<div class="swiper-slide"><img src="images/3.jpg"></div>
 		</div>
 	</div>
     <div class="pagination"></div>
 </div>
-
-<!--
-<div class="slide_container" style="padding:0;margin-bottom:0px;">
-   <ul class="rslides" id="slider">
-		<li ng-repeat="item in data.data">
-			<img ng-src=".{{item.picture_url}}" />
-		</li>
-    </ul>
-</div>
--->
 
 <div class="clear"></div>
 <!--轮播大图 结束-->

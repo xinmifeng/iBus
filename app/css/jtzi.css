@@ -31,7 +31,7 @@ body.bg{
 	width:100%;
 	height:auto;}
 	
-.nav a:hover{
+.nav a.current{
 	text-decoration:none;
 	color:#6ea00e;
 	background:#2c2c2c;
@@ -199,7 +199,7 @@ body.bg{
 	background-size:25px 25px;
 	margin:0 auto;}
 	
-.beau_col a:hover span.home{
+.beau_col a.current span.home{
 	background: url(../images/icon_home_g.png) no-repeat;
 	background-size:25px 25px;
 	margin:0 auto;}
@@ -213,7 +213,7 @@ body.bg{
 	background-size:25px 25px;
 	margin:0 auto;}
 
-.beau_col a:hover span.see_shi{
+.beau_col a.current span.see_shi{
 	background: url(../images/icon_video_g.png) no-repeat;
 	background-size:25px 25px;
 	margin:0 auto;}
@@ -227,7 +227,7 @@ body.bg{
 	background-size:25px 25px;
 	margin:0 auto;}
 	
-.beau_col a:hover span.dazhe{
+.beau_col a.current span.dazhe{
 	background: url(../images/icon_sale_g.png) no-repeat;
 	background-size:25px 25px;
 	margin:0 auto;}
@@ -241,7 +241,7 @@ body.bg{
 	background-size:25px 25px;
 	margin:0 auto;}
 	
-.beau_col a:hover span.yong{
+.beau_col a.current span.yong{
 	background: url(../images/icon_down_g.png) no-repeat;
 	background-size:25px 25px;
 	margin:0 auto;}
@@ -255,7 +255,7 @@ body.bg{
 	background-size:25px 25px;
 	margin:0 auto;}
 	
-.beau_col a:hover span.mine{
+.beau_col a.current span.mine{
 	background: url(../images/icon_mine_g.png) no-repeat;
 	background-size:25px 25px;
 	margin:0 auto;}

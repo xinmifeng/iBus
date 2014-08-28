@@ -46,22 +46,78 @@ function setBg($scope,hasbg){
 }
 
 appModule.controller('MainControll',function ($scope){
+	$scope.setCurrent=function(element){
+		if(element.tagName==="SPAN")
+			element=element.parentNode;
+		var aEls=element.parentNode.parentNode.children;
+		for(var i=0,l=aEls.length;i<l;i++){
+			var item=aEls[i];
+			if(element===item.firstElementChild){
+				element.classList.add("current");
+			}
+			else{
+				item.firstElementChild.classList.remove("current");
+			}
+		}
+	}
 	setBg($scope,true);
 });
 
 var server_url="../server/";
 
+var isroll=false;
 function swiper(){
 	var mySwiper = new Swiper('.swiper-container',{
-		  pagination: '.pagination',
-		  loop:true,
-		  grabCursor: true,
-		  paginationClickable: true
+		pagination: '.pagination',
+		loop:true,
+		grabCursor: true,
+		paginationClickable: true,
+		autoplay:3000,
+		autoplayDisableOnInteraction: false,
+		autoplayStopOnLast:false
 	});
 }
 
-function commonDeal(action){
+function swiperLike(count){
+	var mySwiperlike = new Swiper('.swiper-container',{
+		pagination: '.pagination',
+		paginationClickable: true,
+		slidesPerView: (count<3?count:3),
+		loop: true,
+		autoplay:3000,
+		autoplayDisableOnInteraction: false,
+		autoplayStopOnLast:false
+	});
 }
+
+appModule.directive("orientable",function(){
+	return function($scope,element,attrs){
+		element[0].onload=function(){
+			var ppEl=this.parentNode.parentNode;
+			if(ppEl){
+				var count = parseInt(this.parentNode.parentNode.getAttribute("imgCount"));
+				var index = parseInt(this.getAttribute("index"));
+				if(index+1===count){
+					swiper();
+				}
+			}
+		}
+	}
+});
+
+appModule.directive("orientablelike",function(){
+	return function($scope,element,attrs){
+		element[0].onload=function(){
+			var count = parseInt(this.parentNode.parentNode.getAttribute("imgcount"));
+			var index = parseInt(this.getAttribute("index"));
+			if(index+1===count){
+				swiperLike(count);
+			}
+		}
+		element[0].onerror=function(){
+		}
+	}
+});
 
 function indexControll($scope,$http){
 	$http({
@@ -69,7 +125,8 @@ function indexControll($scope,$http){
 		url:server_url+"banner.action.php",
 		params:{"type":1}
 	}).success(function(data){
-		$scope.data=data;
+		$scope.data=data.data;
+		$scope.dataCount=data.data.length;
 	});
 	$http({
 		method:"get",
@@ -88,9 +145,6 @@ function indexControll($scope,$http){
 		}
 		$scope.indexData=mdata;
 	});
-	$scope.swiper=function(){
-		swiper();
-	}
 	setBg($scope,true);
 }
 
@@ -98,7 +152,17 @@ function videoControll($scope,$http,$routeParams){
 	$scope.swiper=function(){
 		swiper();
 	}
-	var type=$routeParams.id;
+	var type=parseInt($routeParams.id);
+
+	$http({
+		method:"get",
+		url:server_url+"banner.action.php",
+		params:{"type":2,"sub_type":type}
+	}).success(function(data){
+		$scope.data=data.data;
+		$scope.dataCount=data.data.length;
+	});
+
 	$http({
 		method:"get",
 		url:server_url+"video.action.php",
@@ -116,8 +180,10 @@ function videoControll($scope,$http,$routeParams){
 		}
 		$scope.groups=mdata;
 		for(var i=0,l=data.types.length;i<l;i++){
-			var type=data.types[i];
-			type.cssvalue=i%2===0?2:3;
+			var itype=data.types[i];
+			itype.cssvalue=i%2===0?2:3;
+			itype.current=(i===0)?"current":"";
+			itype.current=parseInt(itype["type_id"])===type?"current":"";
 		}
 		$scope.types=data.types;
 		$scope.typeCss=(100/l)+"%";
@@ -134,6 +200,8 @@ function videoDetailControll($scope,$http,$routeParams,$sce){
 		$scope.item=data.data;
 		$scope.item.likeClass=$scope.item.is_like?"love":"";
 		$scope.item.address=$sce.trustAsResourceUrl($scope.item.address);
+		$scope.item.likeData=data.likeData;
+		$scope.item.likeDataCount=data.likeData.length;
 	});
 	$scope.loveMovie=function(){
 		$http({
@@ -163,7 +231,8 @@ function activityControll($scope,$http){
 		url:server_url+"banner.action.php",
 		params:{"type":3}
 	}).success(function(data){
-		$scope.data=data;
+		$scope.data=data.data;
+		$scope.dataCount=data.data.length;
 	});
 	$http({
 		method:"get",
@@ -182,13 +251,18 @@ function activityControll($scope,$http){
 		}
 		$scope.indexData=mdata;
 	});
-	$scope.swiper=function(){
-		swiper();
-	}
 	setBg($scope,true);
 }
 
 function apkControll($scope,$http){
+	$http({
+		method:"get",
+		url:server_url+"banner.action.php",
+		params:{"type":4}
+	}).success(function(data){
+		$scope.data=data.data;
+		$scope.dataCount=data.data.length;
+	});
 	$http({
 		method:"get",
 		url:server_url+"app.action.php"
@@ -217,9 +291,6 @@ function apkControll($scope,$http){
 		}
 		$scope.groups=groups;
 	});
-	$scope.swiper=function(){
-		swiper();
-	}
 	setBg($scope,true);
 }
 
@@ -234,10 +305,11 @@ function appDetailControll($scope,$http,$routeParams){
 		}
 	});
 	$scope.download=function(){
-		function download(url,filename){
+		function download(filename){
+			var img=document.getElementById("img");
 			var lnk = document.createElement('a'), e;
 			lnk.download = filename;
-			lnk.href=url;
+			lnk.href=img.src;
 			if (document.createEvent) {
 				e = document.createEvent("MouseEvents");
 				e.initMouseEvent("click", true, true, window,0, 0, 0, 0, 0, false, false, false,false, 0, null);
@@ -245,8 +317,30 @@ function appDetailControll($scope,$http,$routeParams){
 			}else if (lnk.fireEvent) {
 				lnk.fireEvent("onclick");
 			}
+
+			/*
+			var img=document.getElementById("img");
+			if(img){
+				if(document.createEvent){
+					var e=document.createEvent("TouchEvent");
+					e.initUIEvent("touchstart", true, true); 
+					img.dispatchEvent(e);
+					setTimeout(function(){
+						var e2=document.createEvent("TouchEvent");
+						e2.initUIEvent("touchend", true, true); 
+						img.dispatchEvent(e2);
+					},2000);
+				}
+				else if(img.fireEvent){
+					img.fireEvent("touchstart");
+					setTimeout(function(){
+						img.fireEvent("touchend");
+					},1000);
+				}
+			}
+			*/
 		}
-		//download("images/xizai_point.jpg","point.jpg");
+		download("yhq.jpg");
 	}
 	setBg($scope,false);
 }
