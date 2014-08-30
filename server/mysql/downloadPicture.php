@@ -22,7 +22,7 @@ class imgdata{
 }
 
 $n = new imgdata;
-$n -> getdir("../app/images/1.jpg");
+$n -> getdir("../../app/images/1.jpg");
 $n -> img2data();
 $n -> data2img();
 ?>

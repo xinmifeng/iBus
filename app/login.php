@@ -13,7 +13,7 @@ if(isset($_SESSION["user"])){
 	<title>BusFree</title>
 	<link href="css/bootstrap.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/jtzi.css"/>
-	<script src="bower_components/angular/angular.js"></script>
+	<script src="bower_components/angular/angular.min.js"></script>
 	<script src="js/login.js"></script>
 </head>
 <body ng-controller="loginControll" style="background:#ededed;">

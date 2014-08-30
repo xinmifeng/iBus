@@ -13,7 +13,7 @@ module.exports=function(grunt){
 					{
 						expand:true,
 						cwd:'app/bower_components/',
-						src:'angular/angular.js',
+						src:'angular/angular.min.js',
 						dest:'dest/app/bower_components/',
 						filter:'isFile'
 					},
@@ -41,6 +41,18 @@ module.exports=function(grunt){
 			},
 			main:{
 				src:['dest/app/views_old','dest/server/mysql']
+			}
+		},
+		uglify:{
+			main:{
+				options:{
+					compress:true
+				},
+				files:{
+					'dest/app/js/main.js':['app/js/main.js'],
+					'dest/app/js/login.js':['app/js/login.js'],
+					'dest/app/js/register.js':['app/js/register.js'],
+				}
 			}
 		}
 	});

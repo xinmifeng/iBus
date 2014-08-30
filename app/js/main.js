@@ -419,6 +419,9 @@ function appDetailControll($scope,$http,$routeParams){
 		}
 		download("yhq.jpg");
 	}
+	$scope.mdownload=function(){
+		window.open('http://192.168.1.107/newbee_work/iBus_back/iBus/server/download.php?img=xizai_point.png');
+	}
 	setBg($scope,false);
 }
 
