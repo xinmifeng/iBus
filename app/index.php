@@ -4,13 +4,14 @@ if(!isset($_SESSION["user"])){
 	header("Location:login.php");
 	exit(0);
 }
-require_once("../server/sqlDb.php");
-$DB->orderBy("order_id","desc");
-$fv=$DB->getOne("video_type");
+require("../server/sqlDb.php");
+$fv=Database::select('bee_video_type','type_id',array(
+	'orderBy'=>'order_id desc',
+	'single'=>true
+));
 $vid=0;
-if($DB->count===1){
-	$vid=$fv["type_id"];	
-}
+if($fv) $vid=$fv;
+
 ?>
 <!DOCTYPE HTML>
 <html ng-app="app">

@@ -45,6 +45,19 @@ function setBg($scope,hasbg){
 	$scope.BG=BG;
 }
 
+function setCurrentIndex(index){
+	var aEls=document.querySelectorAll(".navbar a")	
+	for(var i=0,l=aEls.length;i<l;i++){
+		var item=aEls[i];
+		if(i===index){
+			item.classList.add("current");
+		}
+		else{
+			item.classList.remove("current");
+		}
+	}
+}
+
 appModule.controller('MainControll',function ($scope){
 	$scope.setCurrent=function(element){
 		if(element.tagName==="SPAN")
@@ -119,14 +132,44 @@ appModule.directive("orientablelike",function(){
 	}
 });
 
+/*
+appModule.directive("controls",function(){
+	return function($scope,element,attrs){
+		element[0].onclick=function(){
+			alert(1);
+			//alert(getComputedStyle[this]["width"]);
+		}
+	}
+});
+*/
+
+function dealBanner(data){
+	for(var i=0,len=data.length;i<len;i++){
+		var item=data[i];
+		if(item.src){
+			item.clickUrl=item.src;
+		}
+		else{
+			if(item.details_type==1){
+				item.clickUrl="#appDetail/"+item.details_id;
+			}
+			else if(item.details_type==2){
+				item.clickUrl="#videoDetail/"+item.details_id;
+			}
+		}
+	}
+}
+
 function indexControll($scope,$http){
 	$http({
 		method:"get",
 		url:server_url+"banner.action.php",
 		params:{"type":1}
 	}).success(function(data){
-		$scope.data=data.data;
-		$scope.dataCount=data.data.length;
+		var data=data.data;
+		dealBanner(data);
+		$scope.data=data;
+		$scope.dataCount=data.length;
 	});
 	$http({
 		method:"get",
@@ -159,8 +202,10 @@ function videoControll($scope,$http,$routeParams){
 		url:server_url+"banner.action.php",
 		params:{"type":2,"sub_type":type}
 	}).success(function(data){
-		$scope.data=data.data;
-		$scope.dataCount=data.data.length;
+		var data=data.data;
+		dealBanner(data);
+		$scope.data=data;
+		$scope.dataCount=data.length;
 	});
 
 	$http({
@@ -189,16 +234,18 @@ function videoControll($scope,$http,$routeParams){
 		$scope.typeCss=(100/l)+"%";
 	});
 	setBg($scope,true);
+	setCurrentIndex(1);
 }
 
 function videoDetailControll($scope,$http,$routeParams,$sce){
+	var id=$routeParams.id;
 	$http({
 		method:"get",
 		url:server_url+"videoDetail.action.php",
-		params:{"id":$routeParams.id}
+		params:{"id":id}
 	}).success(function(data){
 		$scope.item=data.data;
-		$scope.item.likeClass=$scope.item.is_like?"love":"";
+		$scope.item.likeClass=parseInt($scope.item.is_like)?"love":"";
 		$scope.item.address=$sce.trustAsResourceUrl($scope.item.address);
 		$scope.item.likeData=data.likeData;
 		$scope.item.likeDataCount=data.likeData.length;
@@ -210,7 +257,7 @@ function videoDetailControll($scope,$http,$routeParams,$sce){
 			params:{
 				"type":2,
 				"action":1,
-				"id":$routeParams.id
+				"id":id
 			}
 		}).success(function(data){
 			if(data.status){
@@ -222,7 +269,30 @@ function videoDetailControll($scope,$http,$routeParams,$sce){
 			}
 		});
 	}
+	$scope.play=function(el){
+		if(el.paused){
+			el.play();
+			$http({
+				method:"get",
+				url:server_url+"dohistory.action.php",
+				params:{
+					"type":2,
+					"action":2,
+					"id":id
+				}
+			}).success(function(data){
+				if(!data.status){
+					console.log(data.message);
+				}
+			});
+		}
+		else{
+			el.pause();
+		}
+	}
+
 	setBg($scope,false);
+	setCurrentIndex(1);
 }
 
 function activityControll($scope,$http){
@@ -231,8 +301,10 @@ function activityControll($scope,$http){
 		url:server_url+"banner.action.php",
 		params:{"type":3}
 	}).success(function(data){
-		$scope.data=data.data;
-		$scope.dataCount=data.data.length;
+		var data=data.data;
+		dealBanner(data);
+		$scope.data=data;
+		$scope.dataCount=data.length;
 	});
 	$http({
 		method:"get",
@@ -252,6 +324,7 @@ function activityControll($scope,$http){
 		$scope.indexData=mdata;
 	});
 	setBg($scope,true);
+	setCurrentIndex(2);
 }
 
 function apkControll($scope,$http){
@@ -260,8 +333,10 @@ function apkControll($scope,$http){
 		url:server_url+"banner.action.php",
 		params:{"type":4}
 	}).success(function(data){
-		$scope.data=data.data;
-		$scope.dataCount=data.data.length;
+		var data=data.data;
+		dealBanner(data);
+		$scope.data=data;
+		$scope.dataCount=data.length;
 	});
 	$http({
 		method:"get",
@@ -292,6 +367,7 @@ function apkControll($scope,$http){
 		$scope.groups=groups;
 	});
 	setBg($scope,true);
+	setCurrentIndex(3);
 }
 
 function appDetailControll($scope,$http,$routeParams){
@@ -302,6 +378,7 @@ function appDetailControll($scope,$http,$routeParams){
 	}).success(function(data){
 		if(data.status){
 			$scope.item=data.data;
+			setCurrentIndex($scope.item["app_type"]==0?2:3);
 		}
 	});
 	$scope.download=function(){
@@ -369,6 +446,7 @@ function myControll($scope,$http){
 		});
 	}
 	setBg($scope,false);
+	setCurrentIndex(4);
 }
 
 function historyControll($scope,$http,$routeParams){

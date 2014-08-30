@@ -8,8 +8,13 @@
 
 <!--头图-->
 <div class="container-fluid">
-     <div id="videoBox" mysrc="{{item.address}}" style="text-align:center;min-height:200px;"  class="row col-xs-13">
-		<video id="video_{{item.v_id}}" ng-src="{{item.address}}" controls width="100%" height="auto"></video>
+     <div id="videoBox" mysrc="{{item.address}}" style="text-align:center;min-height:200px;position:relative;"  class="row col-xs-13">
+			<video id="video_{{item.v_id}}" ng-src="{{item.address}}" controls ng-click="play($event.target)"  width="100%" height="auto"></video>
+			<!--
+			<div style="position:absolute;left:100px;right:100px;top:50px;bottom:50px;">
+				<img src="images/icon_video_g.png" style="" />
+			<div>
+			-->
 	 </div>
 </div>
 

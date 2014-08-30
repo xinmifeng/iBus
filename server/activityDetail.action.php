@@ -8,8 +8,10 @@ if(!isset($_GET["id"])){
 }
 require_once("sqlDb.php");
 $id=$_GET["id"];
-$DB->where("id",$id);
-$activity=$DB->getOne("activity");
+$activity=Database::select('bee_activity','*',array(
+	'where'=>array('id'=>$id),
+	'singleRow'=>true
+));
 $pic_url=$activity["picture_url"];
 $src=$activity["src"];
 $activity["src"]=$upload_dir.$src;

@@ -235,7 +235,6 @@ class Database
 	{
 		// increment the sql counter
 		self::$queryCount['sql']++;
-		
 		return self::$DBH->query($query);
 	}
 	

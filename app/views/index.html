@@ -3,7 +3,7 @@
 	<div class="swiper-container">
 		<div class="swiper-wrapper" imgCount={{dataCount}}>
 			<div ng-repeat="item in data" class="swiper-slide">
-				<img index="{{$index}}" ng-src="{{item.picture_url}}" orientable>
+				<img index="{{$index}}" zjUrl="{{item.clickUrl}}"  ng-src="{{item.picture_url}}" orientable>
 			</div>
 		</div>
 	</div>
