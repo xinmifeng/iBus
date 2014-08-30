@@ -1,4 +1,4 @@
-dest
-node_modules
-app/bower_components
-app/views_old
+dest/
+node_modules/
+app/bower_components/
+app/views_old/
