@@ -1,10 +1,53 @@
 module.exports=function(grunt){
 	grunt.initConfig({
-		pkg:grunt.file.readJSON('package.json')
+		pkg:grunt.file.readJSON('package.json'),
+		copy:{
+			main:{
+				files:[
+					{expand:true,cwd:'app/',src:'*.php',dest:'dest/app/',filter:'isFile'},
+					{expand:true,cwd:'app/',src:'js/*',dest:'dest/app/',filter:'isFile'},
+					{expand:true,cwd:'app/',src:'css/*',dest:'dest/app/',filter:'isFile'},
+					{expand:true,cwd:'app/',src:'views/*',dest:'dest/app/',filter:'isFile'},
+					{expand:true,cwd:'app/',src:'images/*',dest:'dest/app/',filter:'isFile'},
+					{expand:true,cwd:'app/',src:'images/*',dest:'dest/app/',filter:'isFile'},
+					{
+						expand:true,
+						cwd:'app/bower_components/',
+						src:'angular/angular.js',
+						dest:'dest/app/bower_components/',
+						filter:'isFile'
+					},
+					{
+						expand:true,
+						cwd:'app/bower_components/',
+						src:'angular-route/angular-route.js',
+						dest:'dest/app/bower_components/',
+						filter:'isFile'
+					},
+					{
+						expand:true,
+						cwd:'app/bower_components/',
+						src:'swiper/src/idangerous.swiper.js',
+						dest:'dest/app/bower_components/',
+						filter:'isFile'
+					},
+					{expand:true,src:['server/**'],dest:'dest/'}
+				]
+			}
+		},
+		clean:{
+			start:{
+				src:['dest']
+			},
+			main:{
+				src:['dest/app/views_old','dest/server/mysql']
+			}
+		}
 	});
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-cmd-concat');
 	grunt.loadNpmTasks('grunt-contrib-copy');
-	grunt.registerTask('default',['haml']);
+	grunt.loadNpmTasks('grunt-contrib-clean');
+	grunt.registerTask('default',['clean:start','copy','clean:main']);
 }
