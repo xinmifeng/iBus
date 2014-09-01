@@ -1,9 +1,11 @@
 <?php
 session_start();
+/*
 if(!isset($_SESSION["user"])){
 	header("Location:login.php");
 	exit(0);
 }
+*/
 require("../server/sqlDb.php");
 $fv=Database::select('bee_video_type','type_id',array(
 	'orderBy'=>'order_id desc',
@@ -26,9 +28,8 @@ if($fv) $vid=$fv;
 	<link rel="stylesheet" href="css/idangerous.swiper.css">
 	<link rel="stylesheet" href="css/swiper.css">
 	<script src="bower_components/angular/angular.min.js"></script>
-	<script src="bower_components/angular-route/angular-route.js"></script>
+	<script src="bower_components/angular-route/angular-route.min.js"></script>
 	<script src="bower_components/swiper/src/idangerous.swiper.js"></script>
-	<script src="js/zepto.js"></script>
 	<script src="js/main.js"></script>
 </head>
 <body ng-controller="MainControll" class="{{BG.hasbg}}">

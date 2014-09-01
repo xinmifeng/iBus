@@ -80,7 +80,7 @@ var server_url="../server/";
 
 var isroll=false;
 function swiper(){
-	var mySwiper = new Swiper('.swiper-container',{
+	new Swiper('.swiper-container',{
 		pagination: '.pagination',
 		loop:true,
 		grabCursor: true,
@@ -92,7 +92,7 @@ function swiper(){
 }
 
 function swiperLike(count){
-	var mySwiperlike = new Swiper('.swiper-container',{
+	new Swiper('.swiper-container',{
 		pagination: '.pagination',
 		paginationClickable: true,
 		slidesPerView: (count<3?count:3),
@@ -104,7 +104,7 @@ function swiperLike(count){
 }
 
 appModule.directive("orientable",function(){
-	return function($scope,element,attrs){
+	return function($scope,element){
 		element[0].onload=function(){
 			var ppEl=this.parentNode.parentNode;
 			if(ppEl){
@@ -119,7 +119,7 @@ appModule.directive("orientable",function(){
 });
 
 appModule.directive("orientablelike",function(){
-	return function($scope,element,attrs){
+	return function($scope,element){
 		element[0].onload=function(){
 			var count = parseInt(this.parentNode.parentNode.getAttribute("imgcount"));
 			var index = parseInt(this.getAttribute("index"));
@@ -160,6 +160,12 @@ function dealBanner(data){
 	}
 }
 
+function redirectToLogin(data){
+	if(parseInt(data.status)==-1){
+		window.location.href="login.php";
+	}
+}
+
 function indexControll($scope,$http){
 	$http({
 		method:"get",
@@ -196,23 +202,23 @@ function videoControll($scope,$http,$routeParams){
 		swiper();
 	}
 	var type=parseInt($routeParams.id);
-
 	$http({
 		method:"get",
 		url:server_url+"banner.action.php",
 		params:{"type":2,"sub_type":type}
 	}).success(function(data){
+		redirectToLogin(data);
 		var data=data.data;
 		dealBanner(data);
 		$scope.data=data;
 		$scope.dataCount=data.length;
 	});
-
 	$http({
 		method:"get",
 		url:server_url+"video.action.php",
 		params:{"type":type,"start":0,"count":10}
 	}).success(function(data){
+		redirectToLogin(data);
 		var items=data.data;
 		var mdata=[];
 		var tdata=[];
@@ -244,11 +250,21 @@ function videoDetailControll($scope,$http,$routeParams,$sce){
 		url:server_url+"videoDetail.action.php",
 		params:{"id":id}
 	}).success(function(data){
+		redirectToLogin(data);
+		var likeData=data.likeData;
+		var relikeData=[];
+		for(var i=0,l=likeData.length;i<l;i++){
+			var ld=likeData[i];
+			ld.clickUrl="#videoDetail/"+ld.v_id;
+			if(ld.v_id!=id){
+				relikeData.push(ld);
+			}
+		}
 		$scope.item=data.data;
 		$scope.item.likeClass=parseInt($scope.item.is_like)?"love":"";
 		$scope.item.address=$sce.trustAsResourceUrl($scope.item.address);
-		$scope.item.likeData=data.likeData;
-		$scope.item.likeDataCount=data.likeData.length;
+		$scope.item.likeData=relikeData;
+		$scope.item.likeDataCount=relikeData.length;
 	});
 	$scope.loveMovie=function(){
 		$http({
@@ -260,6 +276,7 @@ function videoDetailControll($scope,$http,$routeParams,$sce){
 				"id":id
 			}
 		}).success(function(data){
+			redirectToLogin(data);
 			if(data.status){
 				$scope.item.likeClass="love";		
 				$scope.item.total_like=parseInt($scope.item.total_like)+1;
@@ -285,6 +302,7 @@ function videoDetailControll($scope,$http,$routeParams,$sce){
 					"id":id
 				}
 			}).success(function(data){
+				redirectToLogin(data);
 				if(!data.status){
 					console.log(data.message);
 				}
@@ -305,6 +323,7 @@ function activityControll($scope,$http){
 		url:server_url+"banner.action.php",
 		params:{"type":3}
 	}).success(function(data){
+		redirectToLogin(data);
 		var data=data.data;
 		dealBanner(data);
 		$scope.data=data;
@@ -315,6 +334,7 @@ function activityControll($scope,$http){
 		url:server_url+"index.action.php",
 		params:{"type":2}
 	}).success(function(data){
+		redirectToLogin(data);
 		var items=data.data;
 		var mdata=[];
 		var tdata=[];
@@ -337,6 +357,7 @@ function apkControll($scope,$http){
 		url:server_url+"banner.action.php",
 		params:{"type":4}
 	}).success(function(data){
+		redirectToLogin(data);
 		var data=data.data;
 		dealBanner(data);
 		$scope.data=data;
@@ -346,6 +367,7 @@ function apkControll($scope,$http){
 		method:"get",
 		url:server_url+"app.action.php"
 	}).success(function(data){
+		redirectToLogin(data);
 		function arrayGroup(arr){
 			var mdata=[];
 			var tdata=[];
@@ -380,6 +402,7 @@ function appDetailControll($scope,$http,$routeParams){
 		url:server_url+"activityDetail.action.php",
 		params:{"id":$routeParams.id}
 	}).success(function(data){
+		redirectToLogin(data);
 		if(data.status){
 			$scope.item=data.data;
 			setCurrentIndex($scope.item["app_type"]==0?2:3);
@@ -398,6 +421,7 @@ function appDetailControll($scope,$http,$routeParams){
 					id:$routeParams.id
 				}
 			}).success(function(data){
+				redirectToLogin(data);
 				console.log(data);
 				if(data.status){
 					window.location.href='../server/download.php?img='+picName;
@@ -416,6 +440,7 @@ function myControll($scope,$http){
 		method:"get",
 		url:server_url+"getSession.php"
 	}).success(function(data){
+		redirectToLogin(data);
 		if(data.status){
 			$scope.item=data.data;
 			var tel=$scope.item.user_name;
@@ -429,6 +454,7 @@ function myControll($scope,$http){
 			method:"get",
 			url:server_url+"exit.action.php"
 		}).success(function(data){
+			redirectToLogin(data);
 			if(data.status){
 				window.location.href="login.php";
 			}
@@ -451,6 +477,7 @@ function historyControll($scope,$http,$routeParams){
 			type:$routeParams.type
 		}
 	}).success(function(data){
+		redirectToLogin(data);
 		if(data.status){
 			$scope.group=data.data;
 		}

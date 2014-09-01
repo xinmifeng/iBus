@@ -1,6 +1,14 @@
 <?php
 session_start();
 require_once('common.class.php');
+if(!isset($_SESSION["user"])){
+	if(isset($_GET["type"])){
+		if($_GET["type"]!=="1"){
+			echo json_encode(Common::getResult(-1,"用户未登录"));
+			exit(0);
+		}
+	}
+}
 if(isset($_GET["type"])){
 	require_once("sqlDb.php");
 	/*

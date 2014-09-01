@@ -2,7 +2,7 @@ var server_url="../server/";
 
 var loginModule = angular.module('login',[]);
 var user={};
-function loginControll($scope,$http){
+var loginControll=['$scope','$http',function($scope,$http){
 	if(localStorage["tel"]){
 		user.tel=localStorage["tel"];
 	}
@@ -25,4 +25,4 @@ function loginControll($scope,$http){
 			}
 		});
 	}
-}
+}];

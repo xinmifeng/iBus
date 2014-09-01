@@ -2,6 +2,10 @@
 session_start();
 require_once('common.class.php');
 header("Content-type: application/json");
+if(!isset($_SESSION["user"])){
+	echo json_encode(Common::getResult(-1,"用户未登录"));
+	exit(0);
+}
 if(!isset($_GET["id"])){
 	echo json_encode(Common::getResult(0,"lose id!"));
 	exit(0);
@@ -36,7 +40,7 @@ $videoType=$video["type_id"];
 $likeVideos=Database::select('bee_video','v_id,pic_url,count,title',array(
 	'where'=>array('type_id'=>$videoType),
 	'orderBy'=>'count desc,total_like desc',
-	'limit'=>'0,5'
+	'limit'=>'0,9'
 ));
 
 $reLikeVideos=array();

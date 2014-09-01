@@ -49,7 +49,7 @@
 			<div class="swiper-container">
 				<div class="swiper-wrapper" imgCount="{{item.likeDataCount}}">
 					<div ng-repeat="item in item.likeData" class="swiper-slide">
-						<img ng-src="{{item.pic_url}}" index="{{$index}}"  orientablelike />
+						<img zjUrl="{{item.clickUrl}}" ng-src="{{item.pic_url}}" index="{{$index}}"  orientablelike />
 					</div>
 				</div>
 			</div>

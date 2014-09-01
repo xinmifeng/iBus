@@ -20,7 +20,7 @@ module.exports=function(grunt){
 					{
 						expand:true,
 						cwd:'app/bower_components/',
-						src:'angular-route/angular-route.js',
+						src:'angular-route/angular-route.min.js',
 						dest:'dest/app/bower_components/',
 						filter:'isFile'
 					},
@@ -49,9 +49,7 @@ module.exports=function(grunt){
 					compress:true
 				},
 				files:{
-					'dest/app/js/main.js':['app/js/main.js'],
 					'dest/app/js/login.js':['app/js/login.js'],
-					'dest/app/js/register.js':['app/js/register.js'],
 				}
 			}
 		}
@@ -61,5 +59,5 @@ module.exports=function(grunt){
 	grunt.loadNpmTasks('grunt-cmd-concat');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-clean');
-	grunt.registerTask('default',['clean:start','copy','clean:main']);
+	grunt.registerTask('default',['clean:start','copy','clean:main','uglify']);
 }

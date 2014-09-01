@@ -1,6 +1,10 @@
 <?php
 session_start();
 require_once('common.class.php');
+if(!isset($_SESSION["user"])){
+	echo json_encode(Common::getResult(-1,"用户未登录"));
+	exit(0);
+}
 //type 1:活动 2:视频
 if(!isset($_GET["type"])){
 	echo json_encode(Common::getResult(0,"type参数!"));

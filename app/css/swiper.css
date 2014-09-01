@@ -47,7 +47,9 @@
 	margin: 0 auto;
 	min-height: 60px;
 	padding:10px 20px;
+	/*
 	box-shadow: 1px 1px 5px rgba(0,0,0,0.4);
+	*/
 }
 
 .swiper-like .swiper-container {
