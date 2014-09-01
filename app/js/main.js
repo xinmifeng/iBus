@@ -269,9 +269,13 @@ function videoDetailControll($scope,$http,$routeParams,$sce){
 			}
 		});
 	}
+	var isplay=false;
 	$scope.play=function(el){
 		if(el.paused){
 			el.play();
+			if(isplay) return;
+			$scope.item.count=parseInt($scope.item.count)+1;
+			isplay=true;
 			$http({
 				method:"get",
 				url:server_url+"dohistory.action.php",
@@ -381,46 +385,28 @@ function appDetailControll($scope,$http,$routeParams){
 			setCurrentIndex($scope.item["app_type"]==0?2:3);
 		}
 	});
-	$scope.download=function(){
-		function download(filename){
-			var img=document.getElementById("img");
-			var lnk = document.createElement('a'), e;
-			lnk.download = filename;
-			lnk.href=img.src;
-			if (document.createEvent) {
-				e = document.createEvent("MouseEvents");
-				e.initMouseEvent("click", true, true, window,0, 0, 0, 0, 0, false, false, false,false, 0, null);
-				lnk.dispatchEvent(e);
-			}else if (lnk.fireEvent) {
-				lnk.fireEvent("onclick");
-			}
-
-			/*
-			var img=document.getElementById("img");
-			if(img){
-				if(document.createEvent){
-					var e=document.createEvent("TouchEvent");
-					e.initUIEvent("touchstart", true, true); 
-					img.dispatchEvent(e);
-					setTimeout(function(){
-						var e2=document.createEvent("TouchEvent");
-						e2.initUIEvent("touchend", true, true); 
-						img.dispatchEvent(e2);
-					},2000);
-				}
-				else if(img.fireEvent){
-					img.fireEvent("touchstart");
-					setTimeout(function(){
-						img.fireEvent("touchend");
-					},1000);
-				}
-			}
-			*/
-		}
-		download("yhq.jpg");
-	}
 	$scope.mdownload=function(){
-		window.open('http://192.168.1.107/newbee_work/iBus_back/iBus/server/download.php?img=xizai_point.png');
+		var url=$scope.item.src;
+		var picName=url.substr(url.lastIndexOf("/")+1);
+		if(picName && /^[a-z0-9]{32}\.(jpg|png|gif|bmp|ico)$/.test(picName)){
+			$http({
+				method:"get",
+				url:server_url+"dohistory.action.php",
+				params:{
+					type:1,
+					action:3,
+					id:$routeParams.id
+				}
+			}).success(function(data){
+				console.log(data);
+				if(data.status){
+					window.location.href='../server/download.php?img='+picName;
+				}
+			});
+		}
+		else{
+			alert('此图片不存在!');
+		}
 	}
 	setBg($scope,false);
 }
@@ -456,6 +442,7 @@ function historyControll($scope,$http,$routeParams){
 	var type=$routeParams.type;
 	var history={};
 	history.type=type=="1"?"我的优惠劵":"我的观看历史";
+	history.showcount=type=="2";
 	$scope.history=history;
 	$http({
 		method:"get",

@@ -19,7 +19,7 @@
 	</div>
 	<div class="col-xs-7" style="margin-left:10px; margin-top:8px;">
 		<a href="#videoDetail/{{item.id}}" style="background:none; text-decoration:none;">{{item.title}}</a>
-		<p class="text-muted" style="margin-top:6px; margin-bottom:0px; font-size:12px;">{{item.playTime}}</p>
+		<p class="text-muted" ng-show="{{history.showcount}}" style="margin-top:6px; margin-bottom:0px; font-size:12px;">您的播放次数:{{item.count}}</p>
 		<p class="text-muted" style="margin-top:0px; margin-bottom:3px; font-size:12px;">{{item.create_date}}</p>
 	</div>
 	<div class="clearfix"></div>
