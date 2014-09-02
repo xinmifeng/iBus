@@ -90,16 +90,16 @@ else if($action==="codeRegist"){
 		$cuser=Database::select('bee_user','user_name',array(
 			'where'=>array('user_name'=>$tel)
 		));
-		if($cuser){
+		if(count($cuser)==0){
 			$user=array(
 				"user_name"=>$tel,
 				"password"=>md5($pwd),
 				"status"=>1,
-				"create_date"=>$DB->now()
+				"create_date"=>date('Y-m-d H:i:s',time())
 			);
-			Database::insert("user",$user);
+			Database::insert("bee_user",$user);
 			$id=Database::lastInsertId();
-			if($id){
+			if($id>0){
 				$_SESSION["user"]=array(
 					"id"=>$id,
 					"user_name"=>$tel,
