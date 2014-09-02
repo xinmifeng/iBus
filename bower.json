@@ -10,9 +10,7 @@
 	  ],
 	"dependencies": {
 		"angular":"*",
-		"angular-route":"*",
-		"bootstrap":"*",
-		"swiper":"*"
+		"angular-route":"*"
 	},
 	"ignore": [
 		"**/.*",

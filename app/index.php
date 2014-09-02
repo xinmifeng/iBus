@@ -1,11 +1,5 @@
 <?php
 session_start();
-/*
-if(!isset($_SESSION["user"])){
-	header("Location:login.php");
-	exit(0);
-}
-*/
 require("../server/sqlDb.php");
 $fv=Database::select('bee_video_type','type_id',array(
 	'orderBy'=>'order_id desc',
@@ -13,7 +7,6 @@ $fv=Database::select('bee_video_type','type_id',array(
 ));
 $vid=0;
 if($fv) $vid=$fv;
-
 ?>
 <!DOCTYPE HTML>
 <html ng-app="app">
@@ -29,8 +22,8 @@ if($fv) $vid=$fv;
 	<link rel="stylesheet" href="css/swiper.css">
 	<script src="bower_components/angular/angular.min.js"></script>
 	<script src="bower_components/angular-route/angular-route.min.js"></script>
-	<script src="bower_components/swiper/src/idangerous.swiper.js"></script>
-	<script src="js/main.js"></script>
+	<script src="js/rewrite/idangerous.swiper.js"></script>
+	<script src="js/app.js"></script>
 </head>
 <body ng-controller="MainControll" class="{{BG.hasbg}}">
 <!--标题-->

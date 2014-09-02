@@ -15,7 +15,7 @@ if(isset($_SESSION["user"])){
 	<link rel="stylesheet" type="text/css" href="css/jtzi.css"/>
 	<script src="bower_components/angular/angular.min.js"></script>
 	<script src="bower_components/angular-route/angular-route.min.js"></script>
-	<script src="js/register.js"></script>
+	<script src="js/rewrite/register.js"></script>
 </head>
 
 <body style="background:#ededed;">
