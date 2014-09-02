@@ -14,7 +14,7 @@ if(isset($_SESSION["user"])){
 	<link href="css/bootstrap.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/jtzi.css"/>
 	<script src="bower_components/angular/angular.min.js"></script>
-	<script src="js/rewrite/login.js"></script>
+	<script src="js/controllers/login.js"></script>
 </head>
 <body ng-controller="loginControll" style="background:#ededed;">
 
