@@ -97,9 +97,8 @@ else if($action==="codeRegist"){
 				"status"=>1,
 				"create_date"=>date('Y-m-d H:i:s',time())
 			);
-			Database::insert("bee_user",$user);
-			$id=Database::lastInsertId();
-			if($id>0){
+			if(Database::insert("bee_user",$user)){
+				$id=Database::lastInsertId();
 				$_SESSION["user"]=array(
 					"id"=>$id,
 					"user_name"=>$tel,
@@ -109,12 +108,12 @@ else if($action==="codeRegist"){
 				exit(0);
 			}
 			else{
-				echo json_encode(Common::getResult(0,"insert user error."));
+				echo json_encode(Common::getResult(0,"注册失败!"));
 				exit(0);
 			}
 		}
 		else{
-			echo json_encode(Common::getResult(0,"已经存在此用户"));
+			echo json_encode(Common::getResult(0,"已经存在此用户!"));
 			exit(0);
 
 		}
