@@ -14,11 +14,11 @@
 <!--轮播大图 结束-->
 
 <!--内容列表-->
-<div ng-repeat="item in indexData" class="container-fluid pd5">
-   <div class="row" style="margin:0 auto;">
+<div ng-repeat="item in indexData" class="container-fluid" style="padding:5px 0px 0px 0px;">
+   <div class="row" style="margin:0 auto;" index="{{$index}}">
         <div ng-repeat="obj in item" class="col-xs-{{obj.cssvalue}}" style="padding-left:0;padding-right:{{obj.pr}};">
              <a href="{{obj.reurl}}" style="background:#c00;">
-			 <img ng-src="{{obj.pic_url}}" 
+			 <img ng-src="{{obj.pic_url}}" count="12" orientindex="{{$index}}" last="{{$last}}"
 			 class="img-responsive" width="100%" height="100%"/></a> 
         </div>
   </div>

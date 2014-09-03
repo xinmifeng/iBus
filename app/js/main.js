@@ -1,3 +1,13 @@
+function E(f, e, o) {
+    if (!e) e = 'load';
+    if (!o) o = window;
+    if(o.attachEvent) {
+        o.attachEvent('on' + e, f)
+    } else {
+        o.addEventListener(e, f, false)
+    }
+}
+
 var appModule = angular.module('app',['ngRoute']);
 function appRouteConfig($routeProvider){
 	$routeProvider.when("/",{
@@ -128,6 +138,70 @@ appModule.directive("orientablelike",function(){
 			}
 		}
 		element[0].onerror=function(){
+		}
+	}
+});
+
+var indexArray=[];
+function dealImage(isorient){
+	indexArray=isorient?window.arr:indexArray;
+	indexArray.sort(function(a,b){
+		return a.index>b.index?1:-1;
+	});
+	for(var i=0,l=indexArray.length;i<l;i++){
+		var elObj=indexArray[i];		
+		if(elObj.islast){
+			var lastEl=indexArray[i-1].el;
+			var el=elObj.el;
+			var	pw=lastEl.width;
+			var ph=lastEl.height;
+			var nw=el.width;
+			var nh=el.height;
+			if(ph && nh){
+				el.style.height=ph+"px";
+			}
+		}
+	}
+	var change="onorientationchange" in window ? "orientationchange" : "resize"
+	var copy=(function(ar){
+		var ars=[];
+		for(var i=0,l=ar.length;i<l;i++){
+			var item=ar[i];
+			ars.push({
+				el:item.el,
+				index:item.index,
+				islast:item.islast
+			});
+		}
+		return ars;
+	})(indexArray);
+	window.arr=copy;
+	function orientationChange(e){
+		setTimeout('dealImage(true)',400);
+	}
+	E(orientationChange,change);
+	indexArray=[];
+}
+
+function insetIndexArray(el){
+	var index=parseInt(el.getAttribute("orientindex"));
+	var islast=el.getAttribute("last")==="true";
+	var pel=el.parentNode.parentNode.parentNode;
+	var pindex=parseInt(pel.getAttribute("index"));
+	var count=parseInt(el.getAttribute("count"));
+	indexArray.push({'el':el,'index':pindex*2+index,'islast':islast});
+	if(indexArray.length===count){
+		dealImage();
+	}
+}
+
+appModule.directive("orientindex",function(){
+	return function($scope,element){
+		element[0].onload=function(){
+			insetIndexArray(this);
+		}
+		element[0].onerror=function(){
+			insetIndexArray(this);
 		}
 	}
 });
@@ -418,13 +492,17 @@ function appDetailControll($scope,$http,$routeParams){
 				params:{
 					type:1,
 					action:3,
-					id:$routeParams.id
+					id:$routeParams.id,
+					img:picName
 				}
 			}).success(function(data){
 				redirectToLogin(data);
 				console.log(data);
 				if(data.status){
 					window.location.href='../server/download.php?img='+picName;
+				}
+				else{
+					alert(data.message);
 				}
 			});
 		}

@@ -131,6 +131,12 @@ if($type==="2" && $action==="2"){
 	}
 }
 if($type==="1" && $action==="3"){
+	$basename=$_GET['img'];
+	$filename = '../../SWFUpload/file/'.$basename;
+	if(!file_exists($filename)){
+		echo json_encode(Common::getResult(0,"此图片不存在"));
+		exit(0);
+	}
 	$history=getHistory($user_id,$src_id,$type);
 	if($history){
 		$history["create_date"]= date('Y-m-d H:i:s',time());

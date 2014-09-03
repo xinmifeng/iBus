@@ -75,7 +75,7 @@
 }
 
 .swiper-like .swiper-slide img{
-	width:100%;
+	height:100%;
 }
 
 .swiper-like .swiper-slide{
@@ -97,6 +97,7 @@
   text-align:center;
   left:0px;
   margin-bottom:-4px;
+  display:none;
 }
 .swiper-like .swiper-pagination-switch {
   display: inline-block;

@@ -6,8 +6,11 @@ if(empty($_GET['img'])) {
 
 $basename=$_GET['img'];
 $filename = '../../SWFUpload/file/'.$basename;
-
-$mime = ($mime = getimagesize($filename)) ? $mime['mime'] : $mime;
+if(!file_exists($filename)){
+	echo "<b>此图片不存在</b>";
+	exit(0);
+}
+$mim = ($mime = getimagesize($filename)) ? $mime['mime'] : $mime;
 $size = filesize($filename);
 $fp   = fopen($filename, "rb");
 if (!($mime && $size && $fp)) {
