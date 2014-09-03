@@ -206,16 +206,21 @@ appModule.directive("orientindex",function(){
 	}
 });
 
-/*
-appModule.directive("controls",function(){
+appModule.directive("orientvideo",function(){
 	return function($scope,element,attrs){
-		element[0].onclick=function(){
-			alert(1);
-			//alert(getComputedStyle[this]["width"]);
-		}
+		E(function(){
+			var video=this;
+			var containner=video.parentNode;
+			var w=parseInt(getComputedStyle(video)["width"]);
+			var h=parseInt(getComputedStyle(video)["height"]);
+			var imgDiv=video.nextElementSibling;
+			var iw=parseInt(imgDiv.style.width);
+			var ih=parseInt(imgDiv.style.height);
+			imgDiv.style.left=(w-iw)/2+"px";
+			imgDiv.style.top=(h-130)/2+"px";
+		},'loadstart',element[0]);
 	}
 });
-*/
 
 function dealBanner(data){
 	for(var i=0,len=data.length;i<len;i++){
@@ -339,6 +344,7 @@ function videoDetailControll($scope,$http,$routeParams,$sce){
 		$scope.item.address=$sce.trustAsResourceUrl($scope.item.address);
 		$scope.item.likeData=relikeData;
 		$scope.item.likeDataCount=relikeData.length;
+		$scope.item.showtool=false;
 	});
 	$scope.loveMovie=function(){
 		$http({
@@ -381,9 +387,11 @@ function videoDetailControll($scope,$http,$routeParams,$sce){
 					console.log(data.message);
 				}
 			});
+			$scope.item.showtool=false;
 		}
 		else{
 			el.pause();
+			$scope.item.showtool=false;
 		}
 	}
 
