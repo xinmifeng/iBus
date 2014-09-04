@@ -34,6 +34,7 @@ function getHistory($user_id,$src_id,$src_type){
 	));
 	return $history;
 }
+
 function getVideo($src_id){
 	$v=Database::select('bee_video','*',array(
 		'where'=>array('v_id'=>$src_id),
@@ -41,6 +42,7 @@ function getVideo($src_id){
 	));
 	return $v;
 }
+
 if($type==="2" && $action==="1"){
 	/*
 	$history=Database::select("bee_user_history",'*',array(
@@ -104,7 +106,7 @@ if($type==="2" && $action==="1"){
 }
 if($type==="2" && $action==="2"){
 	$history=Database::select("bee_user_history",'*',array(
-		'where'=>array('user_id'=>$user_id,'src_id'=>$src_id),
+		'where'=>array('user_id'=>$user_id,'src_id'=>$src_id,'src_type'=>$type),
 		'singleRow'=>true
 	));
 	if($history){
@@ -118,6 +120,10 @@ if($type==="2" && $action==="2"){
 					exit(0);
 				}
 			}
+		}
+		else{
+			echo json_encode(Common::getResult(0,"更新播放次数失败!"));
+			exit(0);
 		}
 	}
 	else{
