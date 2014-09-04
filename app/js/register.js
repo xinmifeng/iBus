@@ -13,6 +13,10 @@ function appRouteConfig($routeProvider){
 	.when("/register",{
 		controller:registerControll,
 		templateUrl:'views/register_setPassword.html'
+	})
+	.when("/modifypwd",{
+		controller:modifyPwdControll,
+		templateUrl:'views/modifyPassword.html'
 	}).
 	otherwise({
 		redirectTo:"/"
@@ -144,6 +148,7 @@ function registerControll($scope,$http){
 				}
 			}).success(function(data){
 				if(data.status===1){
+					alert("注册成功!");
 					window.location.href="index.php";	
 				}
 				else{
@@ -155,4 +160,8 @@ function registerControll($scope,$http){
 			alert("请输入6~12位的密码与确认密码，并保证一致!");
 		}
 	}
+}
+
+function modifypwd($scope,$http){
+
 }

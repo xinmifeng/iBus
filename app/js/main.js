@@ -487,7 +487,21 @@ function appDetailControll($scope,$http,$routeParams){
 		redirectToLogin(data);
 		if(data.status){
 			$scope.item=data.data;
-			setCurrentIndex($scope.item["app_type"]==0?2:3);
+			switch(parseInt($scope.item["app_type"])){
+				case 0:
+				$scope.item.text="下载优惠券";
+				setCurrentIndex(2);
+				break;
+				case 1:
+				$scope.item.text="下载游戏";
+				setCurrentIndex(3);
+				break;
+				case 2:
+				$scope.item.text="下载应用";
+				setCurrentIndex(3);
+				break;
+			}
+			$scope.item.show=!($scope.item["type"]=="限时活动");
 		}
 	});
 	$scope.mdownload=function(){

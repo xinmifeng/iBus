@@ -120,6 +120,48 @@ else if($action==="codeRegist"){
 		}
 	}
 }
+else if($action==="modifypwd"){
+	if(!isset($_GET["orgpwd"])){
+		echo json_encode(Common::getResult(0,"请输入原密码"));
+		exit(0);
+	}
+	if(!isset($_GET["pwd"])){
+		echo json_encode(Common::getResult(0,"请输入新密码"));
+		exit(0);
+	}
+	if(!isset($_GET["repwd"])){
+		echo json_encode(Common::getResult(0,"请输入确认密码"));
+		exit(0);
+	}
+	if($_GET["pwd"]!=$_GET["repwd"]){
+		echo json_encode(Common::getResult(0,"新密码与确认密码不匹配"));
+		exit(0);
+	}
+	$orgpwd=$_GET["orgpwd"];
+	$pwd=$_GET["pwd"];
+	$repwd=$_GET["repwd"];
+	$user_id=$_SESSION["user"]["id"];
+	require_once("sqlDb.php");
+	$cuser=Database::select('bee_user','*',array(
+		'where'=>array('id'=>$user_id,'password'=>md5($orgpwd)),
+		'singleRow'=>'true'
+	));
+	if($cuser){
+		$cuser["password"]=md5($pwd);
+		if(Database::update('bee_user',$cuser)){
+			echo json_encode(Common::getResult(1,"密码修改成功!"));
+			exit(0);
+		}
+		else{
+			echo json_encode(Common::getResult(1,"密码修改失败!"));
+			exit(0);
+		}
+	}
+	else{
+		echo json_encode(Common::getResult(0,"原密码输入错误"));
+		exit(0);
+	}
+}
 else{
 	echo json_encode(Common::getResult(0,"action 错误"));
 	exit(0);
