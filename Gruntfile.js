@@ -50,6 +50,7 @@ module.exports=function(grunt){
 				},
 				files:{
 					'dest/app/js/login.js':['app/js/login.js'],
+					'dest/app/js/password.js':['app/js/password.js']
 				}
 			}
 		}

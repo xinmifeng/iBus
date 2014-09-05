@@ -80,7 +80,7 @@ if($type==="2" && $action==="1"){
 	}
 	else{
 		$sql="insert into bee_user_history('user_id','src_id','count','is_like','create_date','src_type') values('";
-		$sql=$sql.$user_id."','".$src_id."',0,1,datetime('now'),'".$type."')";
+		$sql=$sql.$user_id."','".$src_id."',0,1,".date('Y-m-d H:i:s',time()).",'".$type."')";
 		$pdost=Database::sql($sql);
 		if($pdost){
 			/*
@@ -111,6 +111,7 @@ if($type==="2" && $action==="2"){
 	));
 	if($history){
 		$history["count"]=intval($history["count"])+1;
+		$history["create_date"] = date('Y-m-d H:i:s',time());
 		if(Database::update('bee_user_history',$history,array('his_id'))){
 			$v=getVideo($src_id);
 			if($v){
