@@ -1,27 +1,49 @@
 <?php
-if(empty($_GET['img'])) {
+if(empty($_GET['name'])) {
 	header("HTTP/1.0 404 Not Found");
 	return;
 }
 
-$basename=$_GET['img'];
-$filename = '../../SWFUpload/file/'.$basename;
-if(!file_exists($filename)){
-	echo "<b>此图片不存在</b>";
-	exit(0);
+if(empty($_GET['type'])) {
+	header("HTTP/1.0 404 Not Found");
+	return;
 }
-$mim = ($mime = getimagesize($filename)) ? $mime['mime'] : $mime;
+
+$type=$_GET["type"];
+$basename=$_GET['name'];
+
+$filename = '../../SWFUpload/file/'.$basename;
+$min="";
+
+$loseImagestr="<b>此图片不存在</b>";
+$loseApkstr="<b>此应用不存在</b>";
+
 $size = filesize($filename);
 $fp   = fopen($filename, "rb");
-if (!($mime && $size && $fp)) {
-	// Error.
-	echo '此图片不存在';
+
+if(!(file_exists($filename) && $size && $fp)){
+	switch($type){		
+		case "image":
+			echo $loseImagestr;
+		break;
+		case "apk":
+			echo $loseApkstr;
+		break;
+	}
 	exit(0);
+}
+
+switch($type){
+	case "image":
+		$mim = ($mime = getimagesize($filename)) ? $mime['mime'] : $mime;
+	break;
+	case "apk":
+		$min= "application/vnd.android.package-archive";
+	break;
 }
 
 header("Content-type: " . $mime);
 header("Content-Length: " . $size);
-// NOTE: Possible header injection via $basename
 header("Content-Disposition: attachment; filename=" . $basename);
 header('Content-Transfer-Encoding: binary');
 header('Cache-Control: must-revalidate, post-check=0, pre-check=0');

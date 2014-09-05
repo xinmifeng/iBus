@@ -505,9 +505,14 @@ function appDetailControll($scope,$http,$routeParams){
 		}
 	});
 	$scope.mdownload=function(){
-		var url=$scope.item.src;
-		var picName=url.substr(url.lastIndexOf("/")+1);
-		if(picName && /^[a-z0-9]{32}\.(jpg|png|gif|bmp|ico)$/.test(picName)){
+		var isapk=parseInt($scope.item["app_type"])>0;
+		var url=isapk?$scope.item.download_url:$scope.item.src;
+		var filename=url.substr(url.lastIndexOf("/")+1);
+		var imgReg=/^[a-z0-9]{32}\.(jpg|png|gif|bmp|ico)$/;
+		var apkReg=/^[a-z0-9]{32}\.apk$/;
+		var reg=isapk?apkReg:imgReg;
+		var str=isapk?"此应用或游戏不存在":"此图片不存在";
+		if(filename && reg.test(filename)){
 			$http({
 				method:"get",
 				url:server_url+"dohistory.action.php",
@@ -515,13 +520,12 @@ function appDetailControll($scope,$http,$routeParams){
 					type:1,
 					action:3,
 					id:$routeParams.id,
-					img:picName
+					file:filename
 				}
 			}).success(function(data){
 				redirectToLogin(data);
-				console.log(data);
 				if(data.status){
-					window.location.href='../server/download.php?img='+picName;
+					window.open('../server/download.php?name='+filename);
 				}
 				else{
 					alert(data.message);
@@ -529,7 +533,7 @@ function appDetailControll($scope,$http,$routeParams){
 			});
 		}
 		else{
-			alert('此图片不存在!');
+			alert(str);
 		}
 	}
 	setBg($scope,false);
