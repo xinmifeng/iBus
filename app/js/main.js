@@ -571,7 +571,7 @@ function myControll($scope,$http){
 function historyControll($scope,$http,$routeParams){
 	var type=$routeParams.type;
 	var history={};
-	history.type=type=="1"?"我的优惠劵":"我的观看历史";
+	history.type=type=="1"?"我的优惠劵":"最近观看";
 	history.showcount=type=="2";
 	$scope.history=history;
 	$http({

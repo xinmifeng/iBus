@@ -14,17 +14,53 @@ function appRouteConfig($routeProvider){
 		controller:registerControll,
 		templateUrl:'views/register_setPassword.html'
 	})
-	.when("/modifypwd",{
-		controller:modifyPwdControll,
-		templateUrl:'views/modifyPassword.html'
-	}).
-	otherwise({
+	.otherwise({
 		redirectTo:"/"
 	});
 }
 registerModule.config(appRouteConfig);
-
+registerModule.factory('timeFunctions', [
+  "$timeout",function timeFunctions($timeout) {
+		var _intervals = {}, _intervalUID = 1;
+		return {
+			$setInterval: function(operation, interval, $scope) {
+				var _internalId = _intervalUID++;
+				_intervals[ _internalId ] = $timeout(function intervalOperation(){
+					operation( $scope || undefined );
+					_intervals[ _internalId ] = $timeout(intervalOperation, interval);
+				}, interval);
+				return _internalId;
+			},
+			$clearInterval: function(id) {
+				return $timeout.cancel( _intervals[ id ] );
+			}
+		}
+	}
+]);
 var user={isok:false,"lastmsg":Date.now()};
+function getCode($http,re){
+	$http({
+		method:"get",
+		url:server_url+"register.action.php",
+		params:{
+			"action":"codeCreate",
+			"tel":user.user_name
+		}
+	}).success(function(data){
+		if(data.status===1){
+			alert("验证码已发送到您的手机,请查收");
+			if(window.localStorage && window.localStorage["time"]){
+				window.localStorage["time"]=60;
+			}
+			if(!re){
+				window.location.href="#checkCode";	
+			}
+		}
+		else{
+			alert("信息发送失败,请重试");
+		}
+	});
+}
 function register_one($scope,$http){
 	$scope.user=user;
 	$scope.telChange=function(){
@@ -40,24 +76,10 @@ function register_one($scope,$http){
 			$scope.user.isok=false;
 		}
 	}
+	
 	$scope.getCode=function(){
 		if(user.isok){
-			$http({
-				method:"get",
-				url:server_url+"register.action.php",
-				params:{
-					"action":"codeCreate",
-					"tel":user.user_name
-				}
-			}).success(function(data){
-				if(data.status===1){
-					//$scope.showReGet=true;
-					window.location.href="#checkCode";	
-				}
-				else{
-					alert(data.message);
-				}
-			});
+			getCode($http);
 		}
 		else{
 			alert("请输入11位手机号码!");
@@ -66,8 +88,39 @@ function register_one($scope,$http){
 }
 
 user.isCodeOk=false;
-function checkCodeControll($scope,$http){
+user.reuse=true;
+function checkCodeControll($scope,$http,timeFunctions){
 	$scope.user=user;
+	$scope.showReGet=true;
+	user.time=60;
+	if(window.localStorage && window.localStorage["time"]){
+		user.time=parseInt(window.localStorage["time"]);
+	}
+
+	function addInterval(){
+		return timeFunctions.$setInterval(function(){
+			if(user.time<=0){
+				return false;
+			}
+			user.time--;
+			if(window.localStorage){
+				window.localStorage["time"]=user.time;
+			}
+		},1000,$scope);
+	}
+
+	var id= addInterval();
+
+	$scope.regetCode=function(){
+		if(user.time==0){
+			getCode($http,true);
+			user.time=60;
+		}
+		else{
+			alert("您需要等待"+user.time+"秒再新获取");
+		}
+	}
+
 	$scope.codeChange=function(){
 		var btn = document.getElementById("checkbtn");
 		if(/^\d{4}$/.test(user.code)){
@@ -160,8 +213,4 @@ function registerControll($scope,$http){
 			alert("请输入6~12位的密码与确认密码，并保证一致!");
 		}
 	}
-}
-
-function modifypwd($scope,$http){
-
 }

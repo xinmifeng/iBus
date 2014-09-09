@@ -1,8 +1,13 @@
+<style>
+body{
+	background-color:#fefefe;
+}
+</style>
 <!--导航条-->
 <div class="container-fluid">
      <div class="row back_show1">
-          <div class="row col-xs-3"><a href="javascript:history.back(0)"><img src="images/back_show1.jpg" width="53" height="45" /></a></div>
-          <div class="row col-xs-6 title_down" style="text-align:center;">{{item.title}}</div>
+          <div class="row col-xs-4"><a href="javascript:history.back(0)"><img src="images/back_show1.jpg" width="53" height="45" /></a></div>
+          <div class="row col-xs-6 title_down" style="text-align:left;">{{item.title}}</div>
 	</div>
 </div>
 
@@ -49,6 +54,9 @@
 				<div class="swiper-wrapper" imgCount="{{item.likeDataCount}}">
 					<div ng-repeat="item in item.likeData" class="swiper-slide">
 						<img zjUrl="{{item.clickUrl}}" ng-src="{{item.pic_url}}" index="{{$index}}"  orientablelike />
+						<div class="swiper-title">
+							{{item.title}}
+						</div>
 					</div>
 				</div>
 			</div>
@@ -58,6 +66,6 @@
 </div>
 
 <!--下面的图-->
-<div class="container-fluid pd30" style="padding-bottom:80px;">
-       <div class="row"><img src="images/qqqxxx.jpg" width="596" height="336" class="img-responsive" style="margin:0 auto;"/></div>
+<div class="container-fluid pd20" style="padding-bottom:80px;">
+       <div class="row"><img src="images/qqqxxx.jpg" width="100%" class="img-responsive" style="margin:0 auto;"/></div>
 </div>

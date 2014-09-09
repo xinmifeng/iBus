@@ -27,6 +27,5 @@
 </div>
 <div class="row pd30 kkk"><button id="checkbtn" ng-click="verifyCode()" type="button" class="btn btn-primary btn-lg btn-block" style="background:#c9c9c9; border:1px solid #c9c9c9; outline:none; 
 height:38px; line-height:18px; margin-top:-40px; color:#fefefe; font-size:16px;">提交验证码</button></div>
-<!--
-<div class="row text-center aga_get">重新获取（60）</div>
--->
+<div id="reGet" ng-show="{{showReGet}}" class="row text-center aga_get">
+<span style="color:blue;cursor:pointer;" ng-click="regetCode()">重新获取</span>（{{user.time}}）</div>
