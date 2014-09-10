@@ -9,7 +9,6 @@ module.exports=function(grunt){
 					{expand:true,cwd:'app/',src:'css/*',dest:'dest/app/',filter:'isFile'},
 					{expand:true,cwd:'app/',src:'views/*',dest:'dest/app/',filter:'isFile'},
 					{expand:true,cwd:'app/',src:'images/*',dest:'dest/app/',filter:'isFile'},
-					{expand:true,cwd:'app/',src:'images/*',dest:'dest/app/',filter:'isFile'},
 					{
 						expand:true,
 						cwd:'app/bower_components/',

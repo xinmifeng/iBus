@@ -374,7 +374,7 @@ function videoDetailControll($scope,$http,$routeParams,$sce){
 				o_obj[key]="";
 			}
 			o_obj["hidepic"]=true;
-			o_obj["pic_url"]="images/small/1.jpg";
+			o_obj["pic_url"]="images/hospital.jpg";
 			return o_obj;
 		}
 		var tempData=[];
