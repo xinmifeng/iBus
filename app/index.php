@@ -22,7 +22,7 @@ if($fv) $vid=$fv;
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
 	<meta name="format-detection" content="telephone=no" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<title>BusFree</title>
+	<title>LeLe WiFi</title>
 	<link href="css/bootstrap.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/jtzi.css"/>
 	<link rel="stylesheet" href="css/idangerous.swiper.css">

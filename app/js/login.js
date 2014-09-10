@@ -13,8 +13,8 @@ var loginControll=['$scope','$http',function($scope,$http){
 			method:"get",
 			url:server_url+"login.action.php",
 			params:{
-				"tel":user.user_name,
-				"pwd":user.password
+				"tel":user.user_name || document.getElementById("tb_tel").value || undefined,
+				"pwd":user.password || document.getElementById("tb_pwd").value || undefined
 			}
 		}).success(function(data){
 			if(data.status===1){

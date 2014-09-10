@@ -1495,7 +1495,8 @@ var Swiper = function (selector, params) {
     function onTouchEnd(event) {
 		if(_this.zjTouch){
 			var zjTarget=event.target || event.srcElement;
-			window.location.href=zjTarget.getAttribute("zjUrl");
+			if(zjTarget.tagName==="IMG" && zjTarget.getAttribute("zjUrl"))
+				window.location.href=zjTarget.getAttribute("zjUrl");
 		}
         //Check For scrolling
         if (isScrolling) {

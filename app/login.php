@@ -4,13 +4,26 @@ if(isset($_SESSION["user"])){
 	header("Location:index.php");
 	exit(0);
 }
+
+require("../server/sqlDb.php");
+$fv=Database::select('bee_index','pic_url',array(
+	'where'=>array('index_id'=>'111'),
+	'fetchStyle' => 'singleColumn'
+));
+$gdsrc="images/denglu_pic.jpg";
+if($fv) {
+	$arr = parse_ini_file("../server/iBus.ini");
+	$upload_dir = $arr["upload_dir"];
+	$gdsrc=$upload_dir.$fv[0];
+}
+
 ?>
 <!Doctype>
 <html ng-app="login">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<title>BusFree</title>
+	<title>LeLe WiFi</title>
 	<link href="css/bootstrap.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/jtzi.css"/>
 	<script src="bower_components/angular/angular.min.js"></script>
@@ -32,12 +45,12 @@ if(isset($_SESSION["user"])){
 	<div class="row pd30">
 		<div class="form-group" style="margin-top:-15px;">
 			<label for="exampleInputEmail1"></label>
-			<input ng-model="user.user_name" type="text" class="form-control" 
+			<input id="tb_tel" ng-model="user.user_name" type="text" class="form-control" 
 			id="exampleInputEmail1" placeholder="请输入手机号">
 		</div>
 		<div class="form-group" style="margin-top:-15px;">
 			<label for="exampleInputPassword1"></label>
-			<input ng-model="user.password" type="password" class="form-control" 
+			<input id="tb_pwd" ng-model="user.password" type="password" class="form-control" 
 				id="exampleInputPassword1" placeholder="请输入密码">
 		</div>
 </div>
@@ -51,7 +64,7 @@ height:38px; line-height:20px; margin-top:-30px; color:#999; font-size:16px;">�
 
 </form>
 
-<div class="row"><img src="images/denglu_pic.jpg" width="640" height="404" class="img-responsive pic_car guding"/></div>
+<div class="row"><img src="<?php echo $gdsrc ?>" width="640" height="404" class="img-responsive pic_car guding"/></div>
 <div class="row text-center footer">杭州微元科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;版权所有</div>
 </div>
 </body>

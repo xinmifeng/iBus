@@ -51,5 +51,16 @@ for($i=0,$l=count($likeVideos);$i<$l;$i++){
 }
 $data=Common::getResult(1,"ok",$video);
 $data["likeData"]=$reLikeVideos;
+
+$fv=Database::select('bee_index','pic_url',array(
+	'where'=>array('index_id'=>'222'),
+	'fetchStyle' => 'singleColumn'
+));
+$gdsrc="images/denglu_pic.jpg";
+if($fv) {
+	$gdsrc=$upload_dir.$fv[0];
+}
+$data["gdsrc"]=$gdsrc;
+
 echo json_encode($data);
 ?>

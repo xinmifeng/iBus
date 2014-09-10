@@ -12,10 +12,17 @@ $where=array();
 if($type>0){
 	$where['index_type']=$type;
 }
-$indexs=Database::select('bee_index','*',array(
+$rindexs=Database::select('bee_index','*',array(
 	'where'=>$where,
 	'orderBy'=>'position asc'
 ));
+
+$indexs=array();
+for($i=0,$l=count($rindexs);$i<$l;$i++){
+	$item=$rindexs[$i];
+	if($item["index_id"]=="111" || $item["index_id"]=="222") continue;
+	array_push($indexs,$item);
+}
 
 $reData=array();
 $widthObj=array(8,4,6,6,8,4,4,8,8,4,4,8);

@@ -106,7 +106,7 @@ function swiperLike(count){
 		pagination: '.pagination',
 		paginationClickable: true,
 		slidesPerView: (count<3?count:3),
-		loop: true,
+		loop: count>3,
 		autoplay:3000,
 		autoplayDisableOnInteraction: false,
 		autoplayStopOnLast:false
@@ -128,16 +128,23 @@ appModule.directive("orientable",function(){
 	}
 });
 
+function dealLike(el){
+	if(!el || !el.parentNode || !el.parentNode.parentNode) return;
+	var count = parseInt(el.parentNode.parentNode.getAttribute("imgcount"));
+	var index = parseInt(el.getAttribute("index"));
+	var relCount=count<3?3:count;
+	if(index+1===count){
+		swiperLike(relCount);
+	}
+}
+
 appModule.directive("orientablelike",function(){
 	return function($scope,element){
 		element[0].onload=function(){
-			var count = parseInt(this.parentNode.parentNode.getAttribute("imgcount"));
-			var index = parseInt(this.getAttribute("index"));
-			if(index+1===count){
-				swiperLike(count);
-			}
+			dealLike(this);	
 		}
 		element[0].onerror=function(){
+			dealLike(this);	
 		}
 	}
 });
@@ -322,6 +329,26 @@ function videoControll($scope,$http,$routeParams){
 	setCurrentIndex(1);
 }
 
+function subStr(str,length){
+	var restr="";
+	var len=0;
+	for(var i=0,l=str.length;i<l;i++){
+		var c=str[i];
+		var charCode=str.charCodeAt(i);
+		if(charCode>=0 && charCode<=128){
+			len++;
+			restr+=c;
+			if(len>=length) return restr;
+		}
+		else{
+			if(len+2>length) {return restr};
+			len+=2;
+			restr+=c;
+			if(len==length) return restr;
+		}
+	}
+	return restr;
+}
 function videoDetailControll($scope,$http,$routeParams,$sce){
 	var id=$routeParams.id;
 	$http({
@@ -335,16 +362,35 @@ function videoDetailControll($scope,$http,$routeParams,$sce){
 		for(var i=0,l=likeData.length;i<l;i++){
 			var ld=likeData[i];
 			ld.clickUrl="#videoDetail/"+ld.v_id;
+			ld.title=subStr(ld.title,13);
 			if(ld.v_id!=id){
 				relikeData.push(ld);
 			}
 		}
+		var orgCount=relikeData.length;
+		function create(){
+			var o_obj=JSON.parse(JSON.stringify(likeData[0]));
+			for(var key in o_obj){
+				o_obj[key]="";
+			}
+			o_obj["hidepic"]=true;
+			o_obj["pic_url"]="images/small/1.jpg";
+			return o_obj;
+		}
+		var tempData=[];
+		if(relikeData.length<3){
+			for(var i=0,l=3-relikeData.length;i<l;i++){
+				tempData.push(create());
+			}
+		}
+		relikeData=relikeData.concat(tempData);
 		$scope.item=data.data;
 		$scope.item.likeClass=parseInt($scope.item.is_like)?"love":"";
 		$scope.item.address=$sce.trustAsResourceUrl($scope.item.address);
 		$scope.item.likeData=relikeData;
-		$scope.item.likeDataCount=relikeData.length;
+		$scope.item.likeDataCount=orgCount;
 		$scope.item.showtool=false;
+		$scope.item.gdsrc=data.gdsrc;
 	});
 	$scope.loveMovie=function(){
 		$http({

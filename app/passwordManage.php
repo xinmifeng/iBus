@@ -10,7 +10,7 @@ if(!isset($_SESSION["user"])){
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<title>BusFree</title>
+	<title>LeLe WiFi</title>
 	<link href="css/bootstrap.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/jtzi.css"/>
 	<script src="bower_components/angular/angular.min.js"></script>
