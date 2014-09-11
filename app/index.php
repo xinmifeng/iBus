@@ -30,6 +30,9 @@ if($fv) $vid=$fv;
 	<script src="bower_components/angular/angular.min.js"></script>
 	<script src="bower_components/angular-route/angular-route.min.js"></script>
 	<script src="bower_components/swiper/src/idangerous.swiper.js"></script>
+	<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+	<script src="bower_components/videogular/videogular.js"></script>
+	<script src="bower_components/videogular-controls/controls.js"></script>
 	<script src="js/main.js"></script>
 </head>
 <body ng-controller="MainControll" class="{{BG.hasbg}}">
@@ -48,19 +51,19 @@ if($fv) $vid=$fv;
    <div class="container-fluid" style="margin-top:0px;">
       <div class="row" >
          <div class="text-center col-xs-2 men" style="width:20%;"> 
-            <a ng-click="setCurrent($event.target)" class="current" href="#/"><span class="home" style="margin-bottom:-12px;"></span>主页</a>
+            <a ng-click="setCurrent($event)" class="current" href="#/"><span class="home" style="margin-bottom:-12px;"></span>主页</a>
          </div>
          <div class="text-center col-xs-2 men" style="width:20%;">
-            <a ng-click="setCurrent($event.target)"  href="#video/<?php echo $vid;?>"><span class="see_shi" style="margin-bottom:-12px;"></span>视频</a>
+            <a ng-click="setCurrent($event)"  href="#video/<?php echo $vid;?>"><span class="see_shi" style="margin-bottom:-12px;"></span>视频</a>
          </div>
          <div class="text-center col-xs-2 men" style="width:20%;">
-            <a ng-click="setCurrent($event.target)"  href="#activity" ><span class="dazhe" style="margin-bottom:-12px;"></span>优惠</a>
+            <a ng-click="setCurrent($event)"  href="#activity" ><span class="dazhe" style="margin-bottom:-12px;"></span>优惠</a>
          </div>
          <div class="text-center col-xs-2 men" style="width:20%;">
-            <a ng-click="setCurrent($event.target)"  href="#apks" ><span class="yong" style="margin-bottom:-12px;"></span>下载吧</a>
+            <a ng-click="setCurrent($event)"  href="#apks" ><span class="yong" style="margin-bottom:-12px;"></span>下载吧</a>
          </div>
          <div class="text-center col-xs-2 men" style="width:20%;">
-            <a ng-click="setCurrent($event.target)"  href="#my" ><span class="mine" style="margin-bottom:-12px;"></span>我的</a>
+            <a ng-click="setCurrent($event)"  href="#my" ><span class="mine" style="margin-bottom:-12px;"></span>我的</a>
          </div>
       </div>
    </div>

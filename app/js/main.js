@@ -8,7 +8,20 @@ function E(f, e, o) {
     }
 }
 
-var appModule = angular.module('app',['ngRoute']);
+function isIOS(){
+    var isIOS = navigator.userAgent.match(/iPhone/i)
+        || navigator.userAgent.match(/iPad/i)
+        || navigator.userAgent.match(/iPod/i);
+	return isIOS;
+}
+
+var appModule = angular.module('app',[
+	'ngRoute',
+	'ngSanitize',
+	'com.2fdevs.videogular',
+	'com.2fdevs.videogular.plugins.controls'
+]);
+
 function appRouteConfig($routeProvider){
 	$routeProvider.when("/",{
 		controller:indexControll,
@@ -70,6 +83,7 @@ function setCurrentIndex(index){
 
 appModule.controller('MainControll',function ($scope){
 	$scope.setCurrent=function(element){
+		element=element.target;
 		if(element.tagName==="SPAN")
 			element=element.parentNode;
 		var aEls=element.parentNode.parentNode.children;
@@ -391,6 +405,31 @@ function videoDetailControll($scope,$http,$routeParams,$sce){
 		$scope.item.likeDataCount=orgCount;
 		$scope.item.showtool=false;
 		$scope.item.gdsrc=data.gdsrc;
+
+		$scope.currentTime = 0;
+		$scope.totalTime = 0;
+		$scope.state = null;
+		$scope.volume = 1;
+		$scope.isCompleted = false;
+		$scope.API = null;
+
+		$scope.config = {
+			autoHide: false,
+			autoHideTime: 3000,
+			autoPlay: false,
+			transclude: true,
+			sources: [
+				{src: $scope.item.address, type: "video/mp4"}
+			],
+			theme:{
+				url:"css/themes/default/videogular.css"
+			}
+		};
+
+		$scope.onPlayerReady = function(API) {
+			$scope.API = API; 
+		}
+
 	});
 	$scope.loveMovie=function(){
 		$http({
@@ -413,9 +452,10 @@ function videoDetailControll($scope,$http,$routeParams,$sce){
 		});
 	}
 	var isplay=false;
-	$scope.play=function(el){
-		if(el.paused){
-			el.play();
+	$scope.mplay=function(){
+		var el=document.querySelector("video");
+		if(!el.paused){
+			//el.play();
 			if(isplay) return;
 			$scope.item.count=parseInt($scope.item.count)+1;
 			isplay=true;
@@ -435,12 +475,7 @@ function videoDetailControll($scope,$http,$routeParams,$sce){
 			});
 			$scope.item.showtool=false;
 		}
-		else{
-			el.pause();
-			$scope.item.showtool=false;
-		}
 	}
-
 	setBg($scope,false);
 	setCurrentIndex(1);
 }
@@ -551,6 +586,11 @@ function appDetailControll($scope,$http,$routeParams){
 		}
 	});
 	$scope.mdownload=function(){
+		var ios=isIOS();
+		if(ios){
+			var isOk = window.confirm("IOS系统无法直接下载,请长按图片保存!是否添加下载记录?");
+			if(!isOk) return;
+		}
 		var isapk=parseInt($scope.item["app_type"])>0;
 		var url=isapk?$scope.item.download_url:$scope.item.src;
 		var filename=url.substr(url.lastIndexOf("/")+1);
@@ -570,7 +610,7 @@ function appDetailControll($scope,$http,$routeParams){
 				}
 			}).success(function(data){
 				redirectToLogin(data);
-				if(data.status){
+				if(data.status && !ios){
 					window.open('../server/download.php?name='+filename);
 				}
 				else{

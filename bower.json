@@ -12,7 +12,9 @@
 		"angular":"*",
 		"angular-route":"*",
 		"bootstrap":"*",
-		"swiper":"*"
+		"swiper":"*",
+		"videogular":"*",
+		"videogular-controls":"*"
 	},
 	"ignore": [
 		"**/.*",
