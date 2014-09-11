@@ -7,6 +7,7 @@ module.exports=function(grunt){
 					{expand:true,cwd:'app/',src:'*.php',dest:'dest/app/',filter:'isFile'},
 					{expand:true,cwd:'app/',src:'js/*',dest:'dest/app/',filter:'isFile'},
 					{expand:true,cwd:'app/',src:'css/*',dest:'dest/app/',filter:'isFile'},
+					{expand:true,cwd:'app/',src:'css/themes/**',dest:'dest/app/',filter:'isFile'},
 					{expand:true,cwd:'app/',src:'views/*',dest:'dest/app/',filter:'isFile'},
 					{expand:true,cwd:'app/',src:'images/*',dest:'dest/app/',filter:'isFile'},
 					{
@@ -27,6 +28,27 @@ module.exports=function(grunt){
 						expand:true,
 						cwd:'app/bower_components/',
 						src:'swiper/src/idangerous.swiper.js',
+						dest:'dest/app/bower_components/',
+						filter:'isFile'
+					},
+					{
+						expand:true,
+						cwd:'app/bower_components/',
+						src:'angular-sanitize/angular-sanitize.js',
+						dest:'dest/app/bower_components/',
+						filter:'isFile'
+					},
+					{
+						expand:true,
+						cwd:'app/bower_components/',
+						src:'videogular/videogular.js',
+						dest:'dest/app/bower_components/',
+						filter:'isFile'
+					},
+					{
+						expand:true,
+						cwd:'app/bower_components/',
+						src:'videogular-controls/controls.js',
 						dest:'dest/app/bower_components/',
 						filter:'isFile'
 					},

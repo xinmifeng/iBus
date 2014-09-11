@@ -30,6 +30,7 @@ if($fv) $vid=$fv;
 	<script src="bower_components/angular/angular.min.js"></script>
 	<script src="bower_components/angular-route/angular-route.min.js"></script>
 	<script src="bower_components/swiper/src/idangerous.swiper.js"></script>
+
 	<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
 	<script src="bower_components/videogular/videogular.js"></script>
 	<script src="bower_components/videogular-controls/controls.js"></script>

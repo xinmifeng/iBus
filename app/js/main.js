@@ -392,7 +392,7 @@ function videoDetailControll($scope,$http,$routeParams,$sce){
 			return o_obj;
 		}
 		var tempData=[];
-		if(relikeData.length<3){
+		if(relikeData.length>0 && relikeData.length<3){
 			for(var i=0,l=3-relikeData.length;i<l;i++){
 				tempData.push(create());
 			}
