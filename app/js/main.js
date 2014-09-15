@@ -453,6 +453,7 @@ function videoDetailControll($scope,$http,$routeParams,$sce){
 	}
 	var isplay=false;
 	$scope.mplay=function(){
+		alert(navigator.userAgent);
 		var el=document.querySelector("video");
 		if(!el.paused){
 			//el.play();
@@ -659,6 +660,7 @@ function historyControll($scope,$http,$routeParams){
 	var history={};
 	history.type=type=="1"?"我的优惠劵":"最近观看";
 	history.showcount=type=="2";
+	history.href=type=="2"?"videoDetail":"appDetail";
 	$scope.history=history;
 	$http({
 		method:"get",
