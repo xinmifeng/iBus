@@ -1,17 +1,6 @@
 <?php
 session_start();
 require("../server/sqlDb.php");
-$qqReg="/MQQBrowser/i";
-$sogouReg="/Sogou/i";
-$ucReg="/UCBrowser/i";
-$agent=$_SERVER["HTTP_USER_AGENT"];
-$isThree=preg_match($qqReg,$agent) || 
-		 preg_match($sogouReg,$agent) ||
-		 preg_match($ucReg,$agent);
-if(!$isThree){
-	header("Location:index_video.php");
-	exit(0);
-}
 $fv=Database::select('bee_video_type','type_id',array(
 	'orderBy'=>'order_id desc',
 	'single'=>true
@@ -34,6 +23,9 @@ if($fv) $vid=$fv;
 	<script src="bower_components/angular/angular.min.js"></script>
 	<script src="bower_components/angular-route/angular-route.min.js"></script>
 	<script src="bower_components/swiper/src/idangerous.swiper.js"></script>
+	<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+	<script src="bower_components/videogular/videogular.js"></script>
+	<script src="bower_components/videogular-controls/controls.js"></script>
 	<script src="js/main.js"></script>
 </head>
 <body ng-controller="MainControll" class="{{BG.hasbg}}">

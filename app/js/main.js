@@ -1,3 +1,15 @@
+function isThreeBrowser(){
+	var agent=navigator.userAgent;
+	var qqReg=/MQQBrowser/gi;
+	var sogouReg=/Sogou/gi;
+	var ucReg=/UCBrowser/gi;
+	return qqReg.test(agent) ||
+			sogouReg.test(agent) ||
+			ucReg.test(agent);
+}
+
+var isThree=isThreeBrowser();
+
 function E(f, e, o) {
     if (!e) e = 'load';
     if (!o) o = window;
@@ -15,7 +27,7 @@ function isIOS(){
 	return isIOS;
 }
 
-var appModule = angular.module('app',[
+var appModule = isThree?angular.module('app',['ngRoute']):angular.module('app',[
 	'ngRoute',
 	'ngSanitize',
 	'com.2fdevs.videogular',
@@ -33,7 +45,7 @@ function appRouteConfig($routeProvider){
 	}).
 	when("/videoDetail/:id",{
 		controller:videoDetailControll,
-		templateUrl:'views/videoDetail.html'
+		templateUrl:isThree?'views/videoDetail.html':"views/videoDetailOrg.html"
 	}).
 	when("/activity",{
 		controller:activityControll,
@@ -411,7 +423,10 @@ function videoDetailControll($scope,$http,$routeParams,$sce){
 		$scope.state = null;
 		$scope.volume = 1;
 		$scope.isCompleted = false;
-		$scope.API = null;
+		$scope.API = {
+			currentTime:$scope.item.length,
+			timeLeft:$scope.item.length
+		};
 
 		$scope.config = {
 			autoHide: false,
@@ -428,6 +443,7 @@ function videoDetailControll($scope,$http,$routeParams,$sce){
 
 		$scope.onPlayerReady = function(API) {
 			$scope.API = API; 
+			$scope.canUse=true;
 		}
 
 	});
@@ -452,29 +468,50 @@ function videoDetailControll($scope,$http,$routeParams,$sce){
 		});
 	}
 	var isplay=false;
+	function playAjax($http){
+		$http({
+			method:"get",
+			url:server_url+"dohistory.action.php",
+			params:{
+				"type":2,
+				"action":2,
+				"id":id
+			}
+		}).success(function(data){
+			redirectToLogin(data);
+			if(!data.status){
+				console.log(data.message);
+			}
+		});
+	}
 	$scope.mplay=function(){
-		alert(navigator.userAgent);
 		var el=document.querySelector("video");
-		if(!el.paused){
-			//el.play();
-			if(isplay) return;
-			$scope.item.count=parseInt($scope.item.count)+1;
-			isplay=true;
-			$http({
-				method:"get",
-				url:server_url+"dohistory.action.php",
-				params:{
-					"type":2,
-					"action":2,
-					"id":id
+		if(!$scope.canUse){
+			el.addEventListener("canplay",function(){
+				var length=el.duration;
+				if(length){
+					var m=Math.floor(length/60);
+					var s=Math.floor(length-m*60);
+					$scope.API.timeLeft=(m>9?m:"0"+m)+":"+s;
 				}
-			}).success(function(data){
-				redirectToLogin(data);
-				if(!data.status){
-					console.log(data.message);
-				}
-			});
-			$scope.item.showtool=false;
+			},false);
+		}
+		if(isThree){
+			if(el.paused){
+				el.play();
+				if(isplay) return;
+				$scope.item.count=parseInt($scope.item.count)+1;
+				isplay=true;
+				playAjax($http);	
+			}
+		}
+		else{
+			if(!el.paused){
+				if(isplay) return;
+				$scope.item.count=parseInt($scope.item.count)+1;
+				isplay=true;
+				playAjax($http);	
+			}
 		}
 	}
 	setBg($scope,false);
