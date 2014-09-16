@@ -76,7 +76,7 @@
 }
 
 .swiper-like .swiper-slide img{
-	height:100%;
+	width:100%;
 }
 
 .swiper-like .swiper-slide{
@@ -122,16 +122,12 @@
 
 .swiper-like .swiper-title{
 	position:absolute;
-	bottom:0;
+	bottom:2px;
+	left:5px;
 	z-index:100;
-	width:90%;
-	height:20px;
 	text-align:left;
-	background:#000;
-	opacity:0.5;
 	color:#fff;
 	line-height:20px;
 	font-size:12px;
-	margin-left:5%;
 	overflow:hidden;
 }

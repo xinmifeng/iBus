@@ -4,7 +4,7 @@ require("../server/sqlDb.php");
 $qqReg="/MQQBrowser/i";
 $sogouReg="/Sogou/i";
 $ucReg="/UCBrowser/i";
-$ios="/iPhone|iPod|iPad/gi";
+$ios="/iPhone|iPod|iPad/i";
 $agent=$_SERVER["HTTP_USER_AGENT"];
 $isThree=preg_match($qqReg,$agent) || 
 		 preg_match($sogouReg,$agent) ||

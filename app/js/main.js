@@ -10,12 +10,6 @@ function isThreeBrowser(){
 			ios.test(agent);
 }
 
-function isIOS(){
-	var ios=/iPhone|iPod|iPad/gi;
-	var agent=navigator.userAgent;
-	return ios.test(agent);
-}
-
 var isThree=isThreeBrowser();
 
 function E(f, e, o) {
@@ -454,7 +448,9 @@ function videoDetailControll($scope,$http,$routeParams,$sce){
 			$scope.API = API; 
 			$scope.canUse=true;
 		}
-
+		if(window.scrollTo){
+			window.scrollTo(0,0);
+		}
 	});
 	$scope.loveMovie=function(){
 		$http({
