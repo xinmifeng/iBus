@@ -3,9 +3,17 @@ function isThreeBrowser(){
 	var qqReg=/MQQBrowser/gi;
 	var sogouReg=/Sogou/gi;
 	var ucReg=/UCBrowser/gi;
+	var ios=/iPhone|iPod|iPad/gi;
 	return qqReg.test(agent) ||
 			sogouReg.test(agent) ||
-			ucReg.test(agent);
+			ucReg.test(agent) ||
+			ios.test(agent);
+}
+
+function isIOS(){
+	var ios=/iPhone|iPod|iPad/gi;
+	var agent=navigator.userAgent;
+	return ios.test(agent);
 }
 
 var isThree=isThreeBrowser();
@@ -184,6 +192,7 @@ function dealImage(isorient){
 	for(var i=0,l=indexArray.length;i<l;i++){
 		var elObj=indexArray[i];		
 		if(elObj.islast){
+			if(!indexArray[i-1]) continue;
 			var lastEl=indexArray[i-1].el;
 			var el=elObj.el;
 			var	pw=lastEl.width;
@@ -486,16 +495,6 @@ function videoDetailControll($scope,$http,$routeParams,$sce){
 	}
 	$scope.mplay=function(){
 		var el=document.querySelector("video");
-		if(!$scope.canUse){
-			el.addEventListener("canplay",function(){
-				var length=el.duration;
-				if(length){
-					var m=Math.floor(length/60);
-					var s=Math.floor(length-m*60);
-					$scope.API.timeLeft=(m>9?m:"0"+m)+":"+s;
-				}
-			},false);
-		}
 		if(isThree){
 			if(el.paused){
 				el.play();
@@ -506,6 +505,19 @@ function videoDetailControll($scope,$http,$routeParams,$sce){
 			}
 		}
 		else{
+			if(!$scope.canUse){
+				el.onloadedmetadata=function(){
+					alert("onloadedmetadata");
+				}
+				el.addEventListener("canplay",function(){
+					var length=el.duration;
+					if(length){
+						var m=Math.floor(length/60);
+						var s=Math.floor(length-m*60);
+						$scope.API.timeLeft=(m>9?m:"0"+m)+":"+s;
+					}
+				},false);
+			}
 			if(!el.paused){
 				if(isplay) return;
 				$scope.item.count=parseInt($scope.item.count)+1;
