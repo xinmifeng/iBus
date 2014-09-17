@@ -15,7 +15,7 @@ body{
 <div class="container-fluid">
      <div id="videoBox" style="text-align:center;height:250px;position:relative;"  class="row col-xs-13">
 			<videogular vg-player-ready="onPlayerReady" vg-theme="config.theme.url">
-				<vg-video style="height:200px;" vg-src="config.sources"></vg-video>
+				<vg-video width="100%" ng-click="mmplay()" vg-src="config.sources"></vg-video>
 				<vg-controls vg-autohide="config.autoHide" vg-autohide-time="config.autoHideTime">
 					<vg-play-pause-button ng-click="mplay()"></vg-play-pause-button>
 					<vg-timedisplay>{{API.currentTime | date:'mm:ss'}}</vg-timedisplay>

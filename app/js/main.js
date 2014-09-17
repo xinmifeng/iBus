@@ -4,10 +4,12 @@ function isThreeBrowser(){
 	var sogouReg=/Sogou/gi;
 	var ucReg=/UCBrowser/gi;
 	var ios=/iPhone|iPod|iPad/gi;
+	var firefox=/Firefox/gi;
 	return qqReg.test(agent) ||
 			sogouReg.test(agent) ||
 			ucReg.test(agent) ||
 			ios.test(agent);
+			//firefox.test(agent);
 }
 
 var isThree=isThreeBrowser();
@@ -20,6 +22,21 @@ function E(f, e, o) {
     } else {
         o.addEventListener(e, f, false)
     }
+}
+
+function launchFullscreen(element) {
+	if(element.requestFullscreen) {
+		element.requestFullscreen();
+	}
+	else if(element.mozRequestFullScreen) {
+		element.mozRequestFullScreen();
+	}
+	else if(element.webkitRequestFullscreen) {
+		element.webkitRequestFullscreen();
+	}
+	else if(element.msRequestFullscreen) {
+		element.msRequestFullscreen();
+	}
 }
 
 function isIOS(){
@@ -115,6 +132,7 @@ appModule.controller('MainControll',function ($scope){
 });
 
 var server_url="../server/";
+//var server_url="../server/mysql/";
 
 var isroll=false;
 function swiper(){
@@ -489,9 +507,9 @@ function videoDetailControll($scope,$http,$routeParams,$sce){
 			}
 		});
 	}
-	$scope.mplay=function(){
+	$scope.mplay=function(play,pause){
 		var el=document.querySelector("video");
-		if(isThree){
+		if(isThree || play){
 			if(el.paused){
 				el.play();
 				if(isplay) return;
@@ -502,9 +520,6 @@ function videoDetailControll($scope,$http,$routeParams,$sce){
 		}
 		else{
 			if(!$scope.canUse){
-				el.onloadedmetadata=function(){
-					alert("onloadedmetadata");
-				}
 				el.addEventListener("canplay",function(){
 					var length=el.duration;
 					if(length){
@@ -521,6 +536,12 @@ function videoDetailControll($scope,$http,$routeParams,$sce){
 				playAjax($http);	
 			}
 		}
+		if(pause){
+			el.pause();
+		}
+	}
+	$scope.mmplay=function(){
+		$scope.mplay(true,true);
 	}
 	setBg($scope,false);
 	setCurrentIndex(1);

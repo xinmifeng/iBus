@@ -5,11 +5,13 @@ $qqReg="/MQQBrowser/i";
 $sogouReg="/Sogou/i";
 $ucReg="/UCBrowser/i";
 $ios="/iPhone|iPod|iPad/i";
+$firefox="/Firefox/i";
 $agent=$_SERVER["HTTP_USER_AGENT"];
 $isThree=preg_match($qqReg,$agent) || 
 		 preg_match($sogouReg,$agent) ||
 		 preg_match($ucReg,$agent) ||
 		 preg_match($ios,$agent);
+		 //preg_match($firefox,$agent);
 if(!$isThree){
 	header("Location:index_video.php");
 	exit(0);

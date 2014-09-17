@@ -1,6 +1,19 @@
 <?php
 session_start();
 require("../server/sqlDb.php");
+$qqReg="/MQQBrowser/i";
+$sogouReg="/Sogou/i";
+$ucReg="/UCBrowser/i";
+$ios="/iPhone|iPod|iPad/i";
+$agent=$_SERVER["HTTP_USER_AGENT"];
+$isThree=preg_match($qqReg,$agent) || 
+		 preg_match($sogouReg,$agent) ||
+		 preg_match($ucReg,$agent) ||
+		 preg_match($ios,$agent);
+if($isThree){
+	header("Location:index.php");
+	exit(0);
+}
 $fv=Database::select('bee_video_type','type_id',array(
 	'orderBy'=>'order_id desc',
 	'single'=>true

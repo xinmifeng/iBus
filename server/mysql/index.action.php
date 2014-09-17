@@ -11,6 +11,8 @@ $type=$_GET["type"];
 if($type>0){
 	$DB->where("index_type",$type);
 }
+$DB->where("index_id","111","<>");
+$DB->where("index_id","222","<>");
 $DB->orderBy("position","asc");
 $indexs=$DB->get("index");
 $reData=array();
