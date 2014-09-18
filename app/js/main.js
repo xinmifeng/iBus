@@ -513,6 +513,7 @@ function videoDetailControll($scope,$http,$routeParams,$sce){
 		if(isThree || play){
 			if(el.paused){
 				el.play();
+				setVideoStatus(el);
 				if(isplay) return;
 				$scope.item.count=parseInt($scope.item.count)+1;
 				isplay=true;
