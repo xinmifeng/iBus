@@ -37,6 +37,7 @@ function launchFullscreen(element) {
 	else if(element.msRequestFullscreen) {
 		element.msRequestFullscreen();
 	}
+	alert('您的浏览器不支持视频全屏!');
 }
 
 function isIOS(){
@@ -507,7 +508,7 @@ function videoDetailControll($scope,$http,$routeParams,$sce){
 			}
 		});
 	}
-	$scope.mplay=function(play,pause){
+	$scope.mplay=function(play,pause,t){
 		var el=document.querySelector("video");
 		if(isThree || play){
 			if(el.paused){
@@ -517,6 +518,11 @@ function videoDetailControll($scope,$http,$routeParams,$sce){
 				isplay=true;
 				playAjax($http);	
 			}
+			else{
+				if(!isThree && play){
+					el.pause();
+				}
+			}
 		}
 		else{
 			if(!$scope.canUse){
@@ -525,7 +531,7 @@ function videoDetailControll($scope,$http,$routeParams,$sce){
 					if(length){
 						var m=Math.floor(length/60);
 						var s=Math.floor(length-m*60);
-						$scope.API.timeLeft=(m>9?m:"0"+m)+":"+s;
+						$scope.API.timeLeft=(m>9?m:"0"+m)+":"+(s<10?"0"+s:s);
 					}
 				},false);
 			}
@@ -537,11 +543,31 @@ function videoDetailControll($scope,$http,$routeParams,$sce){
 			}
 		}
 		if(pause){
-			el.pause();
+			setVideoStatus(el);
 		}
 	}
+
+	function setVideoStatus(el){
+		var btn=document.querySelector('vg-play-pause-button div');
+		if(!el.paused){
+			btn.classList.remove('play');
+			btn.classList.add('pause');
+		}
+		else{
+			btn.classList.remove('pause');
+			btn.classList.add('play');
+		}
+	}
+
 	$scope.mmplay=function(){
+		var myVideo = document.getElementsByTagName('video')[0];
 		$scope.mplay(true,true);
+	}
+	$scope.fullscreen=function(){
+		var el=document.querySelector("video");
+		if(el){
+			launchFullscreen(el);
+		}
 	}
 	setBg($scope,false);
 	setCurrentIndex(1);

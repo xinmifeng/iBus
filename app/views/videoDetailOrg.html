@@ -12,10 +12,10 @@ body{
 </div>
 
 <!--头图-->
-<div class="container-fluid">
-     <div id="videoBox" style="text-align:center;height:250px;position:relative;"  class="row col-xs-13">
-			<videogular vg-player-ready="onPlayerReady" vg-theme="config.theme.url">
-				<vg-video width="100%" ng-click="mmplay()" vg-src="config.sources"></vg-video>
+<div class="container-fluid" ng-click="mplay(false,false,true)">
+     <div id="videoBox" style="text-align:center;height:250px;position:relative;background-color:#000;"  class="row col-xs-13">
+			<videogular style="height:250px" vg-player-ready="onPlayerReady" vg-theme="config.theme.url">
+				<vg-video width="100%" style="height:200px;height:-moz-calc(100% - 50px);height:-webkit-calc(100% - 50px);height:calc(100%-50px);" ng-click="mmplay()" vg-src="config.sources"></vg-video>
 				<vg-controls vg-autohide="config.autoHide" vg-autohide-time="config.autoHideTime">
 					<vg-play-pause-button ng-click="mplay()"></vg-play-pause-button>
 					<vg-timedisplay>{{API.currentTime | date:'mm:ss'}}</vg-timedisplay>
@@ -34,7 +34,7 @@ body{
 </div>
 
 <div class="container-fluid show_info_thr">
-     <div class="row ">
+     <div class="row">
            <div class="text-center col-xs-4 line_bg" style="padding:0;">
             <p class="text-center">
 				<span><img src="images/point_duo.jpg" width="15" height="15" style="margin-top:-4px; margin-right:3px;"/>

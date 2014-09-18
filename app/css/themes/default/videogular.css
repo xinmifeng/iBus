@@ -332,6 +332,10 @@ videogular vg-mutebutton div.mute:before {
 	content: "\e006";
 }
 
+videogular vg-fullscreenButton div:before {
+	content: "\e007";
+}
+
 videogular vg-fullscreenButton div.enter:before {
 	content: "\e007";
 }
