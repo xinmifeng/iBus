@@ -2,6 +2,10 @@
 session_start();
 require_once('common.class.php');
 header("Content-type: application/json");
+if(!isset($_SESSION["user"])){
+	echo json_encode(Common::getResult(-1,"用户未登录"));
+	exit(0);
+}
 if(!isset($_GET["id"])){
 	echo json_encode(Common::getResult(0,"lose id!"));
 	exit(0);
@@ -34,5 +38,15 @@ for($i=0,$l=count($likeVideos);$i<$l;$i++){
 }
 $data=Common::getResult(1,"ok",$video);
 $data["likeData"]=$reLikeVideos;
+
+$DB->where('index_id','222');
+$fv=$DB->getOne('index');
+
+$gdsrc="images/denglu_pic.jpg";
+if($fv) {
+	$gdsrc=$upload_dir.$fv[0];
+}
+$data["gdsrc"]=$gdsrc;
+
 echo json_encode($data);
 ?>

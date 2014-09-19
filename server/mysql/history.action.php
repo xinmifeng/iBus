@@ -20,7 +20,7 @@ $historys=$DB->rawQuery($sql,$params);
 $reData=array();
 for($i=0,$l=count($historys);$i<$l;$i++){
 	$hi=$historys[$i];
-	$hi["picture_url"]=$upload_dir.$hi["picture_url"];
+	$hi["picture_url"]=$upload_dir.$hi["picture"];
 	array_push($reData,$hi);
 }
 echo json_encode(Common::getResult(1,"success!",$reData));

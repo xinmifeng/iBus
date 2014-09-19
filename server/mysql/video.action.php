@@ -2,6 +2,10 @@
 session_start();
 require_once('common.class.php');
 header("Content-type: application/json");
+if(!isset($_SESSION["user"])){
+	echo json_encode(Common::getResult(-1,"用户未登录"));
+	exit(0);
+}
 if(!isset($_GET["type"])){
 	echo json_encode(Common::getResult(0,"lose type!"));
 	exit(0);
@@ -19,7 +23,7 @@ $type=$_GET["type"];
 $start=$_GET["start"];
 $count=$_GET["count"];
 $params = array($type,$start,$count);
-$videos=$DB->rawQuery("select * from bee_video where type_id = ? order by order_id desc limit ?,?",$params);
+$videos=$DB->rawQuery("select * from bee_video where type_id=? order by order_id desc limit ?,?",$params);
 $DB->orderBy("order_id");
 $reVideos=array();
 for($i=0,$l=count($videos);$i<$l;$i++){

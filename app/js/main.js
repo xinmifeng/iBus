@@ -133,7 +133,7 @@ appModule.controller('MainControll',function ($scope){
 });
 
 var server_url="../server/";
-//var server_url="../server/mysql/";
+var server_url="../server/mysql/";
 
 var isroll=false;
 function swiper(){
@@ -705,7 +705,8 @@ function appDetailControll($scope,$http,$routeParams){
 			}).success(function(data){
 				redirectToLogin(data);
 				if(data.status && !ios){
-					window.open('../server/download.php?name='+filename);
+					window.location.href='../server/mysql/download.php?type=image&&name='+filename;
+					alert('下载成功');
 				}
 				else{
 					alert(data.message);
