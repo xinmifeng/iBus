@@ -12,7 +12,7 @@ if(empty($_GET['type'])) {
 $type=$_GET["type"];
 $basename=$_GET['name'];
 
-$filename = '../../SWFUpload/file/'.$basename;
+$filename = '../../swfupload/file/'.$basename;
 $min="";
 
 $loseImagestr="<b>此图片不存在</b>";

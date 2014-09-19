@@ -138,8 +138,8 @@ if($type==="2" && $action==="2"){
 	}
 }
 if($type==="1" && $action==="3"){
-	$basename=$_GET['img'];
-	$filename = '../../SWFUpload/file/'.$basename;
+	$basename=$_GET['file'];
+	$filename = '../../swfupload/file/'.$basename;
 	if(!file_exists($filename)){
 		echo json_encode(Common::getResult(0,"此图片不存在"));
 		exit(0);
