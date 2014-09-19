@@ -11,16 +11,14 @@ $isThree=preg_match($qqReg,$agent) ||
 		 preg_match($sogouReg,$agent) ||
 		 preg_match($ucReg,$agent) ||
 		 preg_match($ios,$agent);
-if($isThree){
-	header("Location:index.php");
+if(!$isThree){
+	header("Location:index_video_preview.php");
 	exit(0);
 }
-
 $DB->orderBy('order_id','Desc');
 $fv=$DB->getOne('video_type');
 $vid=0;
 if($fv) $vid=$fv["type_id"];
-
 ?>
 <!DOCTYPE HTML>
 <html ng-app="app">
@@ -40,9 +38,6 @@ if($fv) $vid=$fv["type_id"];
 	<script src="bower_components/angular/angular.min.js"></script>
 	<script src="bower_components/angular-route/angular-route.min.js"></script>
 	<script src="bower_components/swiper/src/idangerous.swiper.js"></script>
-	<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-	<script src="bower_components/videogular/videogular.js"></script>
-	<script src="bower_components/videogular-controls/controls.js"></script>
 	<script src="js/main.js"></script>
 </head>
 <body ng-controller="MainControll" class="{{BG.hasbg}}">

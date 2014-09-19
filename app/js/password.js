@@ -1,4 +1,8 @@
-var server_url="../server/mysql/";
+var server_url="../server/";
+if(window.isPreview){
+	server_url="../server/mysql/";
+}
+
 var passwordModule = angular.module('password',[]);
 var user={};
 		
@@ -56,7 +60,8 @@ var passwordCtrl=['$scope','$http',function($scope,$http){
 			}).success(function(data){
 				if(data.status===1){
 					alert(data.message);
-					window.location.href="index.php";	
+					var href=window.isPreview?"index_preview.php":"index.php";
+					window.location.href=href;	
 				}
 				else{
 					alert(data.message);

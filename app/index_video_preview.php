@@ -12,7 +12,7 @@ $isThree=preg_match($qqReg,$agent) ||
 		 preg_match($ucReg,$agent) ||
 		 preg_match($ios,$agent);
 if($isThree){
-	header("Location:index.php");
+	header("Location:index_preview.php");
 	exit(0);
 }
 

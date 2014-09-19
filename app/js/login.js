@@ -1,4 +1,7 @@
-var server_url="../server/mysql/";
+var server_url="../server/";
+if(window.isPreview){
+	server_url="../server/mysql/";
+}
 
 var loginModule = angular.module('login',[]);
 var user={};
@@ -18,7 +21,8 @@ var loginControll=['$scope','$http',function($scope,$http){
 			}
 		}).success(function(data){
 			if(data.status===1){
-				window.location.href="index.php";	
+				var href=window.isPreview?"index_preview.php":"index.php";
+				window.location.href=href;	
 			}
 			else{
 				alert(data.message);

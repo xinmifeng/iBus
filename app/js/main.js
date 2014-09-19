@@ -133,7 +133,9 @@ appModule.controller('MainControll',function ($scope){
 });
 
 var server_url="../server/";
-var server_url="../server/mysql/";
+if(window.isPreview){
+	server_url="../server/mysql/";
+}
 
 var isroll=false;
 function swiper(){
@@ -296,7 +298,8 @@ function dealBanner(data){
 
 function redirectToLogin(data){
 	if(parseInt(data.status)==-1){
-		window.location.href="login.php";
+		var href=window.isPreview?"login_preview.php":"login.php";
+		window.location.href=href;
 	}
 }
 
@@ -705,7 +708,7 @@ function appDetailControll($scope,$http,$routeParams){
 			}).success(function(data){
 				redirectToLogin(data);
 				if(data.status && !ios){
-					window.location.href='../server/mysql/download.php?type=image&&name='+filename;
+					window.location.href=server_url+'download.php?type=image&&name='+filename;
 					alert('下载成功');
 				}
 				else{
@@ -721,6 +724,7 @@ function appDetailControll($scope,$http,$routeParams){
 }
 
 function myControll($scope,$http){
+	$scope.passurl=window.isPreview?"passwordManage_preview.php":"passwordManage.php";
 	$http({
 		method:"get",
 		url:server_url+"getSession.php"
@@ -741,7 +745,8 @@ function myControll($scope,$http){
 		}).success(function(data){
 			redirectToLogin(data);
 			if(data.status){
-				window.location.href="login.php";
+				var href=window.isPreview?"login_preview.php":"login.php";
+				window.location.href=href;
 			}
 		});
 	}
