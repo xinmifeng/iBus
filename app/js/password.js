@@ -1,4 +1,4 @@
-var server_url="../server/";
+var server_url="../server/mysql/";
 var passwordModule = angular.module('password',[]);
 var user={};
 		

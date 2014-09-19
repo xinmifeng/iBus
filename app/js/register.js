@@ -1,4 +1,4 @@
-var server_url="../server/";
+var server_url="../server/mysql/";
 
 var registerModule = angular.module('register',["ngRoute"]);
 function appRouteConfig($routeProvider){
@@ -57,7 +57,7 @@ function getCode($http,re){
 			}
 		}
 		else{
-			alert("信息发送失败,请重试");
+			alert(data.message);
 		}
 	});
 }
