@@ -1,11 +1,10 @@
 <?php
 session_start();
-require("../server/mysql/sqlDb.php");
+require("../server/sqlDb.php");
 $qqReg="/MQQBrowser/i";
 $sogouReg="/Sogou/i";
 $ucReg="/UCBrowser/i";
 $ios="/iPhone|iPod|iPad/i";
-$firefox="/Firefox/i";
 $agent=$_SERVER["HTTP_USER_AGENT"];
 $isThree=preg_match($qqReg,$agent) || 
 		 preg_match($sogouReg,$agent) ||
@@ -15,12 +14,12 @@ if($isThree){
 	header("Location:index.php");
 	exit(0);
 }
-
-$DB->orderBy('order_id','Desc');
-$fv=$DB->getOne('video_type');
+$fv=Database::select('bee_video_type','type_id',array(
+	'orderBy'=>'order_id desc',
+	'single'=>true
+));
 $vid=0;
-if($fv) $vid=$fv["type_id"];
-
+if($fv) $vid=$fv;
 ?>
 <!DOCTYPE HTML>
 <html ng-app="app">
@@ -30,9 +29,6 @@ if($fv) $vid=$fv["type_id"];
 	<meta name="format-detection" content="telephone=no" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<title>LeLe WiFi</title>
-	<script>
-		window.isPreview=true;
-	</script>
 	<link href="css/bootstrap.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/jtzi.css"/>
 	<link rel="stylesheet" href="css/idangerous.swiper.css">

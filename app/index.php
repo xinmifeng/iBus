@@ -1,6 +1,6 @@
 <?php
 session_start();
-require("../server/mysql/sqlDb.php");
+require("../server/sqlDb.php");
 $qqReg="/MQQBrowser/i";
 $sogouReg="/Sogou/i";
 $ucReg="/UCBrowser/i";
@@ -11,14 +11,17 @@ $isThree=preg_match($qqReg,$agent) ||
 		 preg_match($sogouReg,$agent) ||
 		 preg_match($ucReg,$agent) ||
 		 preg_match($ios,$agent);
+		 //preg_match($firefox,$agent);
 if(!$isThree){
 	header("Location:index_video.php");
 	exit(0);
 }
-$DB->orderBy('order_id','Desc');
-$fv->getOne('video_type');
+$fv=Database::select('bee_video_type','type_id',array(
+	'orderBy'=>'order_id desc',
+	'single'=>true
+));
 $vid=0;
-if($fv) $vid=$fv["type_id"];
+if($fv) $vid=$fv;
 ?>
 <!DOCTYPE HTML>
 <html ng-app="app">
