@@ -5,14 +5,12 @@ if(isset($_SESSION["user"])){
 	exit(0);
 }
 
-require("../server/sqlDb.php");
-$fv=Database::select('bee_index','pic_url',array(
-	'where'=>array('index_id'=>'111'),
-	'fetchStyle' => 'singleColumn'
-));
+require("../server/mysql/sqlDb.php");
+$DB->where('index_id','111');
+$fv=$DB->getOne('index');
 $gdsrc="images/denglu_pic.jpg";
 if($fv) {
-	$arr = parse_ini_file("../server/iBus.ini");
+	$arr = parse_ini_file("../server/mysql/iBus.ini");
 	$upload_dir = $arr["upload_dir"];
 	$gdsrc=$upload_dir.$fv[0];
 }
