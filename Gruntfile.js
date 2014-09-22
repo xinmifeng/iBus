@@ -10,6 +10,7 @@ module.exports=function(grunt){
 					{expand:true,cwd:'app/',src:'css/themes/**',dest:'dest/app/',filter:'isFile'},
 					{expand:true,cwd:'app/',src:'views/*',dest:'dest/app/',filter:'isFile'},
 					{expand:true,cwd:'app/',src:'images/*',dest:'dest/app/',filter:'isFile'},
+					{expand:true,cwd:'server/',src:'mysql/**',dest:'dest/server/',filter:'isFile'},
 					{
 						expand:true,
 						cwd:'app/bower_components/',
@@ -52,7 +53,7 @@ module.exports=function(grunt){
 						dest:'dest/app/bower_components/',
 						filter:'isFile'
 					},
-					{expand:true,src:['server/**'],dest:'dest/'}
+					{expand:true,src:['server/**'],dest:'dest/',filter:'isFile'}
 				]
 			}
 		},
@@ -61,7 +62,7 @@ module.exports=function(grunt){
 				src:['dest']
 			},
 			main:{
-				src:['dest/app/views_old','dest/server/mysql']
+				src:['dest/app/views_old']
 			}
 		},
 		uglify:{
