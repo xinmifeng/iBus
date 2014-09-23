@@ -689,12 +689,15 @@ function appDetailControll($scope,$http,$routeParams){
 			if(!isOk) return;
 		}
 		var isapk=parseInt($scope.item["app_type"])>0;
+		var str=isapk?"此应用或游戏不存在":"此图片不存在";
 		var url=isapk?$scope.item.download_url:$scope.item.src;
+		if(!url){
+			alert(str);
+		}
 		var filename=url.substr(url.lastIndexOf("/")+1);
 		var imgReg=/^[a-z0-9]{32}\.(jpg|png|gif|bmp|ico)$/;
 		var apkReg=/^[a-z0-9]{32}\.apk$/;
 		var reg=isapk?apkReg:imgReg;
-		var str=isapk?"此应用或游戏不存在":"此图片不存在";
 		if(filename && reg.test(filename)){
 			$http({
 				method:"get",
