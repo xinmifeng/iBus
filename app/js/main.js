@@ -210,11 +210,8 @@ function dealImage(isorient){
 			if(!indexArray[i-1]) continue;
 			var lastEl=indexArray[i-1].el;
 			var el=elObj.el;
-			var	pw=lastEl.width;
 			var ph=lastEl.height;
-			var nw=el.width;
-			var nh=el.height;
-			if(ph && nh){
+			if(ph){
 				el.style.height=ph+"px";
 			}
 		}
@@ -248,7 +245,7 @@ function insetIndexArray(el){
 	var count=parseInt(el.getAttribute("count"));
 	indexArray.push({'el':el,'index':pindex*2+index,'islast':islast});
 	if(indexArray.length===count){
-		dealImage();
+		setTimeout(dealImage,100);
 	}
 }
 
@@ -320,6 +317,7 @@ function indexControll($scope,$http){
 		params:{"type":0}
 	}).success(function(data){
 		var items=data.data;
+		$scope.imgcount=items.length;
 		var mdata=[];
 		var tdata=[];
 		for(var i=0,l=items.length;i<l;i++){
