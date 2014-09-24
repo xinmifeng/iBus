@@ -58,7 +58,7 @@ $fv=Database::select('bee_index','pic_url',array(
 ));
 $gdsrc="images/denglu_pic.jpg";
 if($fv) {
-	$gdsrc=$upload_dir.$fv[0];
+	$gdsrc=$upload_dir.$fv["pic_url"];
 }
 $data["gdsrc"]=$gdsrc;
 

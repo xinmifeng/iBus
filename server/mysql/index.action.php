@@ -44,7 +44,7 @@ function getUrl($item,$vid){
 			$s.="appDetail/".$id;
 			break;
 		case 3:
-			$s.="#apks";
+			$s.="apks";
 	}
 	return $s;
 }

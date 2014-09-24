@@ -12,7 +12,7 @@ $gdsrc="images/denglu_pic.jpg";
 if($fv) {
 	$arr = parse_ini_file("../server/mysql/iBus.ini");
 	$upload_dir = $arr["upload_dir"];
-	$gdsrc=$upload_dir.$fv[0];
+	$gdsrc=$upload_dir.$fv["pic_url"];
 }
 
 ?>
