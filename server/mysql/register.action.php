@@ -20,14 +20,11 @@ if(!isset($_GET["action"])){
 $action=$_GET["action"];
 if($action==="codeCreate"){
 	if(!isset($_GET["tel"])){
-		echo json_encode(Common::getResult(0,"手机号丢失,请重新注册!"));
+		echo json_encode(Common::getResult(0,"lose tel!"));
 		exit(0);
 	}
-	require_once("sqlDb.php");
 	$tel=$_GET["tel"];
-	$DB->where("user_name",$tel);
-	$DB->getOne("user");
-	if($DB->count===1){
+	if(false){
 		echo json_encode(Common::getResult(0,"此手机号已被注册!"));
 		exit(0);
 	}
@@ -48,6 +45,10 @@ if($action==="codeCreate"){
 	}
 }
 else if($action==="codeVerify"){
+	if(!$_SESSION["tel"]){
+		echo json_encode(Common::getResult(0,"请先完成上步操作"));
+		exit(0);
+	}
 	if(!isset($_GET["code"])){
 		echo json_encode(Common::getResult(0,"lose code!"));
 		exit(0);
@@ -56,6 +57,7 @@ else if($action==="codeVerify"){
 	if(isset($_SESSION["token"])){
 		$token = $_SESSION["token"];
 		if($token===$code){
+			$_SESSION["verifyOk"]=true;
 			echo json_encode(Common::getResult(1,"ok"));
 			exit(0);
 		}
@@ -64,6 +66,10 @@ else if($action==="codeVerify"){
 	exit(0);
 }
 else if($action==="codeRegist"){
+	if(!$_SESSION["verifyOk"]){
+		echo json_encode(Common::getResult(0,"请先完成上步操作"));
+		exit(0);
+	}
 	if(!isset($_GET["pwd"])){
 		echo json_encode(Common::getResult(0,"请输入密码"));
 		exit(0);
@@ -84,27 +90,27 @@ else if($action==="codeRegist"){
 		exit(0);
 	}
 	else{
-		require_once("sqlDb.php");
-		$DB->where("user_name",$tel);
-		$DB->getOne("user");
-		if($DB->count===0){
+		require_once("GetAppMAC.php");
+		if(true){
 			$user=array(
-				"user_name"=>$tel,
-				"password"=>md5($pwd),
-				"status"=>1,
-				"create_date"=>$DB->now()
+				"mobile"=>$tel,
+				"security"=>md5($pwd),
+				"mac"=>$client_mac,
+				"difi_id"=>$difi_id,
+				"ip"=>$_SERVER["REMOTE_ADDR"]
 			);
-			$id=$DB->insert("user",$user);
-			if($id){
-				$DB->where('id',$id);	
-				$user=$DB->getOne('user');
-				unset($user["password"]);
-				$_SESSION["user"]=$user;
+			$out=Common::httpRequest('register',$user);
+			$out=intval($out);
+			if($out>0){
+				$_SESSION["user"]=array(
+					"id"=>$out,
+					"user_name"=>$tel,
+				);
 				echo json_encode(Common::getResult(1,"ok"));
 				exit(0);
 			}
 			else{
-				echo json_encode(Common::getResult(0,"insert user error:".$DB->getLastError()));
+				echo json_encode(Common::getResult(0,"注册失败!"));
 				exit(0);
 			}
 		}
@@ -132,20 +138,37 @@ else if($action==="modifypwd"){
 		echo json_encode(Common::getResult(0,"新密码与确认密码不匹配"));
 		exit(0);
 	}
+	if($_GET["orgpwd"]==$_GET["pwd"]){
+		echo json_encode(Common::getResult(0,"新密码不能与原密码相同"));
+		exit(0);
+	}
 	$orgpwd=$_GET["orgpwd"];
 	$pwd=$_GET["pwd"];
 	$repwd=$_GET["repwd"];
 	$user_id=$_SESSION["user"]["id"];
-	require_once("sqlDb.php");
-
-	$DB->where('id',$user_id)->where('password',md5($orgpwd));
-	$cuser=$DB->getOne('user');
-	if($cuser){
-		$cuser["password"]=md5($pwd);
-		$DB->update('user',array(
-			'password'=>md5($pwd)
-		));
-		if($DB->count>0){
+	$tel=$_SESSION["user"]["user_name"];
+	require_once("GetAppMAC.php");
+	$param=array(
+		"mobile"=>$tel,
+		"security"=>md5($orgpwd),
+		"mac"=>$client_mac,
+		"difi_id"=>$difi_id,
+		"ip"=>$_SERVER["REMOTE_ADDR"]
+	);
+	$out=Common::httpRequest('authorization',$param);
+	$out=intval($out);
+	if($out>0){
+		$cuser=array(
+			"mobile"=>$tel,
+			"security"=>md5($pwd),
+			"oldsecurity"=>md5($orgpwd),
+			"mac"=>$client_mac,
+			"difi_id"=>$difi_id,
+			"ip"=>$_SERVER["REMOTE_ADDR"]
+		);
+		$out2=Common::httpRequest('resetSecurity',$cuser);
+		$out2=intval($out2);
+		if($out2>0){
 			echo json_encode(Common::getResult(1,"密码修改成功!"));
 			exit(0);
 		}
