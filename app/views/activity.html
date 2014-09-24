@@ -18,7 +18,7 @@
    <div class="row" style="margin:0 auto;">
         <div ng-repeat="obj in item" class="col-xs-{{obj.cssvalue}}" style="padding-left:0;padding-right:{{obj.pr}};">
              <a href="{{obj.reurl}}" style="background:#c00;">
-			 <img ng-src="{{obj.pic_url}}" count="8" orientindex="{{$index}}" last="{{$last}}"
+			 <img ng-src="{{obj.pic_url}}" count="{{imgcount}}" orientindex="{{$index}}" last="{{$last}}"
 			 class="img-responsive" width="100%" height="100%"/></a> 
         </div>
   </div>

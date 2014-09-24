@@ -1,0 +1,36 @@
+#!/bin/sh                                                                                                                                                                                                 
+ii=0                                                                                                                                                                                                      
+if ! [ $1 ]                                                                                                                                                                                               
+then                                                                                                                                                                                                      
+exit                                                                                                                                                                                                      
+fi                                                                                                                                                                                                        
+while [ $ii -lt 50 ]                                                                                                                                                                                      
+do                                                                                                                                                                                                        
+    if [ -f /tmp/gateway.info ]                                                                                                                                                                           
+    then                                                                                                                                                                                                  
+        line=$(cat /tmp/gateway.info | grep "$1" )                                                                                                                                                        
+                                                                                                                                                                                                          
+        if [ $line ]                                                                                                                                                                                      
+        then                                                                                                                                                                                              
+        line=${line//','/' '}                                                                                                                                                                             
+                                                                                                                                                                                                          
+        ip=$(echo $line | awk '{printf $1}')                                                                                                                                                              
+                                                                                                                                                                                                          
+        mac=$(echo $line | awk '{printf $2}')                                                                                                                                                             
+                                                                                                                                                                                                          
+        if [ $mac == $1 ]                                                                                                                                                                                 
+        then                                                                                                                                                                                              
+            echo $ip                                                                                                                                                                                      
+            break                                                                                                                                                                                         
+        elif [ $ip == $1 ]                                                                                                                                                                                
+        then                                                                                                                                                                                              
+            echo $mac                                                                                                                                                                                     
+            break                                                                                                                                                                                         
+        fi                                                                                                                                                                                                
+        fi                                                                                                                                                                                                
+    fi                                                                                                                                                                                                    
+                                                                                                                                                                                                          
+    usleep 20000                                                                                                                                                                                          
+                                                                                                                                                                                                          
+let ii=$ii+1                                                                                                                                                                                              
+done

@@ -596,6 +596,7 @@ function activityControll($scope,$http){
 	}).success(function(data){
 		redirectToLogin(data);
 		var items=data.data;
+		$scope.imgcount=items.length;
 		var mdata=[];
 		var tdata=[];
 		for(var i=0,l=items.length;i<l;i++){

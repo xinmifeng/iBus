@@ -9,6 +9,7 @@ global $difi_pssword;
 global $sms_id;
 global $sms_key;
 global $upload_dir;
+global $difi_id;
 //global $upload_image_dir;
 //global $upload_video_dir;
 /*
@@ -30,6 +31,7 @@ $difi_server = $arr["difi_server"];
 $sms_uid = $arr["sms_uid"];
 $sms_key = strtoupper(md5($arr["sms_key"]));
 $upload_dir = $arr["upload_dir"];
+$difi_id=$arr["difi_gid"]."-".sprintf("%06s",$arr["difi_id"]);
 //$upload_image_dir = $arr["image_upload_dir"];
 //$upload_video_dir = $arr["video_upload_dir"];
 ?>
