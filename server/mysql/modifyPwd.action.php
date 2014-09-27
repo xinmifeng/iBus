@@ -1,6 +1,10 @@
 <?php
 session_start();
 require_once('common.class.php');
+if(!isset($_SESSION["user"])){
+	echo json_encode(Common::getResult(-1,"用户未登录"));
+	exit(0);
+}
 $user_id=$_SESSION["user"]["id"];
 if(!isset($_GET["pwd"])){
 	echo json_encode(Common::getResult(0,"lose pwd!"));

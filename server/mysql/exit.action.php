@@ -6,5 +6,5 @@ if(isset($_SESSION["user"])){
 	echo json_encode(Common::getResult(1,"exit success!"));
 	exit(0);
 }
-echo json_encode(Common::getResult(0,"not login yet!"));
+echo json_encode(Common::getResult(-1,"not login yet!"));
 ?>
