@@ -164,15 +164,21 @@ function swiperLike(count){
 
 appModule.directive("orientable",function(){
 	return function($scope,element){
-		element[0].onload=function(){
-			var ppEl=this.parentNode.parentNode;
+		function deal(el){
+			var ppEl=el.parentNode.parentNode;
 			if(ppEl){
-				var count = parseInt(this.parentNode.parentNode.getAttribute("imgCount"));
-				var index = parseInt(this.getAttribute("index"));
+				var count = parseInt(el.parentNode.parentNode.getAttribute("imgCount"));
+				var index = parseInt(el.getAttribute("index"));
 				if(index+1===count){
 					swiper();
 				}
 			}
+		}
+		element[0].onload=function(){
+			deal(this);
+		}
+		element[0].onerror=function(){
+			deal(this);
 		}
 	}
 });
