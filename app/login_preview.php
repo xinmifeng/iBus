@@ -35,7 +35,7 @@ if($fv) {
 <!--logo大背景-->
 <div class="container-fluid">
    <div class="row text-center pic_bg" >
-		<img src="images/denglv_bg.png" width="166" 
+		<img src="<?php echo $gdsrc ?>" width="166" 
 		height="46" style="margin-top:20px;"/>
 	</div>
 </div>
