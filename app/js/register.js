@@ -41,7 +41,11 @@ registerModule.factory('timeFunctions', [
 	}
 ]);
 var user={isok:false,"lastmsg":Date.now()};
+var canClick=true;
 function getCode($http,re){
+	if(!canClick){
+		return false;
+	}
 	$http({
 		method:"get",
 		url:server_url+"register.action.php",
@@ -50,6 +54,7 @@ function getCode($http,re){
 			"tel":user.user_name
 		}
 	}).success(function(data){
+		canClick=true;
 		if(data.status===1){
 			alert("验证码已发送到您的手机,请查收");
 			if(window.localStorage && window.localStorage["time"]){
@@ -60,9 +65,10 @@ function getCode($http,re){
 			}
 		}
 		else{
-			alert(data.message);
+			alert("验证码发送失败");
 		}
 	});
+	canClick=false;
 }
 function register_one($scope,$http){
 	$scope.user=user;
