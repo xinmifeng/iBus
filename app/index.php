@@ -32,8 +32,8 @@ if($fv) $vid=$fv;
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<title>LeLe WiFi</title>
 	<link href="css/bootstrap.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="css/jtzi.css"/>
-	<link rel="stylesheet" href="css/idangerous.swiper.css">
+	<link rel="stylesheet" href="css/jtzi.css"/>
+	<link rel="stylesheet" href="bower_components/swiper/src/idangerous.swiper.css">
 	<link rel="stylesheet" href="css/swiper.css">
 	<script src="bower_components/angular/angular.min.js"></script>
 	<script src="bower_components/angular-route/angular-route.min.js"></script>

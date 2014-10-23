@@ -13,6 +13,7 @@ $type=$_GET["type"];
 $basename=$_GET['name'];
 
 $filename = '../../swfupload/file/'.$basename;
+$filename = 'http://192.168.0.107/newbee_work/iBus_back/swfupload/file/'.$basename;
 $min="";
 
 $loseImagestr="<b>此图片不存在</b>";
