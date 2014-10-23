@@ -1496,7 +1496,8 @@ var Swiper = function (selector, params) {
 		if(_this.zjTouch){
 			var zjTarget=event.target || event.srcElement;
 			if(zjTarget.tagName==="IMG" && zjTarget.getAttribute("zjUrl"))
-				window.open(zjTarget.getAttribute("zjUrl"));
+				//window.open(zjTarget.getAttribute("zjUrl"));
+				window.location.href=zjTarget.getAttribute("zjUrl");
 		}
         //Check For scrolling
         if (isScrolling) {

@@ -336,6 +336,7 @@ function indexControll($scope,$http){
 		$scope.indexData=mdata;
 	});
 	setBg($scope,true);
+	setCurrentIndex(0);
 }
 
 function videoControll($scope,$http,$routeParams){
