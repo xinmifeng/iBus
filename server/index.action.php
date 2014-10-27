@@ -37,6 +37,9 @@ $vid=0;
 if($fv) $vid=$fv;
 
 function getUrl($item,$vid){
+	if((strpos($item["src"],'#')===0)){
+		return $itme["src"].$vid;
+	}
 	$type=$item["index_type"];
 	$id=$item["details_id"];
 	if(is_null($id)){
@@ -58,6 +61,7 @@ function getUrl($item,$vid){
 	}
 	return $s;
 }
+
 for($i=0,$len=count($indexs);$i<$len;$i++){
 	$pr=$i%2===0?"5px":"0";
 	$item=$indexs[$i];

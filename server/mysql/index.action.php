@@ -27,6 +27,9 @@ if($DB->count===1){
 	$vid=$fv["type_id"];	
 }
 function getUrl($item,$vid){
+	if((strpos($item["src"],'#')===0)){
+		return $itme["src"].$vid;
+	}
 	$type=$item["index_type"];
 	$id=$item["details_id"];
 	if(is_null($id)){
