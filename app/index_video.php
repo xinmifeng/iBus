@@ -20,6 +20,7 @@ $fv=Database::select('bee_video_type','type_id',array(
 ));
 $vid=0;
 if($fv) $vid=$fv;
+$islog=isset($_SESSION["user"])?1:0;
 ?>
 <!DOCTYPE HTML>
 <html ng-app="app">
@@ -29,6 +30,7 @@ if($fv) $vid=$fv;
 	<meta name="format-detection" content="telephone=no" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<title>LeLe WiFi</title>
+	<script>var islog=<?php echo $islog?>;</script>
 	<link href="css/bootstrap.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/jtzi.css"/>
 	<link rel="stylesheet" href="css/idangerous.swiper.css">
@@ -42,6 +44,7 @@ if($fv) $vid=$fv;
 	<script src="js/main.js"></script>
 </head>
 <body ng-controller="MainControll" class="{{BG.hasbg}}">
+<img src="images/loadding.gif" class="loadding" ng-hide='viewVisible'>
 <!--标题-->
 <div class="container-fluid">
    <div class="row text-center logo">
@@ -57,19 +60,24 @@ if($fv) $vid=$fv;
    <div class="container-fluid" style="margin-top:0px;">
       <div class="row" >
          <div class="text-center col-xs-2 men" style="width:20%;"> 
-            <a ng-click="setCurrent($event)" class="current" href="#/"><span class="home" style="margin-bottom:-12px;"></span>主页</a>
+            <a ng-click="setCurrent($event,true)" class="current" href="javascript:void(0)" myhref="#/">
+				<span class="home" style="margin-bottom:-12px;"></span>主页</a>
          </div>
          <div class="text-center col-xs-2 men" style="width:20%;">
-            <a ng-click="setCurrent($event)"  href="#video/<?php echo $vid;?>"><span class="see_shi" style="margin-bottom:-12px;"></span>视频</a>
+            <a ng-click="setCurrent($event,true)" href="javascript:void(0)" myhref="#video/<?php echo $vid;?>">
+				<span class="see_shi" style="margin-bottom:-12px;"></span>视频</a>
          </div>
          <div class="text-center col-xs-2 men" style="width:20%;">
-            <a ng-click="setCurrent($event)"  href="#activity" ><span class="dazhe" style="margin-bottom:-12px;"></span>优惠</a>
+            <a ng-click="setCurrent($event,true)" href="javascript:void(0)" myhref="#activity" >
+				<span class="dazhe" style="margin-bottom:-12px;"></span>优惠</a>
          </div>
          <div class="text-center col-xs-2 men" style="width:20%;">
-            <a ng-click="setCurrent($event)"  href="#apks" ><span class="yong" style="margin-bottom:-12px;"></span>下载吧</a>
+            <a ng-click="setCurrent($event,true)" href="javascript:void(0)" myhref="#apks" >
+				<span class="yong" style="margin-bottom:-12px;"></span>下载吧</a>
          </div>
          <div class="text-center col-xs-2 men" style="width:20%;">
-            <a ng-click="setCurrent($event)"  href="#my" ><span class="mine" style="margin-bottom:-12px;"></span>我的</a>
+            <a ng-click="setCurrent($event,true)" href="javascript:void(0)" myhref="#my" >
+				<span class="mine" style="margin-bottom:-12px;"></span>我的</a>
          </div>
       </div>
    </div>

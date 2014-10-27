@@ -32,7 +32,8 @@ if($action==="codeCreate"){
 		require_once("SMS.class.php");
 		$token = generateToken();
 		$isms=new SMS();
-		$re=$isms->send($sms_uid,$sms_key,$tel,urlencode("公交无线网关验证码：".$token));
+		$msgtxt='公交“乐乐”WiFi欢迎你免费畅游互联网，验证码："';
+		$re=$isms->send($sms_uid,$sms_key,$tel,urlencode($msgtxt.$token));
 		if($re!=="1"){
 			echo json_encode(Common::getResult(0,"errorcode:".$re));
 			exit(0);

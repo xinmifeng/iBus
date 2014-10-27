@@ -11,6 +11,9 @@ var loginControll=['$scope','$http',function($scope,$http){
 	}
 	$scope.user=user;	
 	$scope.login=function(){
+		var btn = document.getElementById('loginsub');
+		btn.style.backgroundColor="#c9c9c9";
+		btn.disabled=true;
 		localStorage["tel"]=user.user_name;
 		$http({
 			method:"get",
@@ -25,7 +28,8 @@ var loginControll=['$scope','$http',function($scope,$http){
 				window.location.href=href;	
 			}
 			else{
-				alert(data.message);
+				btn.style.backgroundColor="#81b73f";
+				btn.disabled=false;
 			}
 		});
 	}

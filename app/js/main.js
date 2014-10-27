@@ -100,7 +100,7 @@ function setBg($scope,hasbg){
 	$scope.BG=BG;
 }
 
-function setCurrentIndex(index){
+function setCurrentIndex(index,ischeck){
 	var aEls=document.querySelectorAll(".navbar a")	
 	for(var i=0,l=aEls.length;i<l;i++){
 		var item=aEls[i];
@@ -111,23 +111,34 @@ function setCurrentIndex(index){
 			item.classList.remove("current");
 		}
 	}
+	if(ischeck){
+		loginCheck(aEls[index]);	
+	}
 }
 
 appModule.controller('MainControll',function ($scope){
 	$scope.viewVisible=false;
-	$scope.setCurrent=function(element){
+	$scope.setCurrent=function(element,ischeck){
 		element=element.target;
 		if(element.tagName==="SPAN")
 			element=element.parentNode;
 		var aEls=element.parentNode.parentNode.children;
+		var index=0;
 		for(var i=0,l=aEls.length;i<l;i++){
 			var item=aEls[i];
 			if(element===item.firstElementChild){
+				index=i;
 				element.classList.add("current");
 			}
 			else{
 				item.firstElementChild.classList.remove("current");
 			}
+		}
+		if(index===0){
+			window.location.href="#/";
+		}
+		else{
+			loginCheck(element);
 		}
 	}
 	setBg($scope,true);
@@ -308,6 +319,8 @@ function redirectToLogin(data){
 }
 
 function indexControll($scope,$http){
+	var $parent=$scope.$parent;
+	$parent.viewVisible=false;
 	$http({
 		method:"get",
 		url:server_url+"banner.action.php",
@@ -335,18 +348,24 @@ function indexControll($scope,$http){
 			}
 		}
 		$scope.indexData=mdata;
-		$scope.$parent.viewVisible=true;
+		$parent.viewVisible=true;
 	});
 	$scope.loginCheck=function(e){
-		var img=e.target;
-		if(img){
-			
-		}
+		var target=e.target.parentNode;
+		loginCheck(target);
 	}
 	setBg($scope,true);
 }
 
+function loginCheck(target){
+	var url=target.getAttribute('myhref');
+	var loginUrl=window.isPreview?'login_preview.php':'login.php';
+	window.location.href= islog?url:loginUrl;	
+}
+
 function videoControll($scope,$http,$routeParams){
+	var $parent=$scope.$parent;
+	$parent.viewVisible=false;
 	$scope.swiper=function(){
 		swiper();
 	}
@@ -387,7 +406,7 @@ function videoControll($scope,$http,$routeParams){
 		}
 		$scope.types=data.types;
 		$scope.typeCss=(100/l)+"%";
-		$scope.$parent.viewVisible=true;
+		$parent.viewVisible=true;
 	});
 	setBg($scope,true);
 	setCurrentIndex(1);
@@ -414,6 +433,8 @@ function subStr(str,length){
 	return restr;
 }
 function videoDetailControll($scope,$http,$routeParams,$sce){
+	var $parent=$scope.$parent;
+	$parent.viewVisible=false;
 	var id=$routeParams.id;
 	$http({
 		method:"get",
@@ -447,6 +468,10 @@ function videoDetailControll($scope,$http,$routeParams,$sce){
 				tempData.push(create());
 			}
 		}
+		var videoEl=document.querySelector('video');
+		if(videoEl && isIOS()){
+			videoEl.controls=true;
+		}
 		relikeData=relikeData.concat(tempData);
 		$scope.item=data.data;
 		$scope.item.likeClass=parseInt($scope.item.is_like)?"love":"";
@@ -455,34 +480,36 @@ function videoDetailControll($scope,$http,$routeParams,$sce){
 		$scope.item.likeDataCount=orgCount;
 		$scope.item.showtool=false;
 		$scope.item.gdsrc=data.gdsrc;
+		$parent.viewVisible=true;
 
-		$scope.currentTime = 0;
-		$scope.totalTime = 0;
-		$scope.state = null;
-		$scope.volume = 1;
-		$scope.isCompleted = false;
-		$scope.API = {
-			currentTime:$scope.item.length,
-			timeLeft:$scope.item.length
-		};
-		$scope.$parent.viewVisible=true;
+		if(!isThree){
+			$scope.currentTime = 0;
+			$scope.totalTime = 0;
+			$scope.state = null;
+			$scope.volume = 1;
+			$scope.isCompleted = false;
+			$scope.API = {
+				currentTime:$scope.item.length,
+				timeLeft:$scope.item.length
+			};
 
-		$scope.config = {
-			autoHide: false,
-			autoHideTime: 3000,
-			autoPlay: false,
-			transclude: true,
-			sources: [
-				{src: $scope.item.address, type: "video/mp4"}
-			],
-			theme:{
-				url:"css/themes/default/videogular.css"
+			$scope.config = {
+				autoHide: false,
+				autoHideTime: 3000,
+				autoPlay: false,
+				transclude: true,
+				sources: [
+					{src: $scope.item.address, type: "video/mp4"}
+				],
+				theme:{
+					url:"css/themes/default/videogular.css"
+				}
+			};
+
+			$scope.onPlayerReady = function(API) {
+				$scope.API = API; 
+				$scope.canUse=true;
 			}
-		};
-
-		$scope.onPlayerReady = function(API) {
-			$scope.API = API; 
-			$scope.canUse=true;
 		}
 		if(window.scrollTo){
 			window.scrollTo(0,0);
@@ -567,6 +594,7 @@ function videoDetailControll($scope,$http,$routeParams,$sce){
 
 	function setVideoStatus(el){
 		var btn=document.querySelector('vg-play-pause-button div');
+		if(!btn) return;
 		if(!el.paused){
 			btn.classList.remove('play');
 			btn.classList.add('pause');
@@ -592,6 +620,8 @@ function videoDetailControll($scope,$http,$routeParams,$sce){
 }
 
 function activityControll($scope,$http){
+	var $parent=$scope.$parent;
+	$parent.viewVisible=false;
 	$http({
 		method:"get",
 		url:server_url+"banner.action.php",
@@ -621,13 +651,15 @@ function activityControll($scope,$http){
 			}
 		}
 		$scope.indexData=mdata;
-		$scope.$parent.viewVisible=true;
+		$parent.viewVisible=true;
 	});
 	setBg($scope,true);
 	setCurrentIndex(2);
 }
 
 function apkControll($scope,$http){
+	var $parent=$scope.$parent;
+	$parent.viewVisible=false;
 	$http({
 		method:"get",
 		url:server_url+"banner.action.php",
@@ -667,7 +699,7 @@ function apkControll($scope,$http){
 			groups.push(sdata);
 		}
 		$scope.groups=groups;
-		$scope.$parent.viewVisible=true;
+		$parent.viewVisible=true;
 	});
 	setBg($scope,true);
 	setCurrentIndex(3);
@@ -698,7 +730,7 @@ function appDetailControll($scope,$http,$routeParams){
 			}
 			$scope.item.show=!($scope.item["type"]=="限时活动");
 		}
-		$scope.$parent.viewVisible=true;
+		$parent.viewVisible=true;
 	});
 	$scope.mdownload=function(){
 		var ios=isIOS();
@@ -745,6 +777,8 @@ function appDetailControll($scope,$http,$routeParams){
 }
 
 function myControll($scope,$http){
+	$parent=$scope.$parent;
+	$parent.viewVisible=false;
 	$scope.passurl=window.isPreview?"passwordManage_preview.php":"passwordManage.php";
 	$http({
 		method:"get",
@@ -757,7 +791,7 @@ function myControll($scope,$http){
 			if(tel && tel.length===11){
 				$scope.item.user_name=tel.replace(/(\d{3})(\d{4})(\d{4})/g,"$1****$3");
 			}
-			$scope.$parent.viewVisible=true;
+			$parent.viewVisible=true;
 		}
 	});
 	$scope.exitLogin=function(){
@@ -777,6 +811,8 @@ function myControll($scope,$http){
 }
 
 function historyControll($scope,$http,$routeParams){
+	$parent=$scope.$parent;
+	$parent.viewVisible=false;
 	var type=$routeParams.type;
 	var history={};
 	history.type=type=="1"?"我的优惠劵":"最近观看";
@@ -793,6 +829,7 @@ function historyControll($scope,$http,$routeParams){
 		redirectToLogin(data);
 		if(data.status){
 			$scope.group=data.data;
+			$parent.viewVisible=true;
 		}
 	});
 	setBg($scope,false);

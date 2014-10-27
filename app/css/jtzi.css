@@ -481,3 +481,17 @@ body.bg{
 	color:#fff;
 	font-family:"微软雅黑";
 	display:block;}
+
+.loadding{
+	position:fixed;
+	top:49%;
+	left:49%;
+	top:-webkit-calc(50% - 18.5px);
+	top:-moz-calc(50% - 18.5px);
+	top:-o-calc(50% - 18.5px);
+	top:calc(50% - 18.5px);
+	left:-webkit-calc(50% - 18.5px);
+	left:-moz-calc(50% - 18.5px);
+	left:-o-calc(50% - 18.5px);
+	left:calc(50% - 18.5px);
+}

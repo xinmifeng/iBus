@@ -56,7 +56,7 @@ if($fv) {
 </div>
 
 <div class="row pd30 kkk">
-	<input type="submit" class="btn btn-primary btn-lg btn-block" style="background:#81b73f; border:1px solid #81b73f; outline:none; 
+	<input id="loginsub" type="submit" class="btn btn-primary btn-lg btn-block" style="background:#81b73f; border:1px solid #81b73f; outline:none; 
 height:35px; line-height:2px; margin-top:-40px; font-size:16px;" value="登&nbsp;&nbsp;录"></input></div>
 
 <div class="row pd30 kkk"><a ng-href="register.php"><button type="button" class="btn btn-primary btn-lg btn-block" style="background:#fff; border:1px solid #fff; outline:none; 

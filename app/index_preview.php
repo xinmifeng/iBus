@@ -19,6 +19,7 @@ $DB->orderBy('order_id','Desc');
 $fv=$DB->getOne('video_type');
 $vid=0;
 if($fv) $vid=$fv["type_id"];
+$islog=isset($_SESSION["user"])?1:0;
 ?>
 <!DOCTYPE HTML>
 <html ng-app="app">
@@ -31,6 +32,7 @@ if($fv) $vid=$fv["type_id"];
 	<script>
 		window.isPreview=true;
 	</script>
+	<script>var islog=<?php echo $islog; ?></script>
 	<link href="css/bootstrap.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/jtzi.css"/>
 	<link rel="stylesheet" href="css/idangerous.swiper.css">
@@ -41,6 +43,7 @@ if($fv) $vid=$fv["type_id"];
 	<script src="js/main.js"></script>
 </head>
 <body ng-controller="MainControll" class="{{BG.hasbg}}">
+<img src="images/loadding.gif" class="loadding" ng-hide='viewVisible'>
 <!--标题-->
 <div class="container-fluid">
    <div class="row text-center logo">
