@@ -51,7 +51,7 @@ if($fv) $vid=$fv;
    </div>
 </div>
 <!--标题结束-->
-<div ng-view=""></div>
+<div ng-view="" ng-show='viewVisible' ></div>
 <!--底部-->
 <div class="navbar navbar-fixed-bottom beau_col" role="navigation" style="padding:0px;">
    <div class="container-fluid" style="margin-top:0px;">

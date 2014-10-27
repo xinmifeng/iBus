@@ -114,6 +114,7 @@ function setCurrentIndex(index){
 }
 
 appModule.controller('MainControll',function ($scope){
+	$scope.viewVisible=false;
 	$scope.setCurrent=function(element){
 		element=element.target;
 		if(element.tagName==="SPAN")
@@ -334,7 +335,14 @@ function indexControll($scope,$http){
 			}
 		}
 		$scope.indexData=mdata;
+		$scope.$parent.viewVisible=true;
 	});
+	$scope.loginCheck=function(e){
+		var img=e.target;
+		if(img){
+			
+		}
+	}
 	setBg($scope,true);
 }
 
@@ -379,6 +387,7 @@ function videoControll($scope,$http,$routeParams){
 		}
 		$scope.types=data.types;
 		$scope.typeCss=(100/l)+"%";
+		$scope.$parent.viewVisible=true;
 	});
 	setBg($scope,true);
 	setCurrentIndex(1);
@@ -456,6 +465,7 @@ function videoDetailControll($scope,$http,$routeParams,$sce){
 			currentTime:$scope.item.length,
 			timeLeft:$scope.item.length
 		};
+		$scope.$parent.viewVisible=true;
 
 		$scope.config = {
 			autoHide: false,
@@ -611,6 +621,7 @@ function activityControll($scope,$http){
 			}
 		}
 		$scope.indexData=mdata;
+		$scope.$parent.viewVisible=true;
 	});
 	setBg($scope,true);
 	setCurrentIndex(2);
@@ -656,6 +667,7 @@ function apkControll($scope,$http){
 			groups.push(sdata);
 		}
 		$scope.groups=groups;
+		$scope.$parent.viewVisible=true;
 	});
 	setBg($scope,true);
 	setCurrentIndex(3);
@@ -686,6 +698,7 @@ function appDetailControll($scope,$http,$routeParams){
 			}
 			$scope.item.show=!($scope.item["type"]=="限时活动");
 		}
+		$scope.$parent.viewVisible=true;
 	});
 	$scope.mdownload=function(){
 		var ios=isIOS();
@@ -744,6 +757,7 @@ function myControll($scope,$http){
 			if(tel && tel.length===11){
 				$scope.item.user_name=tel.replace(/(\d{3})(\d{4})(\d{4})/g,"$1****$3");
 			}
+			$scope.$parent.viewVisible=true;
 		}
 	});
 	$scope.exitLogin=function(){
