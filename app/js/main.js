@@ -780,6 +780,7 @@ function myControll($scope,$http){
 	$parent=$scope.$parent;
 	$parent.viewVisible=false;
 	$scope.passurl=window.isPreview?"passwordManage_preview.php":"passwordManage.php";
+	$scope.type=isIOS()?'我收藏的视频':'最近观看';
 	$http({
 		method:"get",
 		url:server_url+"getSession.php"
@@ -816,6 +817,9 @@ function historyControll($scope,$http,$routeParams){
 	var type=$routeParams.type;
 	var history={};
 	history.type=type=="1"?"我的优惠劵":"最近观看";
+	if(type!=="1"){
+		history.type=isIOS()?"我收藏的视频":history.type;
+	}
 	history.showcount=type=="2";
 	history.href=type=="2"?"videoDetail":"appDetail";
 	$scope.history=history;

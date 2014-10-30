@@ -13,14 +13,16 @@ $data=array(
 $out=Common::httpRequest('getRegistDate',$data);
 $ture_days=1;
 $unit='时';
-$days=(time()-strtotime($out))/86400;
-if($days>0 && $days<1){
-	$ture_days=ceil($days*24);
-	$unit='时';
-}
-else{
-	$ture_days=ceil($days);
-	$unit='天';
+if($out){
+	$days=(time()-strtotime($out))/86400;
+	if($days>0 && $days<1){
+		$ture_days=ceil($days*24);
+		$unit='时';
+	}
+	else{
+		$ture_days=ceil($days);
+		$unit='天';
+	}
 }
 $user["ture_days"]=$ture_days;
 $user["unit"]=$unit;

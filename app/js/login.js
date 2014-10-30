@@ -6,15 +6,19 @@ if(window.isPreview){
 var loginModule = angular.module('login',[]);
 var user={};
 var loginControll=['$scope','$http',function($scope,$http){
+	$scope.user=user;	
 	if(localStorage["tel"]){
 		user.tel=localStorage["tel"];
+		user.pwd=localStorage["pwd"];
+		user.user_name=user.tel;
+		user.password=user.pwd;
 	}
-	$scope.user=user;	
 	$scope.login=function(){
 		var btn = document.getElementById('loginsub');
 		btn.style.backgroundColor="#c9c9c9";
 		btn.disabled=true;
 		localStorage["tel"]=user.user_name;
+		localStorage['pwd']=user.password;
 		$http({
 			method:"get",
 			url:server_url+"login.action.php",
@@ -28,6 +32,7 @@ var loginControll=['$scope','$http',function($scope,$http){
 				window.location.href=href;	
 			}
 			else{
+				alert(data.message);
 				btn.style.backgroundColor="#81b73f";
 				btn.disabled=false;
 			}
