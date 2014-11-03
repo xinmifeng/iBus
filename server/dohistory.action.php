@@ -123,11 +123,21 @@ if($type==="2" && $action==="2"){
 	}
 	else{
 		$sql="insert into bee_user_history('user_id','src_id','count','is_like','create_date','src_type') values('";
-		$sql=$sql.$user_id."','".$src_id."',1,0,datetime('now'),'".$type."')";
+		$sql=$sql.$user_id."','".$src_id."',1,0,'".date('Y-m-d H:i:s',time())."','".$type."')";
 		$pdost=Database::sql($sql);
 		if($pdost){
-			echo json_encode(Common::getResult(1,"成功添加播放"));
-			exit(0);
+			$v=getVideo($src_id);
+			if($v){
+				$v["count"]=intval($v["count"])+1;
+				if(Database::update('bee_video',$v,array('v_id'))){
+					echo json_encode(Common::getResult(1,"添加播放成功"));
+					exit(0);
+				}
+			}
+			else{
+				echo json_encode(Common::getResult(0,"添加播放失败"));
+				exit(0);
+			}
 		}
 	}
 }
@@ -153,7 +163,7 @@ if($type==="1" && $action==="3"){
 	}
 	else{
 		$sql="insert into bee_user_history('user_id','src_id','count','is_like','create_date','src_type') values('";
-		$sql=$sql.$user_id."','".$src_id."',0,0,datetime('now'),'".$type."')";
+		$sql=$sql.$user_id."','".$src_id."',0,0,'".date('Y-m-d H:i:s',time())."','".$type."')";
 		$pdost=Database::sql($sql);
 		if($pdost){
 			echo json_encode(Common::getResult(1,"成功添加下载"));
