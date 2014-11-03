@@ -355,6 +355,7 @@ function indexControll($scope,$http){
 		loginCheck(target);
 	}
 	setBg($scope,true);
+	setCurrentIndex(0);
 }
 
 function loginCheck(target){
