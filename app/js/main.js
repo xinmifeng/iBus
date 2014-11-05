@@ -142,6 +142,7 @@ appModule.controller('MainControll',function ($scope){
 		}
 	}
 	setBg($scope,true);
+	document.onselectstart=function(){return false;}
 });
 
 var server_url="../server/";
@@ -320,7 +321,9 @@ function redirectToLogin(data){
 
 function indexControll($scope,$http){
 	var $parent=$scope.$parent;
-	$parent.viewVisible=false;
+	if($parent){
+		$parent.viewVisible=true;
+	}
 	$http({
 		method:"get",
 		url:server_url+"banner.action.php",
@@ -348,7 +351,9 @@ function indexControll($scope,$http){
 			}
 		}
 		$scope.indexData=mdata;
-		$parent.viewVisible=true;
+		if($parent){
+			$parent.viewVisible=true;
+		}
 	});
 	$scope.loginCheck=function(e){
 		var target=e.target.parentNode;
@@ -366,7 +371,9 @@ function loginCheck(target){
 
 function videoControll($scope,$http,$routeParams){
 	var $parent=$scope.$parent;
-	$parent.viewVisible=false;
+	if($parent){
+		$parent.viewVisible=false;
+	}
 	$scope.swiper=function(){
 		swiper();
 	}
@@ -407,7 +414,9 @@ function videoControll($scope,$http,$routeParams){
 		}
 		$scope.types=data.types;
 		$scope.typeCss=(100/l)+"%";
-		$parent.viewVisible=true;
+		if($parent){
+			$parent.viewVisible=true;
+		}
 	});
 	setBg($scope,true);
 	setCurrentIndex(1);
@@ -435,7 +444,9 @@ function subStr(str,length){
 }
 function videoDetailControll($scope,$http,$routeParams,$sce){
 	var $parent=$scope.$parent;
-	$parent.viewVisible=false;
+	if($parent){
+		$parent.viewVisible=false;
+	}
 	var id=$routeParams.id;
 	$http({
 		method:"get",
@@ -481,7 +492,9 @@ function videoDetailControll($scope,$http,$routeParams,$sce){
 		$scope.item.likeDataCount=orgCount;
 		$scope.item.showtool=false;
 		$scope.item.gdsrc=data.gdsrc;
-		$parent.viewVisible=true;
+		if($parent){
+			$parent.viewVisible=true;
+		}
 
 		if(!isThree){
 			$scope.currentTime = 0;
@@ -622,7 +635,9 @@ function videoDetailControll($scope,$http,$routeParams,$sce){
 
 function activityControll($scope,$http){
 	var $parent=$scope.$parent;
-	$parent.viewVisible=false;
+	if($parent){
+		$parent.viewVisible=false;
+	}
 	$http({
 		method:"get",
 		url:server_url+"banner.action.php",
@@ -652,7 +667,9 @@ function activityControll($scope,$http){
 			}
 		}
 		$scope.indexData=mdata;
-		$parent.viewVisible=true;
+		if($parent){
+			$parent.viewVisible=true;
+		}
 	});
 	setBg($scope,true);
 	setCurrentIndex(2);
@@ -660,7 +677,9 @@ function activityControll($scope,$http){
 
 function apkControll($scope,$http){
 	var $parent=$scope.$parent;
-	$parent.viewVisible=false;
+	if($parent){
+		$parent.viewVisible=false;
+	}
 	$http({
 		method:"get",
 		url:server_url+"banner.action.php",
@@ -700,13 +719,19 @@ function apkControll($scope,$http){
 			groups.push(sdata);
 		}
 		$scope.groups=groups;
-		$parent.viewVisible=true;
+		if($parent){
+			$parent.viewVisible=true;
+		}
 	});
 	setBg($scope,true);
 	setCurrentIndex(3);
 }
 
 function appDetailControll($scope,$http,$routeParams){
+	var $parent=$scope.$parent;
+	if($parent){
+		$parent.viewVisible=false;
+	}
 	$http({
 		method:"get",
 		url:server_url+"activityDetail.action.php",
@@ -731,7 +756,9 @@ function appDetailControll($scope,$http,$routeParams){
 			}
 			$scope.item.show=!($scope.item["type"]=="限时活动");
 		}
-		$parent.viewVisible=true;
+		if($parent){
+			$parent.viewVisible=true;
+		}
 	});
 	$scope.mdownload=function(){
 		var ios=isIOS();
@@ -779,9 +806,11 @@ function appDetailControll($scope,$http,$routeParams){
 
 function myControll($scope,$http){
 	$parent=$scope.$parent;
-	$parent.viewVisible=false;
+	if($parent){
+		$parent.viewVisible=false;
+	}
 	$scope.passurl=window.isPreview?"passwordManage_preview.php":"passwordManage.php";
-	$scope.type=isIOS()?'我收藏的视频':'最近观看';
+	$scope.type=isIOS()?'我赞的视频':'最近观看';
 	$http({
 		method:"get",
 		url:server_url+"getSession.php"
@@ -793,7 +822,9 @@ function myControll($scope,$http){
 			if(tel && tel.length===11){
 				$scope.item.user_name=tel.replace(/(\d{3})(\d{4})(\d{4})/g,"$1****$3");
 			}
-			$parent.viewVisible=true;
+			if($parent){
+				$parent.viewVisible=true;
+			}
 		}
 	});
 	$scope.exitLogin=function(){
@@ -814,12 +845,14 @@ function myControll($scope,$http){
 
 function historyControll($scope,$http,$routeParams){
 	$parent=$scope.$parent;
-	$parent.viewVisible=false;
+	if($parent){
+		$parent.viewVisible=false;
+	}
 	var type=$routeParams.type;
 	var history={};
 	history.type=type=="1"?"我的优惠劵":"最近观看";
 	if(type!=="1"){
-		history.type=isIOS()?"我收藏的视频":history.type;
+		history.type=isIOS()?"我赞的视频":history.type;
 	}
 	history.showcount=type=="2";
 	history.href=type=="2"?"videoDetail":"appDetail";
@@ -834,7 +867,9 @@ function historyControll($scope,$http,$routeParams){
 		redirectToLogin(data);
 		if(data.status){
 			$scope.group=data.data;
-			$parent.viewVisible=true;
+			if($parent){
+				$parent.viewVisible=true;
+			}
 		}
 	});
 	setBg($scope,false);

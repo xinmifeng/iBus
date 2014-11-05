@@ -53,7 +53,7 @@ $islog=isset($_SESSION["user"])?1:0;
    </div>
 </div>
 <!--标题结束-->
-<div ng-view="" ng-show='viewVisible'></div>
+<div ng-view=""></div>
 <!--底部-->
 <div class="navbar navbar-fixed-bottom beau_col" role="navigation" style="padding:0px;">
    <div class="container-fluid" style="margin-top:0px;">

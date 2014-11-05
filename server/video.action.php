@@ -25,8 +25,8 @@ $count=$_GET["count"];
 
 $videos=Database::select('bee_video','*',array(
 	'where'=>array('type_id'=>$type),
-	'orderBy'=>'order_id desc',
-	'limit'=>$start.','.$count
+	'orderBy'=>'order_id desc'
+	//'limit'=>$start.','.$count
 ));
 
 $reVideos=array();
