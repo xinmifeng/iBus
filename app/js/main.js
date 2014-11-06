@@ -459,7 +459,9 @@ function videoDetailControll($scope,$http,$routeParams,$sce){
 		for(var i=0,l=likeData.length;i<l;i++){
 			var ld=likeData[i];
 			ld.clickUrl="#videoDetail/"+ld.v_id;
-			ld.title=subStr(ld.title,13);
+			if(ld.title.replace(/[\u4E00-\u9FA5]/g,'aa').length>14){
+				ld.title=subStr(ld.title,14)+'...';
+			}
 			if(ld.v_id!=id){
 				relikeData.push(ld);
 			}
